@@ -1,7 +1,7 @@
 # CS 270 Final Project
 ## Requirements
 * Ubuntu 14.0
-* apache2 (apache install: sudo apt-get install apache2)
+* apache2 
 * Python 2.7.6
 * mysql Ver 14.14 
 
@@ -13,7 +13,8 @@ To install and connect MYSQL to Python,
 ## Configuring Python CGI to Apache  
 
 1. Enable cgi using the command: sudo a2enmod cgi
-	(optional: install python support: sudo apt-get install libapache2-mod-python )
+	optional: install python support: 
+		sudo apt-get install libapache2-mod-python
 
 2. Add the following lines to /etc/apache2/apache2.conf
 	
