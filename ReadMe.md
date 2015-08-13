@@ -13,6 +13,7 @@ To install and connect MYSQL to Python,
 ## Configuring Python CGI to Apache  
 
 1. Enable cgi using the command: sudo a2enmod cgi
+	
 	optional: install python support: 
 		sudo apt-get install libapache2-mod-python
 
