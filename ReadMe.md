@@ -1,6 +1,6 @@
 # CS 270 Final Project
 ## Requirements
-* Ubuntu 14.0
+* Linux OS: Ubuntu 14.0
 * apache2 
 * Python 2.7.6
 * mysql Ver 14.14 
