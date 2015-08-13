@@ -34,6 +34,13 @@ To install and connect MYSQL to Python,
 	</Directory>
 	```
 
+In the file /etc/apache2/sites-available/000-default.conf, set the default page as follows:
+	
+	```
+	DirectoryIndex index.py
+	DocumentRoot /var/www/cgi-bin
+	```
+
 3. In  /var/www/ create folder 'cgi-bin'. This is where all cgi files will be stored. 
 Go to http://localhost/cgi-bin/<cgi_file.py>
 

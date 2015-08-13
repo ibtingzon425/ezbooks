@@ -1,8 +1,15 @@
-<!DOCTYPE html>
+#!/usr/bin/python
+import cgi
+import MySQLdb as mdb
+import sys
+
+form = cgi.FieldStorage()
+print "Content-Type: text/html"
+print ""
+print """
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +19,7 @@
     <title>Bare - Start Bootstrap Template</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <style>
@@ -73,15 +80,15 @@
                 <h1>A Bootstrap Starter Template</h1>
                 <p class="lead">Complete with pre-defined file paths that you won't have to change!</p> <br>
                  
-                <FORM method="POST" action="http://localhost/cgi-bin/test.py">
+                 <form action="cgi-bin/test.py">
                      Username <br>
                     <input type="text" name="username">
                     <br> <br>
                     Password<br>
-                    <input type="text" name="password"> 
+                    <input type="text" name="password">
+                </form> 
                 <br><br>
                 <input type="submit" value="Submit">
-                </FORM>
                 <p><p><br><br>
                 <ul class="list-unstyled">
                     <li>Bootstrap v3.3.1</li>
@@ -101,5 +108,25 @@
     <script src="js/bootstrap.min.js"></script>
 
 </body>
-
 </html>
+"""
+
+try:
+    con = mdb.connect('localhost', 'testuser', 'test623', 'testdb');
+
+    cur = con.cursor()
+    cur.execute("SELECT VERSION()")
+
+    ver = cur.fetchone()
+    
+    print "Database version : %s " % ver
+    
+except mdb.Error, e:
+  
+    print "Error %d: %s" % (e.args[0],e.args[1])
+    sys.exit(1)
+    
+finally:    
+        
+    if con:    
+        con.close()
