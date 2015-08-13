@@ -1,5 +1,5 @@
-# [CS 270 Final Project]
-## [Requirements]
+# CS 270 Final Project
+## Requirements
 * Ubuntu 14.0
 * apache2 (apache install: sudo apt-get install apache2)
 * Python 2.7.6
