@@ -1,9 +1,9 @@
 # CS 270 Final Project
 ## Requirements
 * Linux OS: Ubuntu 14.0
-* apache2 
+* Apache2 
+* MYSQL Ver 14.14 
 * Python 2.7.6
-* mysql Ver 14.14 
 
 To install and connect MYSQL to Python,
 
