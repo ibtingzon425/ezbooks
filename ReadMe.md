@@ -4,13 +4,19 @@
 * Apache2 
 * MySQL Ver 14.14 
 * Python 2.7.6
+* Jinja2 (Template Engine)
 
+Download and save repo in directory /var/www
 To install and connect MYSQL to Python,
 
 	sudo apt-get install mysql-server
 	sudo apt-get install python-mysqldb
 
-	To access MySQL: 
+To install Jinja2, download [Markupsafe](https://pypi.python.org/pypi/MarkupSafe) and [Jinja](https://pypi.python.org/pypi/Jinja2), unpack tarball and run the following (for both):
+
+	sudo python setup.py install
+
+To access MySQL: 
 
 	mysql -u root -p password
 
@@ -19,8 +25,6 @@ To install and connect MYSQL to Python,
 	sudo service apache2 status
 	sudo service apache2 start
 	sudo service apache2 restart
-
-Download and save repo in directory /var/www
 
 ## Configuring Python CGI to Apache  
 
@@ -55,3 +59,6 @@ In the file /etc/apache2/sites-available/000-default.conf, set the default page 
 
 3. In  /var/www/ create folder 'cgi-bin'. This is where all cgi files will be stored. 
 Go to http://localhost/cgi-bin/<cgi_file.py>
+
+## Resources
+
