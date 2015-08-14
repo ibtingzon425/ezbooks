@@ -1,14 +1,26 @@
 # CS 270 Final Project
 ## Requirements
 * Linux OS: Ubuntu 14.0
-* apache2 
+* Apache2 
+* MySQL Ver 14.14 
 * Python 2.7.6
-* mysql Ver 14.14 
 
 To install and connect MYSQL to Python,
 
 	sudo apt-get install mysql-server
 	sudo apt-get install python-mysqldb
+
+	To access MySQL: 
+
+	mysql -u root -p password
+
+## Checking apache if running:
+
+	sudo service apache2 status
+	sudo service apache2 start
+	sudo service apache2 restart
+
+Download and save repo in directory /var/www
 
 ## Configuring Python CGI to Apache  
 
@@ -43,13 +55,3 @@ In the file /etc/apache2/sites-available/000-default.conf, set the default page 
 
 3. In  /var/www/ create folder 'cgi-bin'. This is where all cgi files will be stored. 
 Go to http://localhost/cgi-bin/<cgi_file.py>
-
-## Checking apache if running:
-
-	sudo service apache2 status
-	sudo service apache2 start
-	sudo service apache2 restart
-
-## To access MySQL: 
-
-	mysql -u root -p password
