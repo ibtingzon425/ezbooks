@@ -7,12 +7,14 @@
 * Jinja2 (Template Engine)
 
 Download and save repo in directory /var/www
+Make sure to make every .py file in /cgi-bin executable; otherwise, it'll incur an Internal Server Error. 
+
 To install and connect MYSQL to Python,
 
 	sudo apt-get install mysql-server
 	sudo apt-get install python-mysqldb
 
-To install Jinja2, download [Markupsafe](https://pypi.python.org/pypi/MarkupSafe) and [Jinja](https://pypi.python.org/pypi/Jinja2), unpack tarball and run the following (for both):
+To install Flask and Jinja2, download [Markupsafe](https://pypi.python.org/pypi/MarkupSafe) and [Jinja](https://pypi.python.org/pypi/Jinja2) [Werkzeug](https://pypi.python.org/pypi/Werkzeug), unpack tarball and run the following (for both):
 
 	sudo python setup.py install
 
@@ -61,4 +63,7 @@ In the file /etc/apache2/sites-available/000-default.conf, set the default page 
 Go to http://localhost/cgi-bin/<cgi_file.py>
 
 ## Resources
+
+Bootstrap Theme and Template taken from [Start Bootstrap](http://startbootstrap.com/). 
+Start Bootstrap was created by and is maintained by **David Miller**, Managing Parter at [Iron Summit Media Strategies](http://www.ironsummitmedia.com/).
 

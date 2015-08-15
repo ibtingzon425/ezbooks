@@ -4,8 +4,8 @@ import cgitb; cgitb.enable()
 from template import display
 
 def main():
-    form = cgi.FieldStorage()
-    print display("reg.html").render()
+	form = cgi.FieldStorage()
+	print display("login.html").render()
 
 if __name__ == '__main__':
     main()

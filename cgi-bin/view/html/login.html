@@ -1,0 +1,25 @@
+{% if not standalone %}{% extends "base.html" %}{% endif -%}
+{% block form %}
+<style media="all">
+.input-control-text {
+	max-width: 500px; 
+	padding: 15px; 
+	margin: 0 auto 10px;}
+</style>
+
+<form method="GET" action="home.py">
+	<div class="input-control-text">
+		<div class="panel panel-default">
+		    <div class="panel-body">
+			Username<br><input type="text" name="username">
+			<br> <br>
+		    Password<br><input type="password" name="password">
+		    <br><br>
+		    <input type="submit" value="Login">
+		    <br><br>
+		    <a href="index.py">Don't have an account yet?</a>
+		    </div>
+		</div> 
+	</div>
+</form >
+{% endblock %}
