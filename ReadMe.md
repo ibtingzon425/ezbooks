@@ -14,7 +14,7 @@ To install and connect MYSQL to Python,
 	sudo apt-get install mysql-server
 	sudo apt-get install python-mysqldb
 
-To install Flask and Jinja2, download [Markupsafe](https://pypi.python.org/pypi/MarkupSafe) and [Jinja](https://pypi.python.org/pypi/Jinja2) [Werkzeug](https://pypi.python.org/pypi/Werkzeug), unpack tarball and run the following (for both):
+To install Jinja2, download [Markupsafe](https://pypi.python.org/pypi/MarkupSafe), [Jinja](https://pypi.python.org/pypi/Jinja2), [Werkzeug](https://pypi.python.org/pypi/Werkzeug), unpack tarball and run the following (for both):
 
 	sudo python setup.py install
 

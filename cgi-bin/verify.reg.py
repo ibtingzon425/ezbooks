@@ -6,15 +6,11 @@ from template import display
 from model.database import con
 from passlib.hash import sha512_crypt
 
-#From registration, verifies that email and username are unique
-
 def register(username, email, password):
-    enc_password = sha512_crypt.encrypt(password)
-
-    print display("home.html").render(username=username)
+    #print display("home.html").render(username=username)
+    enc_password = sha512_crypt.encrypt(password) 
 
     command = "INSERT INTO Users(username, password, email) VALUES(%s, %s, %s)"
-        
     try:
         cur = con.cursor()
         cur.execute(command, (username, enc_password, email))      
@@ -24,6 +20,8 @@ def register(username, email, password):
         if con:
             con.rollback()
 
+    print "Location: home.py?username=" + username + "\r\n"
+
 def main():
     form = cgi.FieldStorage()
 
@@ -32,8 +30,8 @@ def main():
     email = form.getvalue('email')
     email_exists = False
     username_exists = False
-      
-    command = "SELECT email FROM Users"
+    
+    #From registration, verifies that email and username are unique
     try:
         cur = con.cursor()
 
@@ -45,13 +43,14 @@ def main():
             if(email == row[0]):
                 email_exists = True
 
+        #Checks if username is unique
         command = "SELECT username FROM Users"
         cur.execute(command)
         for i in range(cur.rowcount):
             row = cur.fetchone()
             if(username == row[0]):
                 username_exists = True
-    
+        
     except mdb.Error, e:
         if con:
             con.rollback()
@@ -68,6 +67,7 @@ def main():
                 </script>"
     else:
         register(username, email, password)
+	
 
 if __name__ == '__main__':
     main()

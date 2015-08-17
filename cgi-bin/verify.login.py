@@ -14,12 +14,7 @@ def invalidLogin():
 	          alert('Incorrect username or password.');\
 	          </script>" 
 
-def main():
-	form = cgi.FieldStorage()
-	username = form.getvalue('username')
-	password = form.getvalue('password')
-	enc_password = ""
-
+def validateLoginCredentials(username, password):
 	cur = con.cursor()
 
 	command = "SELECT password FROM Users WHERE username = %s";
@@ -29,11 +24,18 @@ def main():
 		enc_password = row[0]
 		verify = sha512_crypt.verify(password, enc_password)
 		if (verify):
-			print display("home.html").render(username=username)
+			print "Location: home.py?username=" + username + "\r\n"
 		else:
 			invalidLogin() 
 	else:
 		invalidLogin()
+
+def main():
+	form = cgi.FieldStorage()
+	username = form.getvalue('username')
+	password = form.getvalue('password')
+
+	validateLoginCredentials(username, password)
 
 if __name__ == '__main__':
 	main()
