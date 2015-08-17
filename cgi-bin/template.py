@@ -3,7 +3,7 @@ import cgi, jinja2
 import cgitb; cgitb.enable()
 from jinja2 import Environment, PackageLoader, FileSystemLoader
 
-env = Environment(loader=FileSystemLoader('./view/html'))
+env = Environment(loader=FileSystemLoader('./view'))
 
 def readTemplateFile(templateFile):
 	template = env.get_template(templateFile)

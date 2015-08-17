@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block form %}
+<style media="all">
+.input-control-text {
+    max-width: 500px; 
+    padding: 15px; 
+    margin: 0 auto 10px;}
+#form label.error {
+    color: #FF5050 ;
+    float: none;  
+    padding-left: .5em;
+    vertical-align: top; 
+    display: block;
+}
+</style>
+
+<script type="text/javascript" src="view/js/jquery-1.5.min.js"></script>
+<script type="text/javascript" src="view/js/jquery.validate.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+   $("form").validate({
+      rules: {
+         username: {
+            required: true
+            },
+          password: {
+            required: true
+            },
+         },
+         messages: {
+            username: "Please fill out username field.",
+            password: {
+                required: "Please fill out password field."
+            }
+         }
+     });
+});
+</script>
+
+<form id="form" method="POST" action="verify.login.py">
+    <div class="input-control-text">
+        <div class="panel panel-default">
+            <div class="panel-body">
+            Username<br><input type="text" name="username" class="required">
+            <br> <br>
+            Password<br><input type="password" name="password" class="required">
+            <br><br>
+            <input type="submit" value="Login">
+            <br><br>
+            <a href="index.py">Don't have an account yet?</a>
+            </div>
+        </div> 
+    </div>
+</form >
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block form %}
+{{title}}
+<style media="all">
+.input-control-text {
+    max-width: 500px; 
+    padding: 15px; 
+    margin: 0 auto 10px;}
+#form label.error {
+    color: #FF5050;
+    float: none;  
+    padding-left: .5em;
+    vertical-align: top; 
+    display: block;
+}
+</style>
+
+<script type="text/javascript" src="view/js/jquery-1.5.min.js"></script>
+<script type="text/javascript" src="view/js/jquery.validate.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+   $("form").validate({
+      rules: {
+         username: {
+            required: true
+            },
+         email: {
+            required: true,
+            email: true
+            },
+          password: {
+            required: true,
+            minlength: 5
+            },
+         },
+         messages: {
+            username: "Please fill out username field.",
+            password: {
+                required: "Please fill out password field.",
+                minlength: "Must be at least 5 characters long"
+            },
+            email: {
+                required: "Please fill out email field.",
+                email: " Please enter a valid email address"
+            }
+         }
+     });
+});
+</script>
+
+<form id="form" method="post" action="verify.reg.py">
+<div class="input-control-text">
+    <div class="panel panel-default">
+        <div class="panel-body">
+        Username <br>
+        <input type="text" id="username" name="username" class="required">
+        <p><br>
+        E-mail <br>
+        <input type="text" id="email" name="email" class="required">
+        <p><br>
+        Password<br>
+        <input type="password" id= "password" name="password" class="required">
+        <p><br>
+        <input type="submit" value="Register" name="submit" id="submit">
+        <br><br>
+        <a href="login.py" name="login">Already a member? Login.</a>
+        </div>
+    </div> 
+</div>
+</form >
+
+{% endblock %}
