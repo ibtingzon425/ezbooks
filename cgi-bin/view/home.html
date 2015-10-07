@@ -4,8 +4,10 @@
 <style>
     body {
         padding-top: 70px;
-        background-color: #fff;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+        background-color: #eee;
+    }
+    .panel-body{
+      height: 300px;
     }
     </style>
 
@@ -14,21 +16,24 @@
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
 
-          <div class="jumbotron">
-            <h1>Hello, {{fname}}!</h1>
-            <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
-          </div>
-          
+           <div class="page-header">
+            {{% - if genre != - %}}
+            <h1>Hello, {{fname}} {{lname}}.</h1>
+            <h4><p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information. <p></h4>
+           </div>
+
           <div class="row">
             {% for title in titles %}
-            <div class="col-xs-4 col-lg-4">
+            <div class="col-sm- col-lg-3">
               <div class="panel panel-default">
+              <div class="panel-body">
               <center> 
-              <img src= {{title[6]}} style="height:150px;" margin=15px> </img>
-              <h2>{{title[1]}}</h4>
-              <p><h5>Price: P{{title[2]}}</h5></p>
-              <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+              <a href="#" ><img src= {{title[6]}} style="height:160px;" margin=15px> </img></a>
+              <h5><a href="#" style="color: #B00000 ">{{title[1]}}</a></h5>
+              <p><h6>Price: P{{title[2]}}</h6></p>
+              <p><a class="btn btn-danger" href="#" role="button">Learn more &raquo;</a></p>
               </center>
+            </div>
             </div>
             </div><!--/.col-xs-6.col-lg-4-->
             {% endfor %}
