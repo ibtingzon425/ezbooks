@@ -6,8 +6,12 @@ import urllib, urllib2
 import os, time, Cookie
 
 # Renders/displays Registration page
+def passwordError():
+	print "<script type='text/javascript'> \
+            alert('Confirmed password did not match. Please try again.');\
+            </script>"
 
-def invalidReg():
+def emailExistsError():
 	print "<script type='text/javascript'> \
             alert('An account already exists for this email address.');\
             </script>"
@@ -18,7 +22,9 @@ def main():
 
     print display("reg.html").render()
     if(code == '0'):
-    	invalidReg()
+    	emailExistsError()
+    elif(code == '1'):
+    	passwordError()
 
 if __name__ == '__main__':
     main()

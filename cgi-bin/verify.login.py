@@ -20,7 +20,6 @@ import sha, time, os, datetime, session
 #Verifies that login credentials (username, password) are correct
 
 def main():
-
 	try:
 		form = cgi.FieldStorage()
 		email= form.getvalue('email')
@@ -35,10 +34,12 @@ def main():
 			enc_password = row[0]
 			verify = sha512_crypt.verify(password, enc_password)
 			if (verify):
-				command = "SELECT fname FROM Users WHERE email = %s";
+				command = "SELECT fname, lname FROM Users WHERE email = %s";
 				cur.execute(command, (email))
-				fname = cur.fetchone()[0]
-				print "Location: home.py?name=" + fname + "\r\n"
+				row = cur.fetchone()
+				fname = row[0]
+				lname = row[1]
+				print "Location: home.py?fname=" + fname + "&lname=" + lname + "\r\n"
 			else:
 				print "Location: login.py?redirect=0\r\n"
 		else:

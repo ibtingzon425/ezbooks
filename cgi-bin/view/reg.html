@@ -2,19 +2,21 @@
 {% block form %}
 {{title}}
 
-<link href="view/css/signin.css" rel="stylesheet">
+<link href="view/css/login.css" rel="stylesheet">
 
 <div class="container">
 <form class="form-signin" id="form" method="post" action="verify.reg.py">
     <h2 class="form-signin-heading">Create an Account</h2>  
         <label for="inputFname" class="sr-only">First Name</label>
-        <input type="fname" name="fname" id="fname" class="form-control" placeholder="First name" required autofocus>
+        <input type="text" name="fname" id="top" class="form-control" placeholder="First name" required autofocus>
         <label for="inputLname" class="sr-only">Last Name</label>
-        <input type="lname" name="lname" id="lname" class="form-control" placeholder="Last name" required>
+        <input type="text" name="lname" id="mid" class="form-control" placeholder="Last name" required>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" name='email', d="email" class="form-control" placeholder="Email address" autofocus>
+        <input type="email" name='email', id="mid" class="form-control" placeholder="Email address" autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required> 
+        <input type="password" name="password" id="mid" class="form-control" placeholder="Password" required> 
+        <label for="inputPassword" class="sr-only">Confirm Password</label>
+        <input type="password" name="confpwd" id="bottom" class="form-control" placeholder="Confirm Password" required> 
         <input class="btn btn-lg btn-primary btn-block" type="submit" value="Register"></input>
         <div align="right"><br>
         <a href="login.py" name="login">Already a member? Login.</a>

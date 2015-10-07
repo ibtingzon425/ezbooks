@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block form %}
 
-<link href="view/css/signin.css" rel="stylesheet">
+<link href="view/css/login.css" rel="stylesheet">
 
 <div class="container">
   <form class="form-signin" id="form" method="POST" action="verify.login.py">
       <h2 class="form-signin-heading">Please sign in</h2>  
       <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="fname" id="email" name='email', class="form-control" placeholder="Email address" autofocus>
+      <input type="email" id="top" name='email', class="form-control" placeholder="Email address" autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" name="password" id="password" class="form-control" placeholder="Password" required> 
+      <input type="password" name="password" id="bottom" class="form-control" placeholder="Password" required> 
       <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login"></input> <br>
       <div align="right">
       <a href="index.py">Don't have an account yet? Register.</a>
