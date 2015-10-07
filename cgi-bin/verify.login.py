@@ -34,7 +34,7 @@ def main():
 			enc_password = row[0]
 			verify = sha512_crypt.verify(password, enc_password)
 			if (verify):
-				command = "SELECT fname, lname FROM Users WHERE email = %s";
+				command = "SELECT FirstName, LastName FROM Users WHERE Email = %s";
 				cur.execute(command, (email))
 				row = cur.fetchone()
 				fname = row[0]

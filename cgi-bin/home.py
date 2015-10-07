@@ -26,13 +26,24 @@ def main():
 	lname = form.getvalue('lname')
 	sess = session.Session(expires=365*24*60*60, cookie_path='/')
 
-	try:
-		if(lname and fname):
-			print display("home.html").render(fname=fname,lname=lname)
-		else:
-			invaidPageError()
-	except Exception:
-		cookieValidationFailed()
+	if(lname and fname):
+		command = "SELECT * from Books"
+		try:
+			cur = con.cursor()
+			cur.execute(command)
+			con.commit()
+			rows = cur.fetchall()
+
+			titles = []
+			for row in rows:
+				titles.append(row)
+			print display("home.html").render(fname=fname,lname=lname,titles=titles)
+			
+		except mdb.Error, e:
+			if con:
+				con.rollback()
+	else:
+		invaidPageError()
 
 if __name__ == '__main__':
 	main()

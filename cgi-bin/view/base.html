@@ -17,6 +17,7 @@
     <script type="text/javascript" src="js/jquery.validate.js"></script>
     <script src="js/ie-emulation-modes-warning.js"></script>
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <link href="view/css/offcanvas.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <style>
@@ -59,10 +60,22 @@
         <!-- /.container -->
     </nav>
 
-    <!-- Page Content -->     
+    <!-- Page Content -->
+
+    <div class="container">
+    <div class="row row-offcanvas row-offcanvas-right">     
         {% block form %}
         {% endblock %}
-    
+        {% block sidebar %}
+        {% endblock %}
+    </div>
+    <hr>
+
+      <footer>
+        <center>
+        <p><p>&copy; Company 2014</p> </center>
+      </footer>
+    </div>
     <!-- /.container -->
 
     <!-- jQuery Version 1.11.1 -->
