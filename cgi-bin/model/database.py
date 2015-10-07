@@ -2,7 +2,7 @@
 # Create testuser and grant access using the following commands:
 	# SHOW DATABASES;
 	# CREATE DATABASE testdb;
-	# CREATE USER 'testuser'@'localhost' IDENTIFIED BY 'test123';
+	# CREATE USER 'testuser'@'localhost' IDENTIFIED BY 'test623';
 	# USE testdb;
 	# GRANT ALL ON testdb.* TO 'testuser'@'localhost';
 

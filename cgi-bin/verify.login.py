@@ -5,37 +5,46 @@ import MySQLdb as mdb
 from template import display
 from model.database import con
 from passlib.hash import sha512_crypt
+import sha, time, os, datetime, session
+
+#Verifies that login credentials (username, password) are correct
+#!/usr/bin/python
+import cgi
+import cgitb; cgitb.enable()
+import MySQLdb as mdb
+from template import display
+from model.database import con
+from passlib.hash import sha512_crypt
+import sha, time, os, datetime, session
 
 #Verifies that login credentials (username, password) are correct
 
-def invalidLogin():
-	print display("login.html").render()
-	print "<script type='text/javascript'> \
-	          alert('Incorrect username or password.');\
-	          </script>" 
-
-def validateLoginCredentials(username, password):
-	cur = con.cursor()
-
-	command = "SELECT password FROM Users WHERE username = %s";
-	cur.execute(command, (username))
-	row = cur.fetchone()
-	if (row != None):
-		enc_password = row[0]
-		verify = sha512_crypt.verify(password, enc_password)
-		if (verify):
-			print "Location: home.py?username=" + username + "\r\n"
-		else:
-			invalidLogin() 
-	else:
-		invalidLogin()
-
 def main():
-	form = cgi.FieldStorage()
-	username = form.getvalue('username')
-	password = form.getvalue('password')
 
-	validateLoginCredentials(username, password)
+	try:
+		form = cgi.FieldStorage()
+		email= form.getvalue('email')
+		password = form.getvalue('password')
+		
+		cur = con.cursor()
+		command = "SELECT password FROM Users WHERE email = %s";
+		cur.execute(command, (email))
+		row = cur.fetchone()
+		
+		if (row != None):
+			enc_password = row[0]
+			verify = sha512_crypt.verify(password, enc_password)
+			if (verify):
+				command = "SELECT fname FROM Users WHERE email = %s";
+				cur.execute(command, (email))
+				fname = cur.fetchone()[0]
+				print "Location: home.py?name=" + fname + "\r\n"
+			else:
+				print "Location: login.py?redirect=0\r\n"
+		else:
+			print "Location: login.py?redirect=0\r\n"
+	except KeyError:
+		print "Location: login.py\r\n"
 
 if __name__ == '__main__':
 	main()
