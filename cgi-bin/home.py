@@ -28,7 +28,6 @@ def main():
 	sess = session.Session(expires=365*24*60*60, cookie_path='/')
 
 	if(lname and fname):
-
 		if(genre != None):
 			command = "SELECT * from Books NATURAL JOIN Genres WHERE Genre='" + genre + "'"
 		else:

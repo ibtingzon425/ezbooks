@@ -9,19 +9,26 @@
     .panel-body{
       height: 300px;
     }
+    .lead{
+      font-size: 17px;
+    }
     </style>
 
         <div class="col-xs-12 col-sm-9">
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
-
-           <div class="page-header">
-            {{% - if genre != - %}}
-            <h1>Hello, {{fname}} {{lname}}.</h1>
-            <h4><p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information. <p></h4>
-           </div>
-
+            {%- if genre == None -%}
+            <div class="page-header">
+            <h2>Hello, {{fname}} {{lname}}.</h2>
+            <h6><p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information. <p></h6>
+            </div>
+            {% else %}
+            <div class="page-header">
+            <h2>{{genre}}</h2>
+            <h6><p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information. <p></h6>
+            </div>
+            {% endif %}
           <div class="row">
             {% for title in titles %}
             <div class="col-sm- col-lg-3">
