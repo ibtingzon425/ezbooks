@@ -34,12 +34,7 @@ def main():
 			enc_password = row[0]
 			verify = sha512_crypt.verify(password, enc_password)
 			if (verify):
-				command = "SELECT FirstName, LastName FROM Users WHERE Email = %s";
-				cur.execute(command, (email))
-				row = cur.fetchone()
-				fname = row[0]
-				lname = row[1]
-				print "Location: home.py?fname=" + fname + "&lname=" + lname + "\r\n"
+				print "Location: home.py?email=" + email + "\r\n"
 			else:
 				print "Location: login.py?redirect=0\r\n"
 		else:

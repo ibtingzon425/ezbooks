@@ -19,15 +19,11 @@
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
             {%- if genre == None -%}
-            <div class="page-header">
             <h2>Hello, {{fname}} {{lname}}.</h2>
             <h6><p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information. <p></h6>
-            </div>
             {% else %}
-            <div class="page-header">
             <h2>{{genre}}</h2>
             <h6><p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information. <p></h6>
-            </div>
             {% endif %}
           <div class="row">
             {% for title in titles %}
@@ -35,10 +31,10 @@
               <div class="panel panel-default">
               <div class="panel-body">
               <center> 
-              <a href="#" ><img src= {{title[6]}} style="height:160px;" margin=15px> </img></a>
-              <h5><a href="#" style="color: #B00000 ">{{title[1]}}</a></h5>
+              <a href="book.py?email={{email}}&ISBN={{title[0]}}" ><img src= {{title[6]}} style="height:160px;" margin=15px> </img></a>
+              <h5><a href="book.py?email={{email}}&ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
               <p><h6>Price: P{{title[2]}}</h6></p>
-              <p><a class="btn btn-danger" href="#" role="button">Learn more &raquo;</a></p>
+              <p><a class="btn btn-danger" href="book.py?email={{email}}&ISBN={{title[0]}}" role="button">Learn more &raquo;</a></p>
               </center>
             </div>
             </div>

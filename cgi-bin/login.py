@@ -9,6 +9,11 @@ def invalidLogin():
 	          alert('Incorrect email or password.');\
 	          </script>" 
 
+def cookieValidationFailed():
+	print "<script type='text/javascript'> \
+	          alert('Session Expired. Please log in.');\
+	          </script>" 
+
 def main():
 	form = cgi.FieldStorage()
 	code = form.getvalue('redirect')
@@ -16,6 +21,8 @@ def main():
 	print display("login.html").render()
 	if(code == '0'):
 		invalidLogin()
+	elif(code == '1'):
+		cookieValidationFailed()
 
 if __name__ == '__main__':
     main()

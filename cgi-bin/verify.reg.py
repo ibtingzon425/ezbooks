@@ -20,7 +20,7 @@ def register(fname, lname, email, password):
     except mdb.Error, e:
         if con:
             con.rollback()
-    print "Location: home.py?fname=" + fname + "&lname=" + lname + "\r\n"
+    print "Location: home.py?email=" + email + "\r\n"
 
 def main():
     form = cgi.FieldStorage()
