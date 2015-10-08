@@ -1,0 +1,23 @@
+{% extends "home-navbar.html" %}
+
+{% block sidebar %}
+    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+          <div class="list-group">
+            <script type="text/javascript">
+            function func() {
+                document.getElementById("{{genre}}").className = "list-group-item active";
+            } 
+            </script>
+            <a href="#" id="New" class="list-group-item">New Arrivals</a>
+            <a href="#" id="YA" class="list-group-item">Young Adult</a>
+            <a href="home.py?email={{email}}&genre=Science Fiction" id="Science Fiction" class="list-group-item">Science Fiction</a>
+            <a href="home.py?email={{email}}&genre=Fantasy" id="Fantasy" class="list-group-item">Fantasy</a>
+            <a href="home.py?email={{email}}&genre=Fiction" id="General Fiction" class="list-group-item">General Fiction</a>
+            <a href="home.py?email={{email}}&genre=Graphic" id="Graphic Novels" class="list-group-item">Graphic Novels/Manga</a>
+            <a href="home.py?email={{email}}&genre=Non-Fiction" id="Non-Fiction" class="list-group-item">Non-Fiction</a>
+            <a href="#" id="BusMark" class="list-group-item">Business and Marketing</a>
+            <a href="#" id="Humor" class="list-group-item">Humor</a>
+            <a href="#" id="Adv" class="list-group-item">Advanced Search</a>
+          </div>
+        </div>
+{% endblock %}
