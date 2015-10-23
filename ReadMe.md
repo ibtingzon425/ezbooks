@@ -1,5 +1,6 @@
-# ezBooks 
+# ezbooks 
 Web Programming with Python CGI
+A website that hosts a database management system for a bookshop
 ## Requirements
 * Linux OS: Ubuntu 14.0
 * Apache2 
