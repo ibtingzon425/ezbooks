@@ -1,4 +1,4 @@
-# CS 270 Final Project
+# ezBooks - Web Programming with Python CGI
 ## Requirements
 * Linux OS: Ubuntu 14.0
 * Apache2 
