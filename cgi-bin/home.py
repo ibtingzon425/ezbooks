@@ -19,14 +19,15 @@ def main():
 	genre = form.getvalue('genre')
 	sess = session.Session(expires=365*24*60*60, cookie_path='/')
 
+	#TODO: For fname, lname == None redirect to login page
+	#TODO: Implement sessions using Cookies
+
 	try:
 		cur = con.cursor()
 
-		command = "SELECT FirstName, LastName FROM Users WHERE Email = '" + email + "'";
+		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
 		cur.execute(command)
-		row = cur.fetchone()
-		fname = row[0]
-		lname = row[1]
+		user= cur.fetchone()
 
 		if(genre != None):
 			command = "SELECT * from Books NATURAL JOIN Genres WHERE Genre='" + genre + "'"
@@ -39,7 +40,7 @@ def main():
 		for row in rows:
 			titles.append(row)
 			
-		print display("home.html").render(email=email,fname=fname,lname=lname,titles=titles,genre=genre)
+		print display("home.html").render(user=user,titles=titles,genre=genre)
 
 	except mdb.Error, e:
 	    if con:

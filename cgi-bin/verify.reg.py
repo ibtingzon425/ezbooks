@@ -11,7 +11,7 @@ sess = None
 def register(fname, lname, email, password):
     enc_password = sha512_crypt.encrypt(password) 
 
-    command = "INSERT INTO Users(FirstName, LastName, Email, Password) VALUES(%s, %s, %s, %s)"
+    command = "INSERT INTO Users(FirstName, LastName, Email, Password, DateAdded) VALUES(%s, %s, %s, %s, NOW())"
     try:
         cur = con.cursor()
         cur.execute(command, (fname, lname, email, enc_password))      

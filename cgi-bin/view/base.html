@@ -12,12 +12,17 @@
     <title>DBMS</title>
 
     <!-- Bootstrap Core CSS -->
+    <link type="text/css" href="view/css/bootstrap.css" rel="stylesheet">
     <link type="text/css" href="view/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery-1.5.min.js"></script>
-    <script type="text/javascript" src="js/jquery.validate.js"></script>
-    <script src="js/ie-emulation-modes-warning.js"></script>
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
-    <link href="view/css/offcanvas.css" rel="stylesheet">
+    <link type="text/css" href="view/css/bootstrap-theme.min.css" rel="stylesheet">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="view/js/jquery-1.5.min.js"></script>
+    <script type="text/javascript" src="view/js/jquery.shorten.js"></script>
+    <script type="text/javascript" src="view/js/text-show.js"></script>
+    <script type="text/javascript" src="view/js/jquery.validate.js"></script>
+    <script src="view/js/ie-emulation-modes-warning.js"></script>
+    <script src="view/js/ie10-viewport-bug-workaround.js"></script>
+    <link href="view/css/offcanvas.css" rel="stylesheet">    
 
     <!-- Custom CSS -->
     <style>
@@ -37,7 +42,7 @@
     {% endblock %}
 </head>
 
-<body onload='func()'>
+<body>
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -49,7 +54,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">The Online Bookshop</a>
+                {%- if email != Nonetype -%}
+                <a class="navbar-brand" href="home.py?email={{email}}">ezbooks</a>
+                {% else %}
+                <a class="navbar-brand" href="#">ezbooks</a>
+                {% endif %}
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 {% block navbar %}
@@ -79,11 +88,12 @@
     <!-- /.container -->
 
     <!-- jQuery Version 1.11.1 -->
-    <script src="js/jquery.js"></script>
+    <script src="view/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/vendor/holder.min.js"></script>
+    <script src="view/js/bootstrap.min.js"></script>
+    <script src="view/js/vendor/holder.min.js"></script>
+    <script src="view/js/docs.min.js"></script>
 
 </body>
 </html>

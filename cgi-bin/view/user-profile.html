@@ -1,0 +1,33 @@
+{% extends "sidebar.html" %}
+
+{% block form %}
+<style>
+a.morelink {
+    text-decoration:none;
+    outline: none;
+}
+.morecontent span {
+    display: none;
+}
+</style>
+	<link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
+            <div class="col-md-9">
+                <div class="thumbnail">
+                	<div class="col-md-4 left-side">
+                        <center>
+                    </center>
+                    </div>
+                    <div id="desc" class="col-md-8 right-side" style="padding-top:25px">
+                        {%- if userprof[2] == user[2] -%}
+                        <a class="btn btn-sm btn-primary" href="user-profile.py?email={{user[2]}}&user={{userprof[2]}}" role="button" style="float:right">Edit Profile</a>
+                        {% endif %}
+                        <header>  
+                        <h4><strong>{{userprof[0]}} {{userprof[1]}}</strong></h4> 
+                        </header>                        
+                        <hr>
+                        <p> Details: </p>
+                        <p>Joined on {{user[4]}}</p>
+                    </div>
+                </div>
+                </div>
+{% endblock %}

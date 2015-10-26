@@ -12,17 +12,24 @@ def main():
 	
 	ISBN = form.getvalue('ISBN')
 	email = form.getvalue('email')
-	
 	try:
 		cur = con.cursor()
 		
 		command = "SELECT * from Books WHERE ISBN='" + ISBN + "'"
-			
+		
 		cur.execute(command)
 		book = cur.fetchone()
 
-		print display("book.html").render(book=book,email=email)
-		print book[0]
+		command = "SELECT AuthorName from Books NATURAL JOIN Authors WHERE ISBN ='" + book[0] + "'"
+		cur.execute(command)
+		author = cur.fetchone()
+		authorName = author[0]
+
+		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
+		cur.execute(command)
+		user = cur.fetchone()
+		
+		print display("book-item.html").render(book=book,user=user,author=authorName)
 
 	except mdb.Error, e:
 	    if con:

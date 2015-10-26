@@ -1,40 +1,51 @@
 {% extends "sidebar.html" %}
 
 {% block form %}
-<style>
-    body {
-        padding-top: 70px;
-        background-color: #eee;
-    }
-    .panel-body{
-      height: 300px;
-    }
-    .lead{
-      font-size: 17px;
-    }
-    </style>
+        <style>
+            body {
+                padding-top: 70px;
+                background-color: #eee;
+            }
+            .panel-body{
+              height: 300px;
+            }
+            .lead{
+              font-size: 17px;
+            }
+            hr {
+              display: block;
+              height: 1px;
+              border: 0;
+              border-top: 1px solid #ccc;
+              margin: 1em 0;
+              padding: 0; 
+          }
+        </style>
 
         <div class="col-xs-12 col-sm-9">
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
             {%- if genre == None -%}
-            <h2>Hello, {{fname}} {{lname}}.</h2>
+            <h2>Hello, {{user[0]}} {{user[1]}}.</h2>
+            <hr>
             <h6><p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information. <p></h6>
             {% else %}
             <h2>{{genre}}</h2>
+            <hr>
             <h6><p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information. <p></h6>
             {% endif %}
+          
           <div class="row">
             {% for title in titles %}
             <div class="col-sm- col-lg-3">
               <div class="panel panel-default">
               <div class="panel-body">
               <center> 
-              <a href="book.py?email={{email}}&ISBN={{title[0]}}" ><img src= {{title[6]}} style="height:160px;" margin=15px> </img></a>
-              <h5><a href="book.py?email={{email}}&ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
+              <a href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}" ><img src= {{title[6]}} style="height:160px;" margin=15px> </img></a>
+              <h5><a href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
               <p><h6>Price: P{{title[2]}}</h6></p>
-              <p><a class="btn btn-danger" href="book.py?email={{email}}&ISBN={{title[0]}}" role="button">Learn more &raquo;</a></p>
+              <p><a class="btn btn-danger" href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}" role="button">Learn more &raquo;</a></p>
               </center>
             </div>
             </div>

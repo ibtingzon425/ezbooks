@@ -1,0 +1,126 @@
+{% extends "sidebar.html" %}
+
+{% block form %}
+<style>
+a.morelink {
+    text-decoration:none;
+    outline: none;
+}
+.morecontent span {
+    display: none;
+}
+</style>
+	<link type="text/css" href="view/css/book-item.css" rel="stylesheet">
+            <div class="col-md-9">
+                <div class="thumbnail">
+                	<div class="col-md-4 left-side">
+                        <center>
+                        <img class="img-responsive" src={{book[6]}} style="width:200px;padding-top:30px;padding-bottom:20px;">
+                        <div class="btn-group dropup">
+                        <div class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn btn-sm btn-danger">Add to Shelf <span class="caret"></span></button></a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li class="active"><a href="#">Mark as Read</a></li>
+                                <li><a href="#">Mark as To-Read</a></li>
+                                <li><a href="#">Add to Favorites</a></li>
+                                </ul>
+                          </div>
+                        </div>
+                    </center>
+                    </div>
+                    <div id="desc" class="col-md-8 right-side" style="padding-top:25px">
+                        <header>  
+                        <h4><strong>{{book[1]}}</strong></h4> 
+                        <div class="price">
+                        <p class="pull-right" style="font-size:15px;">P{{book[2]}}
+                        </p>
+                        </div>  
+                    </header>                        
+                        <h5><bold>by {{author}}</bold></h5>
+                        <hr>                      
+                        <div class="comment more">
+                            {%- if book[5] == None -%} 
+                                No description available 
+                            {% else %} 
+                                {{book[5]}}
+                            {% endif %} 
+                            </div>
+                        <hr>
+                        <h6>
+                        <p>{{book[8]}}, {{book[9]}} pages </p>
+                        <p>Publisher: {{book[4]}}</p> 
+                        <p>Date Published: {{book[7]}}</p>
+                        <p>ISBN: {{book[0]}}</p>
+                        <p>Literary Awards: </p> 
+                        </h6>
+                        <hr>
+                        <div class="ratings" style:"position:absolute; bottom:0px;">
+                            <p class="pull-right">3 reviews</p>
+                            <p class="pull-bottom">
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                4.0 stars
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="well">
+
+                    <div class="text-right">
+                        <a class="btn btn-success">Leave a Review</a>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            Anonymous
+                            <span class="pull-right">10 days ago</span>
+                            <p>This product was great in terms of quality. I would definitely buy another!</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            Anonymous
+                            <span class="pull-right">12 days ago</span>
+                            <p>I've alredy ordered another one!</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            Anonymous
+                            <span class="pull-right">15 days ago</span>
+                            <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+{% endblock %}
