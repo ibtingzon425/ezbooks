@@ -38,7 +38,8 @@ CREATE TABLE Authors(
 	AuthorDescription VARCHAR(5000),
 	Birthdate DATE,
 	Country VARCHAR(50),
-	Gender VARCHAR(10)
+	Gender VARCHAR(10),
+	AuthorImage VARCHAR(50)
 );
 
 CREATE TABLE BookAuthor(
