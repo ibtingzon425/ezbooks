@@ -27,14 +27,22 @@ def main():
 		author_ = cur.fetchone()
 
 		command = "SELECT ISBN, Title, Price, Publisher, Description, Image, DatePublished, Format, Pages from Books NATURAL JOIN BookAuthor NATURAL JOIN Authors WHERE AuthorId='" + author + "'"
-			
+		
 		cur.execute(command)
 		rows = cur.fetchall()
 		titles = []
 		for row in rows:
 			titles.append(row)
 
-		print display("author-profile.html").render(user=user,author=author_,titles=titles)
+		command = "SELECT Genre from Books NATURAL JOIN Genres NATURAL JOIN BookAuthor WHERE AuthorId ='" + author + "'"
+		cur.execute(command)
+		genres = cur.fetchall()
+		genres_ = []
+		for genre in genres:
+			if genre not in genres_:
+				genres_.append(genre)
+
+		print display("author-profile.html").render(user=user,author=author_,titles=titles,genres=genres_)
 
 	except mdb.Error, e:
 	    if con:

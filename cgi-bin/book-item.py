@@ -27,8 +27,13 @@ def main():
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
 		cur.execute(command)
 		user = cur.fetchone()
+
+		command = "SELECT Genre from Books NATURAL JOIN Genres WHERE ISBN ='" + book[0] + "'"
+		cur.execute(command)
+		genres = cur.fetchall()
 		
-		print display("book-item.html").render(book=book,user=user,authors=authors)
+		print display("book-item.html").render(book=book,user=user,authors=authors,genres=genres)
+		print genres
 
 	except mdb.Error, e:
 	    if con:
