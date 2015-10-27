@@ -15,7 +15,7 @@ a.morelink {
                 <div class="thumbnail">
                 	<div class="col-md-4 left-side">
                         <center>
-                        <img class="img-responsive" src={{book[6]}} style="width:200px;padding-top:30px;padding-bottom:20px;">
+                        <img class="img-responsive" src={{book[5]}} style="width:200px;padding-top:30px;padding-bottom:20px;">
                         <div class="btn-group dropup">
                         <div class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -37,20 +37,30 @@ a.morelink {
                         </p>
                         </div>  
                     </header>                        
-                        <h5><bold>by {{author}}</bold></h5>
+                        <h5><bold>by 
+                            {% for author in authors %}
+                            <a href="author-profile.py?email={{user[2]}}&author={{author[1]}}">
+                            {{author[0]}}
+                            </a>
+                            {%- if loop.index < authors|length -%}
+                            ,
+                            {% endif %} 
+                            </bold>
+                            {% endfor %}
+                        </h5>
                         <hr>                      
                         <div class="comment more">
-                            {%- if book[5] == None -%} 
+                            {%- if book[4] == None -%} 
                                 No description available 
                             {% else %} 
-                                {{book[5]}}
+                                {{book[4]}}
                             {% endif %} 
                             </div>
                         <hr>
                         <h6>
-                        <p>{{book[8]}}, {{book[9]}} pages </p>
-                        <p>Publisher: {{book[4]}}</p> 
-                        <p>Date Published: {{book[7]}}</p>
+                        <p>{{book[7]}}, {{book[8]}} pages </p>
+                        <p>Publisher: {{book[3]}}</p> 
+                        <p>Date Published: {{book[6]}}</p>
                         <p>ISBN: {{book[0]}}</p>
                         <p>Literary Awards: </p> 
                         </h6>
@@ -68,59 +78,5 @@ a.morelink {
                         </div>
                     </div>
                 </div>
-
-                <div class="well">
-
-                    <div class="text-right">
-                        <a class="btn btn-success">Leave a Review</a>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">10 days ago</span>
-                            <p>This product was great in terms of quality. I would definitely buy another!</p>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">12 days ago</span>
-                            <p>I've alredy ordered another one!</p>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">15 days ago</span>
-                            <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
-                        </div>
-                    </div>
-
-                </div>
-
             </div>
 {% endblock %}

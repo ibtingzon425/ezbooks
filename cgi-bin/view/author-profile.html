@@ -1,0 +1,66 @@
+{% extends "sidebar.html" %}
+
+{% block form %}
+<style>
+a.morelink {
+    text-decoration:none;
+    outline: none;
+}
+.morecontent span {
+    display: none;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0; 
+}
+</style>
+	<link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
+            <div class="col-md-9">
+                <div class="thumbnail">
+                	<div class="col-md-4 left-side">
+                        <center>
+                    </center>
+                    </div>
+                    <div id="desc" class="col-md-8 right-side" style="padding-top:25px">
+                        <header>  
+                        <h4><strong>{{author[1]}}</strong></h4> 
+                        </header>                        
+                        <hr>
+                        <p><strong>About</strong>: 
+                            <div class="comment more" style="padding-bottom:30px">
+                                {%- if author[2] == None -%} 
+                                No description available 
+                            {% else %} 
+                                {{author[2]}}
+                            {% endif %} 
+                        </div>
+                        </p>
+                    </div>
+                </div>
+            <br>
+            <h4>{{author[1]}}'s Books</h4>
+            <hr>
+            <p>
+            <div class="row">
+            {% for title in titles %}
+            <div class="col-sm- col-lg-3">
+              <div class="panel panel-default">
+              <div class="panel-body">
+              <center> 
+              <a href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}" ><img src= {{title[5]}} style="height:160px;" margin=15px> </img></a>
+              <h5><a href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
+              <p><h6>Price: P{{title[2]}}</h6></p>
+              <p><a class="btn btn-danger" href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}" role="button">Learn more &raquo;</a></p>
+              </center>
+            </div>
+            </div>
+            </div><!--/.col-xs-6.col-lg-4-->
+            {% endfor %}
+          </div><!--/row-->
+                </div>
+
+{% endblock %}

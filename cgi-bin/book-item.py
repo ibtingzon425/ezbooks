@@ -20,16 +20,15 @@ def main():
 		cur.execute(command)
 		book = cur.fetchone()
 
-		command = "SELECT AuthorName from Books NATURAL JOIN Authors WHERE ISBN ='" + book[0] + "'"
+		command = "SELECT AuthorName, AuthorId from Books NATURAL JOIN BookAuthor NATURAL JOIN Authors WHERE ISBN ='" + book[0] + "'"
 		cur.execute(command)
-		author = cur.fetchone()
-		authorName = author[0]
+		authors = cur.fetchall()
 
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
 		cur.execute(command)
 		user = cur.fetchone()
 		
-		print display("book-item.html").render(book=book,user=user,author=authorName)
+		print display("book-item.html").render(book=book,user=user,authors=authors)
 
 	except mdb.Error, e:
 	    if con:
