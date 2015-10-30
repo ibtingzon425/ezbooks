@@ -42,7 +42,7 @@ def main():
 				titles.append(row)
 			i = i + 1
 			
-		print display("home.html").render(user=user,titles=titles,genre=genre,search='#home#')
+		print display("home.html").render(user=user,titles=titles,genre=genre,search=' ')
 
 	except mdb.Error, e:
 	    if con:

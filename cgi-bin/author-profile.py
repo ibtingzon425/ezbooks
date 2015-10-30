@@ -24,7 +24,7 @@ def main():
 		cur.execute(command)
 		author_ = cur.fetchone()
 
-		command = "SELECT ISBN, Title, Price, Publisher, Description, Image, DatePublished, Format, Pages from Books NATURAL JOIN BookAuthor NATURAL JOIN Authors WHERE AuthorId='" + author + "'"
+		command = "SELECT ISBN, Title, Price, Publisher, Description, Image, DatePublished, Format, Length from Books NATURAL JOIN BookAuthor NATURAL JOIN Authors WHERE AuthorId='" + author + "'"
 		
 		cur.execute(command)
 		rows = cur.fetchall()

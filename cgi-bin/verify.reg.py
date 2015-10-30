@@ -11,7 +11,7 @@ sess = None
 def register(fname, lname, email, password):
     enc_password = sha512_crypt.encrypt(password) 
 
-    command = "INSERT INTO Users(FirstName, LastName, Email, Password, DateAdded) VALUES(%s, %s, %s, %s, NOW())"
+    command = "INSERT INTO Users(FirstName, LastName, Email, Password, DateJoined) VALUES(%s, %s, %s, %s, NOW())"
     try:
         cur = con.cursor()
         cur.execute(command, (fname, lname, email, enc_password))      
@@ -20,6 +20,7 @@ def register(fname, lname, email, password):
     except mdb.Error, e:
         if con:
             con.rollback()
+
     print "Location: home.py?email=" + email + "\r\n"
 
 def main():

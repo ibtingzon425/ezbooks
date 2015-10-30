@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Authors;
 DROP TABLE IF EXISTS BookAuthor;
 DROP TABLE IF EXISTS Books;
-DROP TABLE IF EXISTS FavoriteShelf;
+DROP TABLE IF EXISTS UserCart;
 DROP TABLE IF EXISTS LiteraryAwards;
 
 CREATE TABLE Users(
@@ -14,7 +14,7 @@ CREATE TABLE Users(
 	LastName  VARCHAR(100) NOT NULL,
 	Email VARCHAR(50) PRIMARY KEY,
 	Password VARCHAR(256) NOT NULL,
-	DateAdded DATE, 
+	DateJoined DATE, 
 	Country VARCHAR(50),
 	Birthdate DATE
 );
@@ -28,7 +28,7 @@ CREATE TABLE Books(
 	Image VARCHAR(50),
 	DatePublished DATE,
 	Format VARCHAR(50),
-	Pages INTEGER
+	Length INTEGER
 );
 
 CREATE TABLE Authors(
@@ -72,7 +72,7 @@ CREATE TABLE LiteraryAwards(
 	PRIMARY KEY(ISBN, Award) 
 );
 
-CREATE TABLE FavoriteShelf(
+CREATE TABLE UserCart(
 	Email VARCHAR(50) NOT NULL,
 	ISBN VARCHAR(500) NOT NULL,
 	PRIMARY KEY(Email, ISBN) 
@@ -81,7 +81,7 @@ CREATE TABLE FavoriteShelf(
 ALTER TABLE BookGenre ADD FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
 ALTER TABLE Reviews ADD FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
 ALTER TABLE Reviews ADD FOREIGN KEY (Email) REFERENCES Users(Email);
-ALTER TABLE FavoriteShelf ADD FOREIGN KEY(Email) References Users(Email);
-ALTER TABLE FavoriteShelf ADD FOREIGN KEY(ISBN) References Books(ISBN);
+ALTER TABLE UserCart ADD FOREIGN KEY(Email) References Users(Email);
+ALTER TABLE UserCart ADD FOREIGN KEY(ISBN) References Books(ISBN);
 ALTER TABLE BookAuthor ADD FOREIGN KEY(ISBN) References Books(ISBN);
 ALTER TABLE BookAuthor ADD FOREIGN KEY(AuthorId) References Authors(AuthorId)
