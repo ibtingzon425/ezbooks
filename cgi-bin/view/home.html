@@ -26,16 +26,21 @@
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
-            {%- if genre == None -%}
+            {%- if genre == None and search == '#home#' -%}
             <h2>Hello, {{user[0]}} {{user[1]}}.</h2>
             <hr>
             <h6><p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information. <p></h6>
-            {% else %}
+            {%- elif genre == None and (search != None or search == ' ') -%}
+            <h3>Search Results</h3> <hr>
+            {% elif genre != None %}
             <h2>{{genre}}</h2>
             <hr>
             <h6><p class="lead">Disable the responsiveness of Bootstrap by fixing the width of the container and using the first grid system tier. <a href="http://getbootstrap.com/getting-started/#disable-responsive">Read the documentation</a> for more information. <p></h6>
             {% endif %}
-          
+            
+          {%- if genre == None and titles|length == 0 -%}
+          No results found for '{{search}}'.
+          {% else %}
           <div class="row">
             {% for title in titles %}
             <div class="col-sm- col-lg-3">
@@ -52,6 +57,7 @@
             </div><!--/.col-xs-6.col-lg-4-->
             {% endfor %}
           </div><!--/row-->
+          {% endif %}
         </div><!--/.col-xs-12.col-sm-9-->   
 
 {% endblock %}

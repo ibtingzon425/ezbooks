@@ -62,7 +62,6 @@ a.morelink {
                         <p>Publisher: {{book[3]}}</p> 
                         <p>Date Published: {{book[6]}}</p>
                         <p>ISBN: {{book[0]}}</p>
-                        <p>Literary Awards: </p>
                         <p>Genre: {% for genre in genres %} 
                             <a href="home.py?email={{user[2]}}&genre={{genre[0]}}">{{genre[0]}} </a>
                             {%- if loop.index < genres|length -%}

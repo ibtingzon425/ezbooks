@@ -54,8 +54,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                {%- if email != Nonetype -%}
-                <a class="navbar-brand" href="home.py?email={{email}}">ezbooks</a>
+                {%- if user != None -%}
+                <a class="navbar-brand" href="home.py?email={{user[2]}}">ezbooks</a>
                 {% else %}
                 <a class="navbar-brand" href="#">ezbooks</a>
                 {% endif %}

@@ -13,14 +13,12 @@ def main():
 	author= form.getvalue('author') 
 	email = form.getvalue('email') #email of current user
 
-	#TODO: If current user != email 
-
 	try:
 		cur = con.cursor()
 		
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
 		cur.execute(command)
-		user= cur.fetchone() #
+		user_= cur.fetchone() #
 
 		command = "SELECT * from Authors WHERE AuthorId ='" + author + "'"
 		cur.execute(command)
@@ -34,7 +32,7 @@ def main():
 		for row in rows:
 			titles.append(row)
 
-		command = "SELECT Genre from Books NATURAL JOIN Genres NATURAL JOIN BookAuthor WHERE AuthorId ='" + author + "'"
+		command = "SELECT Genre from Books NATURAL JOIN BookGenre NATURAL JOIN BookAuthor WHERE AuthorId ='" + author + "'"
 		cur.execute(command)
 		genres = cur.fetchall()
 		genres_ = []
@@ -42,7 +40,7 @@ def main():
 			if genre not in genres_:
 				genres_.append(genre)
 
-		print display("author-profile.html").render(user=user,author=author_,titles=titles,genres=genres_)
+		print display("author-profile.html").render(user=user_,author=author_,titles=titles,genres=genres_)
 
 	except mdb.Error, e:
 	    if con:

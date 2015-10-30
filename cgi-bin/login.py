@@ -18,7 +18,7 @@ def main():
 	form = cgi.FieldStorage()
 	code = form.getvalue('redirect')
 
-	print display("login.html").render()
+	print display("login.html").render(user=None)
 	if(code == '0'):
 		invalidLogin()
 	elif(code == '1'):

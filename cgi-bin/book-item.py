@@ -28,7 +28,7 @@ def main():
 		cur.execute(command)
 		user = cur.fetchone()
 
-		command = "SELECT Genre from Books NATURAL JOIN Genres WHERE ISBN ='" + book[0] + "'"
+		command = "SELECT Genre from Books NATURAL JOIN BookGenre WHERE ISBN ='" + book[0] + "'"
 		cur.execute(command)
 		genres = cur.fetchall()
 		

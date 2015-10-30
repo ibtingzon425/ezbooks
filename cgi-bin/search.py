@@ -16,6 +16,7 @@ def main():
 	form = cgi.FieldStorage()
 	
 	email = form.getvalue('email')
+	search = form.getvalue('search')
 	genre = form.getvalue('genre')
 	sess = session.Session(expires=365*24*60*60, cookie_path='/')
 
@@ -29,21 +30,31 @@ def main():
 		cur.execute(command)
 		user= cur.fetchone()
 
-		if(genre != None):
-			command = "SELECT * from Books NATURAL JOIN BookGenre WHERE Genre='" + genre + "'"
-		else:
-			command = "SELECT * from Books"
-			
-		cur.execute(command)
-		rows = cur.fetchall()
 		titles = []
-		i = 0
-		for row in rows:
-			if (i < 12):
+		
+		if(search != None):
+			put = "ISBN, Title, Price, Publisher, Description, Image"
+			command = "SELECT " + put + " from Books NATURAL JOIN BookAuthor NATURAL JOIN Authors WHERE AuthorName LIKE '%" + search + "%'"
+			cur.execute(command)
+			rows = cur.fetchall()
+			for row in rows:
 				titles.append(row)
-			i = i + 1
+
+			command = "SELECT " + put + " from Books WHERE ISBN LIKE '%" + search + "%'"
+			cur.execute(command)
+			rows = cur.fetchall()
+			for row in rows:
+				titles.append(row)
+
+			command = "SELECT " + put + " from Books WHERE Title LIKE '%" + search + "%'"
+			cur.execute(command)
+			rows = cur.fetchall()
+			for row in rows:
+				titles.append(row)
+		else:
+			search = " "
 			
-		print display("home.html").render(user=user,titles=titles,genre=genre,search='#home#')
+		print display("home.html").render(user=user,titles=titles,genre=genre,search=search)
 
 	except mdb.Error, e:
 	    if con:

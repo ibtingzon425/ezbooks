@@ -20,7 +20,7 @@ def main():
     form = cgi.FieldStorage()
     code = form.getvalue('redirect')
 
-    print display("reg.html").render()
+    print display("reg.html").render(user=None)
     if(code == '0'):
     	emailExistsError()
     elif(code == '1'):
