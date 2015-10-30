@@ -17,7 +17,6 @@ def main():
 	
 	email = form.getvalue('email')
 	genre = form.getvalue('genre')
-	sess = session.Session(expires=365*24*60*60, cookie_path='/')
 
 	#TODO: For fname, lname == None redirect to login page
 	#TODO: Implement sessions using Cookies
