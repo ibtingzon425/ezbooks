@@ -31,8 +31,16 @@ def main():
 		command = "SELECT Genre from Books NATURAL JOIN BookGenre WHERE ISBN ='" + book[0] + "'"
 		cur.execute(command)
 		genres = cur.fetchall()
+
+		book_exists = False
+		command = "SELECT * FROM UserCart WHERE Email=%s AND ISBN=%s"
+		cur = con.cursor()
+		cur.execute(command, (email, ISBN))
+		book_ = cur.fetchone()
+		if (book_ != None):
+			book_exists = True
 		
-		print display("book-item.html").render(book=book,user=user,authors=authors,genres=genres)
+		print display("book-item.html").render(book=book,user=user,authors=authors,genres=genres,book_exists=book_exists)
 		print genres
 
 	except mdb.Error, e:

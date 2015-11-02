@@ -26,7 +26,15 @@ def main():
 		cur.execute(command)
 		userprof = cur.fetchone() #
 
-		print display("user-profile.html").render(user=user,userprof=userprof)
+		command = "SELECT ISBN, Title, Price, Publisher, Description, Image, DatePublished, Format, Length from Books NATURAL JOIN UserCart NATURAL JOIN Users WHERE Email='" + email + "'"
+		
+		cur.execute(command)
+		rows = cur.fetchall()
+		titles = []
+		for row in rows:
+			titles.append(row)
+
+		print display("user-profile.html").render(user=user,userprof=userprof,titles=titles)
 
 	except mdb.Error, e:
 	    if con:

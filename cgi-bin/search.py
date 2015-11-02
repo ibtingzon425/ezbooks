@@ -19,9 +19,6 @@ def main():
 	search = form.getvalue('search')
 	genre = form.getvalue('genre')
 
-	#TODO: For fname, lname == None redirect to login page
-	#TODO: Implement sessions using Cookies
-
 	try:
 		cur = con.cursor()
 
@@ -37,19 +34,22 @@ def main():
 			cur.execute(command)
 			rows = cur.fetchall()
 			for row in rows:
-				titles.append(row)
+				if row not in titles:
+					titles.append(row)
 
 			command = "SELECT " + put + " from Books WHERE ISBN LIKE '%" + search + "%'"
 			cur.execute(command)
 			rows = cur.fetchall()
 			for row in rows:
-				titles.append(row)
+				if row not in titles:
+					titles.append(row)
 
 			command = "SELECT " + put + " from Books WHERE Title LIKE '%" + search + "%'"
 			cur.execute(command)
 			rows = cur.fetchall()
 			for row in rows:
-				titles.append(row)
+				if row not in titles:
+					titles.append(row)
 		else:
 			search = " "
 			
