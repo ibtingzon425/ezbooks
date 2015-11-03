@@ -34,7 +34,15 @@ def main():
 		for row in rows:
 			titles.append(row)
 
-		print display("user-profile.html").render(user=user,userprof=userprof,titles=titles)
+		command = "SELECT * from Books NATURAL JOIN UserOwned WHERE Email='" + email + "'"
+		
+		cur.execute(command)
+		rows = cur.fetchall()
+		own = []
+		for row in rows:
+			own.append(row)
+
+		print display("user-profile.html").render(user=user,userprof=userprof,titles=titles,own=own)
 
 	except mdb.Error, e:
 	    if con:

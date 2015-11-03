@@ -1,0 +1,61 @@
+{% extends "sidebar.html" %}
+
+{% block form %}
+<style type="text/css">
+table, th, td {
+    border: 1px solid #ccc;
+}
+th, td {
+    padding: 10px;
+}
+th {
+    background-color: #ddd;
+    color: #333;
+}
+</style>
+	<link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
+            <div class="col-md-9">
+                <div class="thumbnail">
+                    <div style="padding:40px">
+                        <header> <h4><strong>EzBooks Shopping Cart Checkout</strong></h4> </header>  
+                        <hr>
+                         <br>
+                        <table border="1" style="width:100%">
+                          <tr>
+                            <th>ISBN</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Format</th>
+                            <th><div align="right">Price</div></th>
+                          </tr>
+
+                          {% for title in titles %}
+                          <tr>
+                            <td><a href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}">{{title[0]}}</a></td>
+                            <td><a href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}">{{title[1]}}</a></td>
+                            <td><a href="author-profile.py?email={{user[2]}}&author={{title[5]}}">{{title[4]}}</a></td>
+                            <td>{{title[3]}}</td>
+                            <td><div style= "color:#bb3e4f" align="right">PHP {{title[2]}}</div></td>
+                          </tr>
+                          {% endfor %}
+
+                          <tfoot>
+                                <tr class="odd" >
+                                <td colspan="4"><div align="right" class="bold"><strong>Total Amount</strong></div></td>
+                                <td class="right totalAmount"><div style= "color:#bb3e4f" align="right"><strong>PHP {{total}}</strong></div></td>
+                            </tr>
+                        </tfoot>
+                        </table>
+                        <br> 
+                        <div align="right"> <a class="btn btn-primary" href="home.py?email={{user[2]}}" role="button">Continue Shopping &raquo;</a> &nbsp;
+                            {%- if total > 0 -%}
+                            <a class="btn btn-danger" href="checkout.py?email={{user[2]}}" role="button">Proceed to Checkout &raquo;</a> 
+                            {%- else -%}
+                            <a class="btn btn-danger disabled" href="checkout.py?email={{user[2]}}" role="button">Proceed to Checkout &raquo;</a>
+                            {%- endif -%}
+                        </div> 
+                    </div>
+                </div>           
+            </div>
+
+{% endblock %}

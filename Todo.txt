@@ -1,0 +1,18 @@
+- Sessions (subsequently, remove all email=<email> in links)
+- Book Profile [DONE]
+- Author Profile [DONE]
+- User Profile 
+	- Basic Info [DONE]
+	- User Cart [DONE]
+	- User Owned Books
+	- Edit Profile 
+- Shopping Cart [DONE]
+	- Payment Page 
+- Populate Database (Around 50 - 100 entries if possible)
+
+If there's time:
+- Admin Module
+	- Add Book
+	- Update Book Details
+	- Delete Book
+

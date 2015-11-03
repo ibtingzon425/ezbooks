@@ -19,9 +19,35 @@
                         <p>Joined on {{userprof[4]}}</p>
                     </div>
                 </div>
+
                 <br>
-                <h4>{{user[0]}} {{user[1]}}'s Cart 
-                    <a class="btn btn-sm btn-danger" href="checkout.py?email={{user[2]}}" role="button" style="float:right">See Detailed List >> </a></h4> 
+                <h4><strong>{{user[0]}} {{user[1]}}'s Books</strong></h4> 
+                <hr>
+          {%- if own|length == 0 -%}
+                <p>Looks like you don't own any books yet! Start shopping <a href="home.py?email={{user[2]}}">here</a>. </p>
+                {%- else -%}
+                <p>
+                <div class="row">
+                {% for title in own%}
+                <div class="col-sm- col-lg-3">
+                  <div class="panel panel-default">
+                  <div class="panel-body">
+                  <center> 
+                  <a href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}" ><img src= {{title[5]}} style="height:160px;" margin=15px> </img></a>
+                  <h5><a href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
+                  <p><h6>Price: P{{title[2]}}</h6></p>
+                  <p><a class="btn btn-danger" href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}" role="button">Learn More &raquo;</a></p>
+                  </center>
+                </div>
+                </div>              
+                </div><!--/.col-xs-6.col-lg-4-->
+            {% endfor %}
+          </div><!--/row-->
+          {% endif %}
+                
+                <br>
+                <h4><strong>{{user[0]}} {{user[1]}}'s Cart </strong>
+                    <a class="btn btn-sm btn-danger" href="shopping-cart.py?email={{user[2]}}" role="button" style="float:right">See Detailed List >> </a></h4> 
                 <hr>
                 {%- if titles|length == 0 -%}
                 <p>Looks like you haven't got any book in your cart yet! Start shopping <a href="home.py?email={{user[2]}}">here</a>. </p>
@@ -39,10 +65,13 @@
                   <p><a class="btn btn-danger" href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}" role="button">Learn More &raquo;</a></p>
                   </center>
                 </div>
-                </div>
+                </div>              
                 </div><!--/.col-xs-6.col-lg-4-->
             {% endfor %}
           </div><!--/row-->
           {% endif %}
+
+          
+
                 </div>
 {% endblock %}

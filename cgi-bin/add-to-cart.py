@@ -31,14 +31,42 @@ def main():
 		cur.execute(command)
 		user= cur.fetchone() 
 
-		command = "SELECT ISBN, Title, Price, Publisher, Description, Image from Books NATURAL JOIN UserCart WHERE Email='" + email + "'"
+		#Get titles of books in cart
+		command = "SELECT ISBN, Title, Price, Format from Books NATURAL JOIN UserCart WHERE Email='" + email + "'"
+		
 		cur.execute(command)
 		rows = cur.fetchall()
-		titles = []
+		titles_temp = []
 		for row in rows:
-			titles.append(row)
+			titles_temp.append(row)
 
-		print display("user-profile.html").render(user=user,userprof=user,titles=titles)
+		titles = []
+		for title in titles_temp:
+			command = "SELECT AuthorName, AuthorId from Books NATURAL JOIN BookAuthor NATURAL JOIN Authors WHERE ISBN='" + title[0] + "'"
+			cur.execute(command)
+			row = cur.fetchone()
+			new_title = title + (row)
+			titles.append(new_title)
+
+		#update total price
+		command = "SELECT TotalCost from Users WHERE Email='" + email + "'"
+		cur.execute(command)
+		row = cur.fetchone()
+		total = row[0]
+
+		command = "SELECT Price from Books WHERE ISBN='" + book + "'"
+		cur.execute(command)
+		row = cur.fetchone()
+		price = row[0]
+
+		total = total + price
+
+		command = "UPDATE Users SET TotalCost='" + str(total) + "' WHERE Email='" + email + "'"
+		cur.execute(command)
+		con.commit()
+
+		#print display("user-profile.html").render(user=user,userprof=user,titles=titles)
+		print display("shopping-cart.html").render(user=user,titles=titles,total=total)
 
 	except mdb.Error, e:
 		if con:

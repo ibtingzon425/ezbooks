@@ -19,7 +19,8 @@ CREATE TABLE Users(
 	DateJoined DATE, 
 	Country VARCHAR(50),
 	Birthdate DATE,
-	Image VARCHAR(500)
+	Image VARCHAR(500),
+	TotalCost INTEGER
 );
 
 CREATE TABLE Books(
@@ -31,7 +32,7 @@ CREATE TABLE Books(
 	Image VARCHAR(500),
 	DatePublished DATE,
 	Format VARCHAR(50),
-	Length INTEGER
+	Length INTEGER DEFAULT 0
 );
 
 CREATE TABLE Authors(
