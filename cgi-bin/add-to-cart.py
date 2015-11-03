@@ -48,6 +48,8 @@ def main():
 			new_title = title + (row)
 			titles.append(new_title)
 
+		total = 0.0
+
 		#update total price
 		command = "SELECT TotalCost from Users WHERE Email='" + email + "'"
 		cur.execute(command)
