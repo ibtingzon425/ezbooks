@@ -12,6 +12,7 @@ def main():
 	form = cgi.FieldStorage()
 	email = form.getvalue('email') #email of current user
 	book = form.getvalue('ISBN')
+	total = 0.0
 
 	try:
 		# Checks if book already exists in cart

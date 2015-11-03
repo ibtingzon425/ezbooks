@@ -21,7 +21,7 @@
                 </div>
 
                 <br>
-                <h4><strong>{{user[0]}} {{user[1]}}'s Books</strong></h4> 
+                <h4><strong>{{user[0]}} {{user[1]}}'s eBook Collection</strong></h4> 
                 <hr>
           {%- if own|length == 0 -%}
                 <p>Looks like you don't own any books yet! Start shopping <a href="home.py?email={{user[2]}}">here</a>. </p>
@@ -44,10 +44,10 @@
             {% endfor %}
           </div><!--/row-->
           {% endif %}
-                
+
                 <br>
-                <h4><strong>{{user[0]}} {{user[1]}}'s Cart </strong>
-                    <a class="btn btn-sm btn-danger" href="shopping-cart.py?email={{user[2]}}" role="button" style="float:right">See Detailed List >> </a></h4> 
+                <h4><strong>{{user[0]}} {{user[1]}}'s Shopping Cart </strong>
+                    <a class="btn btn-sm btn-danger" href="shopping-cart.py?email={{user[2]}}" role="button" style="float:right">Checkout &raquo; </a></h4> 
                 <hr>
                 {%- if titles|length == 0 -%}
                 <p>Looks like you haven't got any book in your cart yet! Start shopping <a href="home.py?email={{user[2]}}">here</a>. </p>
