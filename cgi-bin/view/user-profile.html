@@ -1,29 +1,11 @@
 {% extends "sidebar.html" %}
 
 {% block form %}
-<style>
-a.morelink {
-    text-decoration:none;
-    outline: none;
-}
-.morecontent span {
-    display: none;
-}
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0; 
-}
-</style>
 	<link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
             <div class="col-md-9">
                 <div class="thumbnail">
                 	<div class="col-md-4 left-side">
-                        <center>
-                    </center>
+                        <center></center>
                     </div>
                     <div id="desc" class="col-md-8 right-side" style="padding-top:25px">
                         {%- if userprof[2] == user[2] -%}
@@ -38,7 +20,8 @@ hr {
                     </div>
                 </div>
                 <br>
-                <h4>{{user[0]}} {{user[1]}}'s Cart</h4>
+                <h4>{{user[0]}} {{user[1]}}'s Cart 
+                    <a class="btn btn-sm btn-danger" href="checkout.py?email={{user[2]}}" role="button" style="float:right">See Detailed List >> </a></h4> 
                 <hr>
                 {%- if titles|length == 0 -%}
                 <p>Looks like you haven't got any book in your cart yet! Start shopping <a href="home.py?email={{user[2]}}">here</a>. </p>

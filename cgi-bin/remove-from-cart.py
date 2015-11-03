@@ -31,12 +31,14 @@ def main():
 		cur.execute(command)
 		user= cur.fetchone() 
 
-		command = "SELECT ISBN, Title, Price, Publisher, Description, Image from Books NATURAL JOIN UserCart NATURAL JOIN Users WHERE Email='" + email + "'"
+		command = "SELECT ISBN, Title, Price, Publisher, Description, Image from Books NATURAL JOIN UserCart WHERE Email='" + email + "'"
 		cur.execute(command)
 		rows = cur.fetchall()
 		titles = []
+		total = 0
 		for row in rows:
 			titles.append(row)
+			total = total + row[2]
 
 		print display("user-profile.html").render(user=user,userprof=user,titles=titles)
 

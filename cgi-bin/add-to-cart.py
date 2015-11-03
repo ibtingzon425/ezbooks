@@ -31,7 +31,7 @@ def main():
 		cur.execute(command)
 		user= cur.fetchone() 
 
-		command = "SELECT ISBN, Title, Price, Publisher, Description, Image from Books NATURAL JOIN UserCart NATURAL JOIN Users WHERE Email='" + email + "'"
+		command = "SELECT ISBN, Title, Price, Publisher, Description, Image from Books NATURAL JOIN UserCart WHERE Email='" + email + "'"
 		cur.execute(command)
 		rows = cur.fetchall()
 		titles = []

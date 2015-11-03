@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS Authors;
 DROP TABLE IF EXISTS BookAuthor;
 DROP TABLE IF EXISTS Books;
 DROP TABLE IF EXISTS UserCart;
+DROP TABLE IF EXISTS UserOwned;
 DROP TABLE IF EXISTS LiteraryAwards;
 
 CREATE TABLE Users(
@@ -17,7 +18,8 @@ CREATE TABLE Users(
 	Password VARCHAR(256) NOT NULL,
 	DateJoined DATE, 
 	Country VARCHAR(50),
-	Birthdate DATE
+	Birthdate DATE,
+	Image VARCHAR(500)
 );
 
 CREATE TABLE Books(
@@ -26,7 +28,7 @@ CREATE TABLE Books(
 	Price DECIMAL(10,2) NOT NULL,
 	Publisher VARCHAR(256), 
 	Description VARCHAR(5000),
-	Image VARCHAR(50),
+	Image VARCHAR(500),
 	DatePublished DATE,
 	Format VARCHAR(50),
 	Length INTEGER
@@ -80,6 +82,12 @@ CREATE TABLE LiteraryAwards(
 );
 
 CREATE TABLE UserCart(
+	Email VARCHAR(50) NOT NULL,
+	ISBN VARCHAR(500) NOT NULL,
+	PRIMARY KEY(Email, ISBN) 
+);
+
+CREATE TABLE UserOwned(
 	Email VARCHAR(50) NOT NULL,
 	ISBN VARCHAR(500) NOT NULL,
 	PRIMARY KEY(Email, ISBN) 

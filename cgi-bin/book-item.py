@@ -16,7 +16,6 @@ def main():
 		cur = con.cursor()
 		
 		command = "SELECT * from Books WHERE ISBN='" + ISBN + "'"
-		
 		cur.execute(command)
 		book = cur.fetchone()
 
