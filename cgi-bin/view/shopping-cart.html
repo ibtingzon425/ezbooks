@@ -49,9 +49,9 @@ th {
                         <br> 
                         <div align="right"> <a class="btn btn-primary" href="home.py?email={{user[2]}}" role="button">Continue Shopping &raquo;</a> &nbsp;
                             {%- if total > 0 -%}
-                            <a class="btn btn-danger" href="checkout.py?email={{user[2]}}" role="button">Proceed to Checkout &raquo;</a> 
+                            <a class="btn btn-danger" href="checkout.py?email={{user[2]}}" role="button">Proceed to Payment &raquo;</a> 
                             {%- else -%}
-                            <a class="btn btn-danger disabled" href="checkout.py?email={{user[2]}}" role="button">Proceed to Checkout &raquo;</a>
+                            <a class="btn btn-danger disabled" href="checkout.py?email={{user[2]}}" role="button">Proceed to Payment &raquo;</a>
                             {%- endif -%}
                         </div> 
                     </div>
