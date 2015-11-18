@@ -11,7 +11,7 @@ $(document).ready(function() {
             var c = content.substr(0, showChar);
             var h = content.substr(showChar, content.length-showChar);
 
-            var html = '<p style="text-align:justify">' + c + ' <span class="moreelipses">'+ellipsestext+'</span><span class="morecontent"><span>' + h + '</span><a href="" class="morelink">'+moretext+'</a></span></p>';
+            var html = '<p style="text-align:justify">' + c + '<span class="moreelipses">'+ellipsestext+'</span><span class="morecontent"><span>' + h + '</span><a href="" class="morelink">'+moretext+'</a></span></p>';
 
             $(this).html(html);
         }

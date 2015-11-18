@@ -20,7 +20,7 @@ def main():
 		cur.execute(command)
 		user_= cur.fetchone() 
 
-		command = "SELECT ISBN from Books NATURAL JOIN UserCart WHERE Email='" + email + "'"
+		command = "SELECT ISBN from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
 		
 		cur.execute(command)
 		rows = cur.fetchall()

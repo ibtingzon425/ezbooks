@@ -19,7 +19,7 @@ def main():
 		cur.execute(command)
 		user_= cur.fetchone() #
 
-		command = "SELECT ISBN, Title, Price, Format from Books NATURAL JOIN UserCart WHERE Email='" + email + "'"
+		command = "SELECT ISBN, Title, Price from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
 		
 		cur.execute(command)
 		rows = cur.fetchall()
@@ -30,11 +30,18 @@ def main():
 		titles = []
 		total = 0
 		for title in titles_temp:
-			command = "SELECT AuthorName, AuthorId from Books NATURAL JOIN BookAuthor NATURAL JOIN Authors WHERE ISBN='" + title[0] + "'"
+			command = "SELECT Format from BookFormat NATURAL JOIN ComicBooks NATURAL JOIN UserCart WHERE ISBN='" + title[0] + "'"
+			cur.execute(command)
+			format = cur.fetchall()
+			title = title + (format,)
+
+			command = "SELECT WriterName, WriterId from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE ISBN='" + title[0] + "'"
 			cur.execute(command)
 			row = cur.fetchone()
+
 			new_title = title + (row)
 			titles.append(new_title)
+
 			total = total + title[2]
 
 		command = "UPDATE Users SET TotalCost='" + str(total) + "' WHERE Email='" + email + "'"

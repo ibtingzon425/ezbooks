@@ -10,7 +10,7 @@ import os, time, sys, session, Cookie, json
 def main():
 	form = cgi.FieldStorage()
 	
-	author= form.getvalue('author') 
+	writer= form.getvalue('writer') 
 	email = form.getvalue('email') #email of current user
 
 	try:
@@ -20,11 +20,11 @@ def main():
 		cur.execute(command)
 		user_= cur.fetchone() #
 
-		command = "SELECT * from Authors WHERE AuthorId ='" + author + "'"
+		command = "SELECT * from Writers WHERE WriterId ='" + writer + "'"
 		cur.execute(command)
-		author_ = cur.fetchone()
+		writer_ = cur.fetchone()
 
-		command = "SELECT ISBN, Title, Price, Publisher, Description, Image, DatePublished, Format, Length from Books NATURAL JOIN BookAuthor NATURAL JOIN Authors WHERE AuthorId='" + author + "'"
+		command = "SELECT ISBN, Title, Price, Image from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE WriterId='" + writer + "'"
 		
 		cur.execute(command)
 		rows = cur.fetchall()
@@ -32,7 +32,7 @@ def main():
 		for row in rows:
 			titles.append(row)
 
-		command = "SELECT Genre from Books NATURAL JOIN BookGenre NATURAL JOIN BookAuthor WHERE AuthorId ='" + author + "'"
+		command = "SELECT Genre from ComicBooks NATURAL JOIN BookGenre NATURAL JOIN BookWriter WHERE WriterId ='" + writer + "'"
 		cur.execute(command)
 		genres = cur.fetchall()
 		genres_ = []
@@ -40,7 +40,7 @@ def main():
 			if genre not in genres_:
 				genres_.append(genre)
 
-		print display("author-profile.html").render(user=user_,author=author_,titles=titles,genres=genres_)
+		print display("writer-profile.html").render(user=user_,writer=writer_,titles=titles,genres=genres_)
 
 	except mdb.Error, e:
 	    if con:

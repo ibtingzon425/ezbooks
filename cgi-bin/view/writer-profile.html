@@ -6,36 +6,36 @@
                 <div class="thumbnail">
                 	<div class="col-md-4 left-side">
                         <center>
-                            <img class="img-responsive" src={{author[6]}} style="width:200px;padding-top:30px;padding-bottom:20px;">
+                            <img class="img-responsive" src={{writer[6]}} style="width:200px;padding-top:30px;padding-bottom:20px;">
                     </center>
                     </div>
                     <div id="desc" class="col-md-8 right-side" style="padding-top:25px">
                         <header>  
-                        <h4><strong>{{author[1]}}</strong></h4> 
+                        <h4><strong>{{writer[1]}}</strong></h4> 
                         </header>                        
                         <hr>
                         <h5>
-                        <p><strong>Born:</strong> {{author[3]}} in {{author[4]}} </p>
-                        <p><strong>Gender:</strong> {{author[5]}}</p>
+                        <p><strong>Born:</strong> {{writer[3]}} in {{writer[4]}} </p>
+                        <p><strong>Gender:</strong> {{writer[5]}}</p>
                         <p><strong>Genres:</strong> {% for genre in genres %} 
                             <a href="home.py?email={{user[2]}}&genre={{genre[0]}}">{{genre[0]}} </a>
                             {%- if loop.index < genres|length -%}
                             ,
                             {% endif %}  {% endfor %}</p> 
                         </h5>
-                        <p><strong>About this author</strong>: 
+                        <p><strong>About this writer</strong>: 
                             <div class="comment more" style="padding-bottom:30px">
-                            {%- if author[2] == None -%} 
+                            {%- if writer[2] == None -%} 
                                 No description available 
                             {% else %} 
-                                {{author[2]}}
+                                {{writer[2]}}
                             {% endif %} 
                         </div>
                         </p>
                     </div>
                 </div>
             <br>
-            <h4>{{author[1]}}'s Books</h4>
+            <h4>{{writer[1]}}'s Books</h4>
             <hr>
             <p>
             <div class="row">
@@ -44,10 +44,10 @@
               <div class="panel panel-default">
               <div class="panel-body">
               <center> 
-              <a href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}" ><img src= {{title[5]}} style="height:160px;" margin=15px> </img></a>
-              <h5><a href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
+              <a href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}" ><img src= {{title[3]}} style="height:160px;" margin=15px> </img></a>
+              <h5><a href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
               <p><h6>Price: P{{title[2]}}</h6></p>
-              <p><a class="btn btn-danger" href="book-item.py?email={{user[2]}}&ISBN={{title[0]}}" role="button">Learn more &raquo;</a></p>
+              <p><a class="btn btn-danger" href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}" role="button">Learn more &raquo;</a></p>
               </center>
             </div>
             </div>

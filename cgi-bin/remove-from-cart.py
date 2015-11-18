@@ -32,7 +32,7 @@ def main():
 		cur.execute(command)
 		user= cur.fetchone() 
 
-		command = "SELECT ISBN, Title, Price, Format from Books NATURAL JOIN UserCart WHERE Email='" + email + "'"
+		command = "SELECT ISBN, Title, Price from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
 		
 		cur.execute(command)
 		rows = cur.fetchall()
@@ -41,10 +41,17 @@ def main():
 			titles_temp.append(row)
 
 		titles = []
+		total = 0
 		for title in titles_temp:
-			command = "SELECT AuthorName, AuthorId from Books NATURAL JOIN BookAuthor NATURAL JOIN Authors WHERE ISBN='" + title[0] + "'"
+			command = "SELECT Format from BookFormat NATURAL JOIN ComicBooks NATURAL JOIN UserCart WHERE ISBN='" + title[0] + "'"
+			cur.execute(command)
+			format = cur.fetchall()
+			title = title + (format,)
+
+			command = "SELECT WriterName, WriterId from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE ISBN='" + title[0] + "'"
 			cur.execute(command)
 			row = cur.fetchone()
+
 			new_title = title + (row)
 			titles.append(new_title)
 
@@ -53,7 +60,7 @@ def main():
 		row = cur.fetchone()
 		total = row[0]
 
-		command = "SELECT Price from Books WHERE ISBN='" + book + "'"
+		command = "SELECT Price from ComicBooks WHERE ISBN='" + book + "'"
 		cur.execute(command)
 		row = cur.fetchone()
 		price = row[0]
@@ -65,7 +72,6 @@ def main():
 		cur.execute(command)
 		con.commit()
 
-		#print display("user-profile.html").render(user=user,userprof=user,titles=titles)
 		print display("shopping-cart.html").render(user=user,titles=titles,total=total)
 
 	except mdb.Error, e:

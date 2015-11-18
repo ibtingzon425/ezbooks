@@ -26,7 +26,7 @@ def main():
 		cur.execute(command)
 		userprof = cur.fetchone() #
 
-		command = "SELECT * from Books NATURAL JOIN UserCart WHERE Email='" + email + "'"
+		command = "SELECT * from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
 		
 		cur.execute(command)
 		rows = cur.fetchall()
@@ -34,7 +34,7 @@ def main():
 		for row in rows:
 			titles.append(row)
 
-		command = "SELECT * from Books NATURAL JOIN UserOwned WHERE Email='" + email + "'"
+		command = "SELECT * from ComicBooks NATURAL JOIN UserOwned WHERE Email='" + email + "'"
 		
 		cur.execute(command)
 		rows = cur.fetchall()

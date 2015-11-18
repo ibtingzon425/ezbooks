@@ -30,21 +30,21 @@ def main():
 		
 		if(search != None):
 			put = "ISBN, Title, Price, Publisher, Description, Image"
-			command = "SELECT " + put + " from Books NATURAL JOIN BookAuthor NATURAL JOIN Authors WHERE AuthorName LIKE '%" + search + "%'"
+			command = "SELECT " + put + " from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE WriterName LIKE '%" + search + "%'"
 			cur.execute(command)
 			rows = cur.fetchall()
 			for row in rows:
 				if row not in titles:
 					titles.append(row)
 
-			command = "SELECT " + put + " from Books WHERE ISBN LIKE '%" + search + "%'"
+			command = "SELECT " + put + " from ComicBooks WHERE ISBN LIKE '%" + search + "%'"
 			cur.execute(command)
 			rows = cur.fetchall()
 			for row in rows:
 				if row not in titles:
 					titles.append(row)
 
-			command = "SELECT " + put + " from Books WHERE Title LIKE '%" + search + "%'"
+			command = "SELECT " + put + " from ComicBooks WHERE Title LIKE '%" + search + "%'"
 			cur.execute(command)
 			rows = cur.fetchall()
 			for row in rows:

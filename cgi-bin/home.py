@@ -29,9 +29,9 @@ def main():
 		user= cur.fetchone()
 
 		if(genre != None):
-			command = "SELECT * from Books NATURAL JOIN BookGenre WHERE Genre='" + genre + "'"
+			command = "SELECT * from ComicBooks NATURAL JOIN BookGenre WHERE Genre='" + genre + "'"
 		else:
-			command = "SELECT * from Books"
+			command = "SELECT * from ComicBooks"
 			
 		cur.execute(command)
 		rows = cur.fetchall()
