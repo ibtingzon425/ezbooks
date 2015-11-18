@@ -28,7 +28,7 @@ INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9781608866878", LAST_I
 INSERT INTO BookFormat(ISBN, Format) VALUES ("9781608866878", ".cbr");
 INSERT INTO BookFormat(ISBN, Format) VALUES ("9781608866878", ".cbz");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608866878", "Action/Adventure");
-INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608866878", "Crime Fiction");
-INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608866878", "Science Fiction");
-INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608866878", "Superhero");
+INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608866878", "Fantasy");
+INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608866878", "Humor");
+INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608866878", "Slice of Life");
 INSERT INTO LiteraryAwards(ISBN, Award) Values ("9781608866878", "Will Eisner Comic Industry Awards for Best New Series & Best Publication for Teens (ages 13-17) (2015)")
