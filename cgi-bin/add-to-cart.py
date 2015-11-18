@@ -29,7 +29,7 @@ def main():
 		
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
 		cur.execute(command)
-		user= cur.fetchone() 
+		user = cur.fetchone() 
 
 		#Get titles of ComicBooks in cart
 		command = "SELECT ISBN, Title, Price from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
@@ -75,8 +75,8 @@ def main():
 		cur.execute(command)
 		con.commit()
 
-		#print display("user-profile.html").render(user=user,userprof=user,titles=titles)
 		print display("shopping-cart.html").render(user=user,titles=titles,total=total)
+		print format
 
 	except mdb.Error, e:
 		if con:

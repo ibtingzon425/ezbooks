@@ -1,12 +1,13 @@
 SET FOREIGN_KEY_CHECKS=0; 
 DROP TABLE IF EXISTS BookGenre;
 DROP TABLE IF EXISTS Genres;
-DROP TABLE IF EXISTS BookReview;
 DROP TABLE IF EXISTS BookFormat;
 DROP TABLE IF EXISTS Users;
-DROP TABLE IF EXISTS Authors;
-DROP TABLE IF EXISTS BookAuthor;
-DROP TABLE IF EXISTS Books;
+DROP TABLE IF EXISTS Writers;
+DROP TABLE IF EXISTS Illustrators;
+DROP TABLE IF EXISTS BookWriter;
+DROP TABLE IF EXISTS BookIllustrator;
+DROP TABLE IF EXISTS ComicBooks;
 DROP TABLE IF EXISTS UserCart;
 DROP TABLE IF EXISTS UserOwned;
 DROP TABLE IF EXISTS LiteraryAwards;
@@ -23,26 +24,35 @@ CREATE TABLE Users(
 	TotalCost INTEGER
 );
 
-CREATE TABLE Books(
+CREATE TABLE ComicBooks(
 	ISBN VARCHAR(500) PRIMARY KEY,
 	Title VARCHAR(256) NOT NULL,
 	Price DECIMAL(10,2) NOT NULL,
 	Publisher VARCHAR(256), 
-	Description VARCHAR(5000),
+	Description VARCHAR(5000) DEFAULT "No description available.",
 	Image VARCHAR(500),
-	DatePublished DATE,
-	Format VARCHAR(50),
+	DatePublished VARCHAR(500),
 	Length INTEGER DEFAULT 0
 );
 
-CREATE TABLE Authors(
-	AuthorId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	AuthorName VARCHAR(256) NOT NULL,
-	AuthorDescription VARCHAR(5000),
+CREATE TABLE Writers(
+	WriterId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	WriterName VARCHAR(256) NOT NULL,
+	WriterDescription VARCHAR(5000) DEFAULT "No description available.",
 	Birthdate DATE,
-	Country VARCHAR(50),
-	Gender VARCHAR(10),
-	AuthorImage VARCHAR(50)
+	Born VARCHAR(50) DEFAULT "",
+	Gender VARCHAR(10) DEFAULT "",
+	WriterImage VARCHAR(50)
+);
+
+CREATE TABLE Illustrators(
+	IllustratorId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	IllustratorName VARCHAR(256) NOT NULL,
+	IllustratorDescription VARCHAR(5000) DEFAULT "No description available.",
+	Birthdate DATE,
+	Born VARCHAR(50) DEFAULT "",
+	Gender VARCHAR(10) DEFAULT "",
+	IllustratorImage VARCHAR(50)
 );
 
 CREATE TABLE Genres(
@@ -50,10 +60,16 @@ CREATE TABLE Genres(
 	GenreDesc VARCHAR(500)
 ); 
 
-CREATE TABLE BookAuthor(
+CREATE TABLE BookWriter(
 	ISBN VARCHAR(500) NOT NULL,
-	AuthorId INT NOT NULL,
-	PRIMARY KEY(ISBN, AuthorId)
+	WriterId INT NOT NULL,
+	PRIMARY KEY(ISBN, WriterId)
+);
+
+CREATE TABLE BookIllustrator(
+	ISBN VARCHAR(500) NOT NULL,
+	IllustratorId INT NOT NULL,
+	PRIMARY KEY(ISBN, IllustratorId)
 );
 
 CREATE TABLE BookGenre(
@@ -66,14 +82,6 @@ CREATE TABLE BookFormat(
 	ISBN VARCHAR(500) NOT NULL,
 	Format VARCHAR(50) NOT NULL,
 	PRIMARY KEY(ISBN, Format)
-);
-
-CREATE TABLE BookReview(
-	ISBN VARCHAR(500) NOT NULL, 
-	Email VARCHAR(50) NOT NULL,
-	Stars INT(5) NOT NULL,
-	Review VARCHAR(500),
-	PRIMARY KEY(ISBN, Review)
 );
 
 CREATE TABLE LiteraryAwards(
@@ -94,11 +102,13 @@ CREATE TABLE UserOwned(
 	PRIMARY KEY(Email, ISBN) 
 );
 
-ALTER TABLE BookGenre ADD FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
-ALTER TABLE BookReview ADD FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
-ALTER TABLE BookFormat ADD FOREIGN KEY (ISBN) REFERENCES Books(ISBN);
+ALTER TABLE BookGenre ADD FOREIGN KEY (ISBN) REFERENCES ComicBooks(ISBN);
+ALTER TABLE BookReview ADD FOREIGN KEY (ISBN) REFERENCES ComicBooks(ISBN);
+ALTER TABLE BookFormat ADD FOREIGN KEY (ISBN) REFERENCES ComicBooks(ISBN);
 ALTER TABLE BookReview ADD FOREIGN KEY (Email) REFERENCES Users(Email);
 ALTER TABLE UserCart ADD FOREIGN KEY(Email) References Users(Email);
-ALTER TABLE UserCart ADD FOREIGN KEY(ISBN) References Books(ISBN);
-ALTER TABLE BookAuthor ADD FOREIGN KEY(ISBN) References Books(ISBN);
-ALTER TABLE BookAuthor ADD FOREIGN KEY(AuthorId) References Authors(AuthorId)
+ALTER TABLE UserCart ADD FOREIGN KEY(ISBN) References ComicBooks(ISBN);
+ALTER TABLE BookWriter ADD FOREIGN KEY(ISBN) References ComicBooks(ISBN);
+ALTER TABLE BookWriter ADD FOREIGN KEY(WriterId) References Writers(WriterId);
+ALTER TABLE BookIllustrator ADD FOREIGN KEY(ISBN) References ComicBooks(ISBN);
+ALTER TABLE BookIllustrator ADD FOREIGN KEY(IllustratorId) References Illustrators(IllustratorId)
