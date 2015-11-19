@@ -21,7 +21,7 @@ CREATE TABLE Users(
 	Country VARCHAR(50),
 	Birthdate DATE,
 	Image VARCHAR(500),
-	TotalCost INTEGER
+	TotalCost DECIMAL(10,2)
 );
 
 CREATE TABLE ComicBooks(

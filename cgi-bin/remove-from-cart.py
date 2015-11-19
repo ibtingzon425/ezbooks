@@ -27,6 +27,25 @@ def main():
 			cur = con.cursor()
 			cur.execute(command, (email, book))
 			con.commit()
+
+			command = "SELECT TotalCost from Users WHERE Email='" + email + "'"
+			cur.execute(command)
+			row = cur.fetchone()
+			total = row[0]
+
+			command = "SELECT Price from ComicBooks WHERE ISBN='" + book + "'"
+			cur.execute(command)
+			row = cur.fetchone()
+			price = row[0]
+
+			if (total >= price):
+				total = total - price
+			else:
+				total = 0
+
+			command = "UPDATE Users SET TotalCost=%s WHERE Email=%s"
+			cur.execute(command, (total, email))
+			con.commit()
 		
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
 		cur.execute(command)
@@ -55,22 +74,11 @@ def main():
 			new_title = title + (row)
 			titles.append(new_title)
 
+
 		command = "SELECT TotalCost from Users WHERE Email='" + email + "'"
 		cur.execute(command)
 		row = cur.fetchone()
 		total = row[0]
-
-		command = "SELECT Price from ComicBooks WHERE ISBN='" + book + "'"
-		cur.execute(command)
-		row = cur.fetchone()
-		price = row[0]
-
-		if (total >= price):
-			total = total - price
-
-		command = "UPDATE Users SET TotalCost='" + str(total) + "' WHERE Email='" + email + "'"
-		cur.execute(command)
-		con.commit()
 
 		print display("shopping-cart.html").render(user=user,titles=titles,total=total)
 

@@ -24,7 +24,7 @@ a.morelink {
                                 <form id="form" action="add-to-cart.py" method="GET">
                                 <input type="hidden" id="email" name="email" class="form-control" value="{{user[2]}}">
                                 <input type="hidden" id="ISBN" name="ISBN" class="form-control" value="{{book[0]}}">
-                                <button type="submit" id="btn" class="btn btn-danger" onclick="onConfirm()">Add to Cart </button>
+                                <button type="submit" id="btn" class="btn btn-danger" onclick="onConfirm()" style="width:100%">Add to Cart &raquo;</button>
                                 <script>
                                 function onConfirm() {
                                     var link;
@@ -43,7 +43,7 @@ a.morelink {
                                 <form id="form" action="remove-from-cart.py" method="GET">
                                 <input type="hidden" id="email" name="email" class="form-control" value="{{user[2]}}">
                                 <input type="hidden" id="ISBN" name="ISBN" class="form-control" value="{{book[0]}}">
-                                <button type="submit" id="btn" class="btn btn-danger" onclick="onRemove()">Remove from Cart </button>
+                                <button type="submit" id="btn" class="btn btn-danger" onclick="onRemove()">Remove from Cart &raquo;</button>
                                 <script>
                                 function onRemove() {
                                     var link;
@@ -79,7 +79,10 @@ a.morelink {
                             ,
                             {% endif %} 
                             </bold>
-                            {% endfor %},
+                            {% endfor %}
+                            {%- if illustrators|length > 0 -%}
+                            ,
+                            {% endif %} 
                             {% for illustrator in illustrators %}
                             <a href="illustrator-profile.py?email={{user[2]}}&illustrator={{illustrator[1]}}">
                             {{illustrator[0]}}</a> <font color="gray">(Illustrator)</font> 
@@ -113,6 +116,7 @@ a.morelink {
                         <tr><td > Publisher:  </td> <td> {{book[3]}}  </td></tr> 
                         <tr><td > Date Published:  </td> <td> {{book[6]}}  </td></tr>
                         <tr><td > ISBN:  </td> <td> {{book[0]}}  </td></tr>
+                        {%- if book[9]|length > 0 -%}
                         <tr><td > Literary Awards:  </td> 
                             <td> {% for award in book[9] %}
                             {{award}} 
@@ -122,6 +126,7 @@ a.morelink {
                             {% endfor %}
                             </td>
                         </tr>
+                        {% endif %}
                         <tr><td > Genre:  </td> <td> {% for genre in genres %} 
                             <a href="home.py?email={{user[2]}}&genre={{genre[0]}}">{{genre[0]}} </a>
                             {%- if loop.index < genres|length -%}
