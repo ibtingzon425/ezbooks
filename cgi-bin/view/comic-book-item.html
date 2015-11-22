@@ -21,12 +21,12 @@ a.morelink {
                                 <input type="hidden" id="book" name="book" class="form-control" value="{{book[1]}}">
                                 <input type="hidden" id="price" name="book" class="form-control" value="{{book[2]}}">
 				{%- if book_owned == True -%}
-				<a class="btn btn-danger" href="model/images/sample_comic.pdf" target="_blank" role="button">Download</a>
+				<a class="btn btn-primary" href="model/images/sample_comic.pdf" target="_blank" role="button">Download</a>
                                 {%- elif book_exists == False -%} 
                                 <form id="form" action="add-to-cart.py" method="GET">
                                 <input type="hidden" id="email" name="email" class="form-control" value="{{user[2]}}">
                                 <input type="hidden" id="ISBN" name="ISBN" class="form-control" value="{{book[0]}}">
-                                <button type="submit" id="btn" class="btn btn-danger" onclick="onConfirm()" style="width:100%">Add to Cart &raquo;</button>
+                                <button type="submit" id="btn" class="btn btn-success" onclick="onConfirm()" style="width:100%">Add to Cart &raquo;</button>
                                 <script>
                                 function onConfirm() {
                                     var link;

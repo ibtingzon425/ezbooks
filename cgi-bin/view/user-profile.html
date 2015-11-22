@@ -5,23 +5,28 @@
             <div class="col-md-9">
                 <div class="thumbnail">
                 	<div class="col-md-4 left-side">
-                        <center></center>
+                        <center>
+                        <img class="img-responsive" src={{userprof[7]}} style="width:200px;padding-top:30px;padding-bottom:20px;">
+                        </center>
                     </div>
                     <div id="desc" class="col-md-8 right-side" style="padding-top:25px">
                         {%- if userprof[2] == user[2] -%}
-                        <a class="btn btn-sm btn-primary" href="user-profile.py?email={{user[2]}}&user={{userprof[2]}}" role="button" style="float:right">Edit Profile</a>
+                        <a class="btn btn-sm btn-primary" href="user-profile.py?email={{user[2]}}&user={{userprof[2]}}&action=edit" role="button" style="float:right">Edit Profile</a>
                         {% endif %}
                         <header>  
                         <h4><strong>{{userprof[0]}} {{userprof[1]}}</strong></h4> 
                         </header>                        
                         <hr>
-                        <p> Details: </p>
+                        <p>Email: {{userprof[2]}} </p>
+                        <p>Country: {{userprof[5]}} </p>
+		        <p>Birthdate: {{userprof[6]}} </p>
                         <p>Joined on {{userprof[4]}}</p>
+                        <br/>
                     </div>
                 </div>
 
                 <br>
-                <h4><strong>{{user[0]}} {{user[1]}}'s eBook Collection</strong></h4> 
+                <h4><strong>{{userprof[0]}} {{userprof[1]}}'s eBook Collection</strong></h4> 
                 <hr>
           {%- if own|length == 0 -%}
                 <p>Looks like you don't own any books yet! Start shopping <a href="home.py?email={{user[2]}}">here</a>. </p>
@@ -36,7 +41,7 @@
                   <a href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}" ><img src= {{title[5]}} style="height:160px;" margin=15px> </img></a>
                   <h5><a href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
                   <p><h6>Price: P{{title[2]}}</h6></p>
-                  <p><a class="btn btn-danger" href="model/images/sample_comic.pdf" role="button" target="_blank">Download</a></p>
+                  <p><a class="btn btn-primary" href="model/images/sample_comic.pdf" role="button" target="_blank">Download</a></p>
                   </center>
                 </div>
                 </div>              
@@ -46,8 +51,11 @@
           {% endif %}
 
                 <br>
-                <h4><strong>{{user[0]}} {{user[1]}}'s Shopping Cart </strong>
-                    <a class="btn btn-sm btn-success" href="shopping-cart.py?email={{user[2]}}" role="button" style="float:right">Checkout &raquo; </a></h4> 
+                <h4><strong>{{userprof[0]}} {{userprof[1]}}'s Shopping Cart </strong>
+		    {%- if userprof[2] == user[2] -%}
+                    <a class="btn btn-sm btn-success" href="shopping-cart.py?email={{user[2]}}" role="button" style="float:right">Checkout &raquo; </a>
+                    {% endif %}
+                </h4> 
                 <hr>
                 {%- if titles|length == 0 -%}
                 <p>Looks like you haven't got any book in your cart yet! Start shopping <a href="home.py?email={{user[2]}}">here</a>. </p>
