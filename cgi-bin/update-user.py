@@ -48,15 +48,16 @@ def main():
  		if form.has_key('image_file'):
 			
     			fileitem = form['image_file']
-    			if fileitem.file:
- 
-				fout = file ("model/users/" +  email + os.path.splitext(fileitem.filename)[1] , 'wb')
-    				while 1:
-        				chunk = fileitem.file.read(100000)
-        				if not chunk: break
-        				fout.write(chunk)
-    				fout.close()
-				update_command = update_command + ", Image = '" + "model/users/" +  email + os.path.splitext(fileitem.filename)[1]  + "' "
+    			if fileitem.file :
+				extension = os.path.splitext(fileitem.filename)[1] 
+				if extension != '' :
+					fout = file ("model/users/" +  email + extension , 'wb')
+    					while 1:
+        					chunk = fileitem.file.read(100000)
+        					if not chunk: break
+        					fout.write(chunk)
+    					fout.close()
+					update_command = update_command + ", Image = '" + "model/users/" +  email + extension  + "' "
 		
 
 		update_command = update_command + "WHERE Email = '" + userprof + "'"
