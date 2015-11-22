@@ -36,7 +36,7 @@
                   <a href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}" ><img src= {{title[5]}} style="height:160px;" margin=15px> </img></a>
                   <h5><a href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
                   <p><h6>Price: P{{title[2]}}</h6></p>
-                  <p><a class="btn btn-danger" href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}" role="button">Learn More &raquo;</a></p>
+                  <p><a class="btn btn-danger" href="model/images/sample_comic.pdf" role="button" target="_blank">Download</a></p>
                   </center>
                 </div>
                 </div>              
@@ -47,7 +47,7 @@
 
                 <br>
                 <h4><strong>{{user[0]}} {{user[1]}}'s Shopping Cart </strong>
-                    <a class="btn btn-sm btn-danger" href="shopping-cart.py?email={{user[2]}}" role="button" style="float:right">Checkout &raquo; </a></h4> 
+                    <a class="btn btn-sm btn-success" href="shopping-cart.py?email={{user[2]}}" role="button" style="float:right">Checkout &raquo; </a></h4> 
                 <hr>
                 {%- if titles|length == 0 -%}
                 <p>Looks like you haven't got any book in your cart yet! Start shopping <a href="home.py?email={{user[2]}}">here</a>. </p>

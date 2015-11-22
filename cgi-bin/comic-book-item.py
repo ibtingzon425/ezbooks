@@ -61,8 +61,16 @@ def main():
 		book_ = cur.fetchone()
 		if (book_ != None):
 			book_exists = True
+
+		book_owned = False
+		command = "SELECT 1 from ComicBooks NATURAL JOIN UserOwned WHERE Email=%s AND ISBN=%s"
+		cur = con.cursor()
+                cur.execute(command, (email, ISBN))
+                book_ = cur.fetchone()
+                if (book_ != None):
+                        book_owned = True
 		
-		print display("comic-book-item.html").render(book=books,user=user,writers=writers,illustrators=illustrators,genres=genres,book_exists=book_exists)
+		print display("comic-book-item.html").render(book=books,user=user,writers=writers,illustrators=illustrators,genres=genres,book_exists=book_exists,book_owned=book_owned)
 		
 	except mdb.Error, e:
 	    if con:
