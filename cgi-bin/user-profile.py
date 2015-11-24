@@ -6,12 +6,14 @@ from template import display
 from model.database import con
 from passlib.hash import sha512_crypt
 import os, time, sys, session, Cookie, json
+import utilities
 
 def main():
 	form = cgi.FieldStorage()
 	
-	userprof = form.getvalue('user') #email of userprofile
+	userprofile = form.getvalue('user') #email of userprofile
 	email = form.getvalue('email') #email of current user
+        action = form.getvalue('action') # action 
 
 	#TODO: If current user != email 
 
@@ -22,11 +24,11 @@ def main():
 		cur.execute(command)
 		user= cur.fetchone() #
 
-		command = "SELECT * FROM Users WHERE Email = '" + userprof + "'";
+		command = "SELECT * FROM Users WHERE Email = '" + userprofile + "'";
 		cur.execute(command)
 		userprof = cur.fetchone() #
 
-		command = "SELECT * from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
+		command = "SELECT * from ComicBooks NATURAL JOIN UserCart WHERE Email='" + userprofile + "'"
 		
 		cur.execute(command)
 		rows = cur.fetchall()
@@ -34,15 +36,19 @@ def main():
 		for row in rows:
 			titles.append(row)
 
-		command = "SELECT * from ComicBooks NATURAL JOIN UserOwned WHERE Email='" + email + "'"
+		command = "SELECT * from ComicBooks NATURAL JOIN UserOwned WHERE Email='" + userprofile + "'"
 		
 		cur.execute(command)
 		rows = cur.fetchall()
 		own = []
 		for row in rows:
 			own.append(row)
-
-		print display("user-profile.html").render(user=user,userprof=userprof,titles=titles,own=own)
+		
+		if action == 'edit':
+			countryDropDown = utilities.generateCountryDropDown(userprof[5]) 
+			print display("user-profile-edit.html").render(user=user,userprof=userprof,titles=titles,own=own,countryDropDown=countryDropDown)
+		else :
+			print display("user-profile.html").render(user=user,userprof=userprof,titles=titles,own=own)
 
 	except mdb.Error, e:
 	    if con:
