@@ -39,13 +39,13 @@ def main():
 		for row in rows:
 			titles.append(row)
 
-		genre_ = None
+		genre_ = [None, None]
 		if (genre != None):
 			command = "SELECT * FROM Genres WHERE Genre = '" + genre + "'";
 			cur.execute(command)
 			genre_ = cur.fetchone()
 
-		print display("home.html").render(user=user,titles=titles,genre=genre_,search=' ')
+		print display("home.html").render(user=user,titles=titles,genre=genre_[0],genredesc=genre_[1],search=' ')
 
 	except mdb.Error, e:
 	    if con:
