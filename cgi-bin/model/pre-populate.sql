@@ -1,3 +1,13 @@
+INSERT INTO Genres (Genre, GenreDesc) VALUES ("Fantasy", "Fantasy is a genre that uses magic and other supernatural forms as a primary element of plot, theme, and/or setting.  ");
+INSERT INTO Genres (Genre, GenreDesc) VALUES ("Humor", "A comic novel is usually a work of fiction in which the writer seeks to amuse the reader, sometimes with subtlety and as part of a carefully woven narrative, sometimes above all other considerations. ");
+INSERT INTO Genres (Genre, GenreDesc) VALUES ("Crime Fiction", "The crime genre includes the broad selection of books on criminals, courts, and investigations.");
+INSERT INTO Genres (Genre, GenreDesc) VALUES ("Science Fiction", "Science fiction (abbreviated SF or sci-fi with varying punctuation and capitalization) is a broad genre of fiction that often involves speculations based on current or future science or technology. ");
+INSERT INTO Genres (Genre, GenreDesc) VALUES ("Action/Adventure", "Adventure fiction is a genre of fiction in which an adventure, an exciting undertaking involving risk and physical danger, forms the main storyline.");
+INSERT INTO Genres (Genre, GenreDesc) VALUES ("Slice of Life", "Slice of life describes the use of realism depicting everyday experiences in art and entertainment");
+INSERT INTO Genres (Genre, GenreDesc) VALUES ("Young Adult", "Young adult is a literary genre that focuses on characters and conflicts for readers aged between 12 and 18.");
+
+
+
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9780930289232", "DC Comics Inc", "1986-09-01",  "Watchmen", "899.00", "416", "model/images/9780930289232.jpg", "This Hugo Award-winning graphic novel chronicles the fall from grace of a group of super-heroes plagued by all-too-human failings. Along the way, the concept of the super-hero is dissected as the heroes are stalked by an unknown assassin. <br><br> One of the most influential graphic novels of all time and a perennial best-seller, Watchmen has been studied on college campuses across the nation and is considered a gateway title, leading readers to other graphic novels such as V for Vendetta, Batman: The Dark Knight Returns and The Sandman series. ");
 INSERT INTO Writers(WriterName, Gender, Born, WriterImage, WriterDescription) VALUES ("Alan Moore", "Male", "Northampton, England, The United Kingdom", "model/writers/alan-moore.jpg", "Alan Moore is an English writer primarily known for his work in comic books including Watchmen, V for Vendetta, and From Hell.");
 INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9780930289232", LAST_INSERT_ID());
@@ -54,7 +64,6 @@ INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780062278241", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780062278241", "Fantasy");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780062278241", "Humor");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780062278241", "Young Adult");
-INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780062278241", "Slice of Life");
 
 
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("99780785139546", "Marvel", "2009-03-25",  "Deadpool: Secret Invasion", "299.00", "136", "model/images/99780785139546.jpg", "The Merc with a Mouth is back, even deadlier and more deranged than before! The planet has been invaded by Skrulls, everything's gone topsy-turvy... but, in Deadpool's world, that just means it's Monday! Crazy times call for crazy men, but c'mon, this guy's insane! Like it or not, Deadpool may be the only person on the planet who can save us... but who's to say he wants to? An explosive debut story by writer Daniel Way (Wolverine: Origins, Ghost Rider, Bullseye: Greatest Hits) and fan-favorite artist Paco Medina (New Warriors, New X-Men)! Deadpool: His madness is his method! You won't want to miss it!");
@@ -83,20 +92,31 @@ INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785184027", "Superhero");
 
 
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9781607066019", "Marvel", "2009-03-25",  "Saga, Volume 1", "299.00", "60", "model/images/9781607066019.jpg", "When two soldiers from opposite sides of a never-ending galactic war fall in love, they risk everything to bring a fragile new life into a dangerous old universe. <br><br>From bestselling writer Brian K. Vaughan, Saga is the sweeping tale of one young family fighting to find their place in the worlds. Fantasy and science fiction are wed like never before in this sexy, subversive drama for adults. ");
+INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9781632154385", "Marvel", "2009-03-25",  "Saga, Volume 2", "299.00", "60", "model/images/9781632154385.jpg", "Multiple storylines collide in this cosmos-spanning new volume. While Gwendolyn and Lying Cat risk everything to find a cure for The Will, Marko makes an uneasy alliance with Prince Robot IV to find their missing children, who are trapped on a strange world with terrifying new enemies.");
 INSERT INTO Writers(WriterName, Gender, Born, WriterImage) VALUES ("Brian K. Vaughan", "Male", " Cleveland, Ohio, The United States ", "model/writers/brian-vaughan.jpg");
 INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781607066019", LAST_INSERT_ID());
+INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781632154385", LAST_INSERT_ID());
 
 INSERT INTO Illustrators(IllustratorName, Gender, Born, IllustratorImage, IllustratorDescription) VALUES ("Fiona Staples", "Female", "Canada","model/writers/fiona-staples.jpg", "Fiona Staples is a Canadian comic book artist known for her work on books such as North 40, DV8: Gods and Monsters, T.H.U.N.D.E.R. Agents and Saga. She has been cited as one of the best female artists working in the industry, and one of the best artists overall.");
 INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9781607066019", LAST_INSERT_ID());
+INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9781632154385", LAST_INSERT_ID());
 
 INSERT INTO BookFormat(ISBN, Format) VALUES ("9781607066019", ".cbr");
 INSERT INTO BookFormat(ISBN, Format) VALUES ("9781607066019", ".cbz");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781607066019", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781607066019", "Fantasy");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781607066019", "Science Fiction");
+
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9781632154385", ".cbr");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9781632154385", ".cbz");
+INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781632154385", "Action/Adventure");
+INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781632154385", "Fantasy");
+INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781632154385", "Science Fiction");
+
 INSERT INTO LiteraryAwards(ISBN, Award) Values ("9781607066019", "Hugo Award for Best Graphic Story (2013)");
 INSERT INTO LiteraryAwards(ISBN, Award) Values ("9781607066019", "Will Eisner Comic Industry Awards for Best New Series, Best Continuing Series, Best Writer (for Brian K. Vaughan) (2013)");
 INSERT INTO LiteraryAwards(ISBN, Award) Values ("9781607066019", "Harvey Awards (2013)");
+
 
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9780785190219", "Marvel", "2009-03-25",  "Ms. Marvel, Vol. 1: No Normal", "120.00", "136", "model/images/9780785190219.jpg", "Kamala Khan is an ordinary girl from Jersey City - until she's suddenly empowered with extraordinary gifts. But who truly is the new Ms. Marvel? Teenager? Muslim? Inhuman? Find out as she takes the Marvel Universe by storm! When Kamala discovers the dangers of her newfound powers, she unlocks a secret behind them, as well. Is Kamala ready to wield these immense new gifts? Or will the weight of the legacy before her be too much to bear? Kamala has no idea, either. But she's comin' for you, Jersey!<br><br>It's history in the making from acclaimed writer G. Willow Wilson (Air, Cairo) and beloved artist Adrian Alphona (RUNAWAYS)! Collecting MS. MARVEL (2014) #1-5 and material from ALL-NEW MARVEL NOW! POINT ONE #1.");
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9780785190226", "Marvel", "2009-03-25",  "Ms. Marvel, Vol. 2: Generation Why", "120.00", "136", "model/images/9780785190226.jpg", "Who is the Inventor, and what does he want with the all-new Ms. Marvel and all her friends? Maybe Wolverine can help! If Kamala can stop fan-girling out about meeting her favorite super hero, that is. Then, Kamala crosses paths with Inhumanity -- by meeting the royal dog, Lockjaw! But why is Lockjaw really with Kamala? As Ms. Marvel discovers more about her past, the Inventor continues to threaten her future. Kamala bands together with some unlikely heroes to stop the maniacal villain before he does real damage, but has she taken on more than she can handle? And how much longer can Ms. Marvel's life take over Kamala Khan's? Kamala Khan continues to prove why she's the best (and most adorable) new super hero there is!");
@@ -143,4 +163,22 @@ INSERT INTO BookFormat(ISBN, Format) VALUES ("9781563898686", ".cbz");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781563898686", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781563898686", "Superhero");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781563898686", "Crime Fiction");
-INSERT INTO LiteraryAwards(ISBN, Award) Values ("9781563898686", "Will Eisner Comic Industry Awards for Best Graphic Album Reprint (2002) ")
+INSERT INTO LiteraryAwards(ISBN, Award) Values ("9781563898686", "Will Eisner Comic Industry Awards for Best Graphic Album Reprint (2002) ");
+
+INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9781401235444", "DC", "2009-03-25",  "Suicide Squad, Vol. 1: Kicked in the Teeth", "391.00", "136", "model/images/9781401235444.jpg", "As a part of the acclaimed DC Comics--The New 52 event of September 2011, writer and co-creator of the CW show 'Supernatural' Adam Glass rolls out an all-new team of death-row super villains recruited by the government to take on missions so dangerous-they're sheer suicide. <br><br>The story begins with the Suicide Squad defeated, imprisoned and being interrogated about their newest mission. Harley Quinn, King Shark, Deadshot and company must make it out alive without revealing who's pulling the strings behind their illegal operations. Who will be the first to crack under the pressure? More importantly will they make it all out alive? Collects issues #1-7.");
+INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9781401238445", "DC", "2009-03-25",  "Suicide Squad, Vol. 2: Basilisk Rising", "391.00", "136", "model/images/9781401238445.jpg", "As the surviving Squad members attempt to recover from their disastrous Gotham City mission, we learn a dark secret that has been festering in the team since issue #1: a traitor stalks the Suicide Squad! The saboteur's mission: Assassinate Amanda Waller, expose the Squad and leave Task Force X in ruins! The Basilisk strikes! Collects issues #8-13, issue 0, and Resurrection Man #9");
+INSERT INTO Writers(WriterName, Gender, Born, WriterImage) VALUES ("Adam Glass", "Male", "The United States", "model/writers/adam-glass.jpg");
+INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781401235444", LAST_INSERT_ID());
+INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781401238445", LAST_INSERT_ID());
+
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9781401238445", ".cbr");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9781401238445", ".cbz");
+INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781401238445", "Action/Adventure");
+INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781401238445", "Superhero");
+INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781401238445", "Crime Fiction");
+
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9781401235444", ".cbr");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9781401235444", ".cbz");
+INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781401235444", "Action/Adventure");
+INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781401235444", "Superhero");
+INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781401235444", "Crime Fiction")

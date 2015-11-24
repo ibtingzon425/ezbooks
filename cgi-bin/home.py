@@ -36,13 +36,16 @@ def main():
 		cur.execute(command)
 		rows = cur.fetchall()
 		titles = []
-		i = 0
 		for row in rows:
-			if (i < 12):
-				titles.append(row)
-			i = i + 1
-			
-		print display("home.html").render(user=user,titles=titles,genre=genre,search=' ')
+			titles.append(row)
+
+		genre_ = None
+		if (genre != None):
+			command = "SELECT * FROM Genres WHERE Genre = '" + genre + "'";
+			cur.execute(command)
+			genre_ = cur.fetchone()
+
+		print display("home.html").render(user=user,titles=titles,genre=genre_,search=' ')
 
 	except mdb.Error, e:
 	    if con:
