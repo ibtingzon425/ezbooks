@@ -30,7 +30,7 @@ CREATE TABLE ComicBooks(
 	Price DECIMAL(10,2) NOT NULL,
 	Publisher VARCHAR(256) DEFAULT "", 
 	Description VARCHAR(5000) DEFAULT "No description available.",
-	Image VARCHAR(500),
+	Image VARCHAR(500) DEFAULT "model/writers/default.png",
 	DatePublished VARCHAR(500),
 	Length INTEGER DEFAULT 0
 );
@@ -42,7 +42,7 @@ CREATE TABLE Writers(
 	Birthdate DATE,
 	Born VARCHAR(50) DEFAULT "",
 	Gender VARCHAR(10) DEFAULT "",
-	WriterImage VARCHAR(50)
+	WriterImage VARCHAR(50) DEFAULT "model/writers/default.png"
 );
 
 CREATE TABLE Illustrators(
@@ -52,7 +52,7 @@ CREATE TABLE Illustrators(
 	Birthdate DATE,
 	Born VARCHAR(50) DEFAULT "",
 	Gender VARCHAR(10) DEFAULT "",
-	IllustratorImage VARCHAR(50)
+	IllustratorImage VARCHAR(50) DEFAULT "model/writers/default.png"
 );
 
 CREATE TABLE Genres(

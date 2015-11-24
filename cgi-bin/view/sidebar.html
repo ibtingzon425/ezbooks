@@ -3,7 +3,7 @@
 {% block sidebar %}
     <script>
         $(document).ready(function() {
-            document.getElementById("{{genre}}").className = "list-group-item active";
+            document.getElementById("{{genre[0]}}").className = "list-group-item active";
         });
     </script>
     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
