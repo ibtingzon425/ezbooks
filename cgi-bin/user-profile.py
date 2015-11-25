@@ -24,31 +24,35 @@ def main():
 		cur.execute(command)
 		user= cur.fetchone() #
 
-		command = "SELECT * FROM Users WHERE Email = '" + userprofile + "'";
-		cur.execute(command)
-		userprof = cur.fetchone() #
+		if action != 'create' :
+			command = "SELECT * FROM Users WHERE Email = '" + userprofile + "'";
+			cur.execute(command)
+			userprof = cur.fetchone() #
 
-		command = "SELECT * from ComicBooks NATURAL JOIN UserCart WHERE Email='" + userprofile + "'"
+			command = "SELECT * from ComicBooks NATURAL JOIN UserCart WHERE Email='" + userprofile + "'"
 		
-		cur.execute(command)
-		rows = cur.fetchall()
-		titles = []
-		for row in rows:
-			titles.append(row)
+			cur.execute(command)
+			rows = cur.fetchall()
+			titles = []
+			for row in rows:
+				titles.append(row)
 
-		command = "SELECT * from ComicBooks NATURAL JOIN UserOwned WHERE Email='" + userprofile + "'"
+			command = "SELECT * from ComicBooks NATURAL JOIN UserOwned WHERE Email='" + userprofile + "'"
 		
-		cur.execute(command)
-		rows = cur.fetchall()
-		own = []
-		for row in rows:
-			own.append(row)
+			cur.execute(command)
+			rows = cur.fetchall()
+			own = []
+			for row in rows:
+				own.append(row)
 
 		sidebar = utilities.getSideBar(email,user[9], cur)
 		
 		if action == 'edit':
 			countryDropDown = utilities.generateCountryDropDown(userprof[5]) 
 			print display("user-profile-edit.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own,countryDropDown=countryDropDown)
+		elif action == 'create':
+			countryDropDown = utilities.generateCountryDropDown(None)
+			print display("user-profile-create.html").render(user=user,createform=None,sidebar=sidebar,countryDropDown=countryDropDown)	
 		else :
 			print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own)
 

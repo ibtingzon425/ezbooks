@@ -18,7 +18,8 @@ def main():
 	current_password = form.getvalue('current_password')
 	new_password = form.getvalue('new_password')
 	country = form.getvalue('country')
-	birthdate = form.getvalue('birth_date')	
+	birthdate = form.getvalue('birth_date')
+	is_administrator = form.getvalue('is_administrator') 	
 
 	#TODO: If current user != email 
 
@@ -60,6 +61,9 @@ def main():
     					fout.close()
 					update_command = update_command + ", Image = '" + "model/users/" +  email + extension  + "' "
 		
+		# set is administrator
+		if is_administrator is not None:
+			update_command = update_command + ", IsAdmin = '" + is_administrator + " '"
 
 		update_command = update_command + "WHERE Email = '" + userprof + "'"
 		cur.execute(update_command)

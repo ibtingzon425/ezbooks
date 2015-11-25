@@ -20,6 +20,9 @@
                         <p>Email: {{userprof[2]}} </p>
                         <p>Country: {{userprof[5]}} </p>
 		        <p>Birthdate: {{userprof[6]}} </p>
+			{%- if (user[9]=='Y')  -%} 
+			<p>Is Administrator: {%- if userprof[9]=="Y" -%} Yes {% else %} No {% endif %}
+		        {% endif %}
                         <p>Joined on {{userprof[4]}}</p>
                         <br/>
                     </div>
