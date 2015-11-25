@@ -3,20 +3,112 @@
 {% block sidebar %}
     <script>
         $(document).ready(function() {
+	{% if genre %}
             document.getElementById("{{genre}}").className = "list-group-item active";
+        {% elif publisher %}
+	    document.getElementById("{{publisher}}").className = "list-group-item active";
+	{% endif %}
         });
     </script>
     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-          <div class="list-group">
-            <div class="list-group-item" style="background-color:#222; color:#aaa; ">Browse Categories</div>
-            <a href="home.py?email={{user[2]}}&genre=Action/Adventure" id="Action/Adventure" class="list-group-item">Action/Adventure</a>
-            <a href="home.py?email={{user[2]}}&genre=Crime Fiction" id="Crime Fiction" class="list-group-item">Crime Fiction</a>
-            <a href="home.py?email={{user[2]}}&genre=Fantasy" id="Fantasy" class="list-group-item">Fantasy</a>
-            <a href="home.py?email={{user[2]}}&genre=Humor" id="Humor" class="list-group-item">Humor</a>
-            <a href="home.py?email={{user[2]}}&genre=Science Fiction" id="Science Fiction" class="list-group-item">Science Fiction</a>
-            <a href="home.py?email={{user[2]}}&genre=Slice of Life" id="Slice of Life" class="list-group-item">Slice of Life</a>
-            <a href="home.py?email={{user[2]}}&genre=Superhero" id="Superhero" class="list-group-item">Superhero</a>
-            <a href="home.py?email={{user[2]}}&genre=Young Adult" id="Young Adult" class="list-group-item">Young Adult</a>
+
+	<!-- Normal View -->          
+        {%if  user[9] == "N"  %}
+        <div class="list-group">
+            <div class="list-group-item" style="background-color:#222; color:#aaa; ">Browse By Genre</div>
+	    {% for genre in sidebar['genres'] %}
+            <a href="home.py?email={{user[2]}}&genre={{genre}}" id="{{genre}}" class="list-group-item">{{genre}}</a>
+            {% endfor %}
           </div>
+
+        <div class="list-group">
+	  <div class="list-group-item" style="background-color:#222; color:#aaa; ">Browse By Publisher</div>
+	  {% for publisher in sidebar['publishers'] %}
+          <a href="home.py?email={{user[2]}}&publisher={{publisher}}" id="{{publisher}}" class="list-group-item">{{publisher}}</a>
+          {% endfor %}	
         </div>
+
+	<!-- Admin View -->
+	{% else %}
+	<div class="list-group">
+          <div class="list-group-item" style="background-color:#222; color:#aaa; "> View
+          </div>
+
+          <div class="list-group-item">
+ 		<table>
+		<tr>
+		<td width="150 px">
+		<div class="dropdown" >
+                        <button class="btn btn-normal" type="button" data-toggle="dropdown"">Book
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                                {{sidebar['books']}}
+                        </ul>
+                </div>
+                <br/>
+		</td>
+		
+		<td>
+		<!-- Genres -->
+                <div class="dropdown" >
+                        <button class="btn btn-normal" type="button" data-toggle="dropdown"">Genre
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                                {{sidebar['genres']}}
+                        </ul>
+                </div>
+		<br/>
+		</td>
+		</tr>
+
+
+		<td width="150px">
+		<!-- Illustrators -->
+                <div class="dropdown" >
+                        <button class="btn btn-normal" type="button" data-toggle="dropdown"">Illustrator
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                                {{sidebar['illustrators']}}
+                        </ul>
+                </div>
+                <br/>
+		</td>
+		<td>
+	        <!-- Writers -->
+        	<div class="dropdown" style="text-align:center">
+                        <button class="btn btn-normal" type="button" data-toggle="dropdown">Writer
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                                {{sidebar['writers']}}
+                        </ul>
+                </div>
+		<br/>
+		</td>
+		</tr>
+		<tr><td>
+		<!-- Users -->
+		<div class="dropdown">
+                        <button class="btn btn-normal" type="button" data-toggle="dropdown">User
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                                {{sidebar['users']}}
+                        </ul>
+                </div>
+		</td></tr>
+		</table>
+          </div>
+
+	  <br/>
+	  <div class="list-group">
+            <div class="list-group-item" style="background-color:#222; color:#aaa; ">Create New (TO DO)</div>
+	    <a href="#"   class="list-group-item">Book</a>
+	    <a href="#"   class="list-group-item">Genre</a>
+	    <a href="#"   class="list-group-item">Illustrator</a>
+	    <a href="#"   class="list-group-item">User</a>
+            <a href="#"   class="list-group-item">Writer</a>
+	</div>
+	</div>
+	{% endif %}
+
+   </div>
 {% endblock %}

@@ -6,6 +6,7 @@ from template import display
 from model.database import con
 from passlib.hash import sha512_crypt
 import os, time, sys, session, Cookie, json
+import utilities
 
 def main():
 
@@ -80,7 +81,9 @@ def main():
 		row = cur.fetchone()
 		total = row[0]
 
-		print display("shopping-cart.html").render(user=user,titles=titles,total=total)
+		
+		sidebar = utilities.getSideBar(email,user[9], cur)
+		print display("shopping-cart.html").render(sidebar=sidebar,user=user,titles=titles,total=total)
 
 	except mdb.Error, e:
 		if con:

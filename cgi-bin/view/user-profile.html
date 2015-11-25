@@ -10,7 +10,7 @@
                         </center>
                     </div>
                     <div id="desc" class="col-md-8 right-side" style="padding-top:25px">
-                        {%- if userprof[2] == user[2] -%}
+                        {%- if (userprof[2] == user[2]) or (user[9]=='Y')  -%}
                         <a class="btn btn-sm btn-primary" href="user-profile.py?email={{user[2]}}&user={{userprof[2]}}&action=edit" role="button" style="float:right">Edit Profile</a>
                         {% endif %}
                         <header>  
@@ -41,7 +41,11 @@
                   <a href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}" ><img src= {{title[5]}} style="height:160px;" margin=15px> </img></a>
                   <h5><a href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
                   <p><h6>Price: P{{title[2]}}</h6></p>
+	          {%- if (userprof[2] == user[2]) %}
                   <p><a class="btn btn-primary" href="model/images/sample_comic.pdf" role="button" target="_blank">Download</a></p>
+		  {% else %}
+	          <p><a class="btn btn-danger" href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}" role="button">Learn More &raquo;</a></p>
+		  {% endif %} 
                   </center>
                 </div>
                 </div>              

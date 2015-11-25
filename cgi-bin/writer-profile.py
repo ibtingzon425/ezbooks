@@ -6,6 +6,7 @@ from template import display
 from model.database import con
 from passlib.hash import sha512_crypt
 import os, time, sys, session, Cookie, json
+import utilities
 
 def main():
 	form = cgi.FieldStorage()
@@ -40,7 +41,8 @@ def main():
 			if genre not in genres_:
 				genres_.append(genre)
 
-		print display("writer-profile.html").render(user=user_,writer=writer_,titles=titles,genres=genres_)
+		sidebar = utilities.getSideBar(email, user_[9], cur)
+		print display("writer-profile.html").render(sidebar=sidebar,user=user_,writer=writer_,titles=titles,genres=genres_)
 
 	except mdb.Error, e:
 	    if con:

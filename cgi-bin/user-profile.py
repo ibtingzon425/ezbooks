@@ -43,12 +43,14 @@ def main():
 		own = []
 		for row in rows:
 			own.append(row)
+
+		sidebar = utilities.getSideBar(email,user[9], cur)
 		
 		if action == 'edit':
 			countryDropDown = utilities.generateCountryDropDown(userprof[5]) 
-			print display("user-profile-edit.html").render(user=user,userprof=userprof,titles=titles,own=own,countryDropDown=countryDropDown)
+			print display("user-profile-edit.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own,countryDropDown=countryDropDown)
 		else :
-			print display("user-profile.html").render(user=user,userprof=userprof,titles=titles,own=own)
+			print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own)
 
 	except mdb.Error, e:
 	    if con:

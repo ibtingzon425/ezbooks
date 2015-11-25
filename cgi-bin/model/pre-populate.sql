@@ -1,3 +1,10 @@
+-- Real Password is 12345
+INSERT INTO `Users` VALUES ('Admin','User','admin@ezcomics.com','$6$rounds=656000$wVf.fA291z66gi1k$6DuEkfdkorc1LRKQOJLMHcKJhhxK0W3k5FVhIO1mfxQwvky.ucTbQNPgHrGJd2d71suI8qCYWPXMbk2L/.q4k/','2015-11-25',NULL,NULL,NULL,NULL,'Y');
+
+-- Real Password is 0987
+INSERT INTO `Users` VALUES 
+('Roy Amante','Salvador','roy.salvador@gmail.com@gmail.com','$6$rounds=656000$4SjJk0DANLFXwHG.$bUYDV4GAmkpXudefgrZ7Puw8UnWJgrTgHY4XBnLt0QfKtzIcC6O/spq3x7Q8NNEsdIMeZjfkMoKnZFMPtWR7r1','2015-11-22',NULL,NULL,NULL,0,'N');
+
 INSERT INTO Genres (Genre, GenreDesc) VALUES ("Fantasy", "Fantasy is a genre that uses magic and other supernatural forms as a primary element of plot, theme, and/or setting.  ");
 INSERT INTO Genres (Genre, GenreDesc) VALUES ("Humor", "A comic novel is usually a work of fiction in which the writer seeks to amuse the reader, sometimes with subtlety and as part of a carefully woven narrative, sometimes above all other considerations. ");
 INSERT INTO Genres (Genre, GenreDesc) VALUES ("Crime Fiction", "The crime genre includes the broad selection of books on criminals, courts, and investigations.");
@@ -5,7 +12,7 @@ INSERT INTO Genres (Genre, GenreDesc) VALUES ("Science Fiction", "Science fictio
 INSERT INTO Genres (Genre, GenreDesc) VALUES ("Action/Adventure", "Adventure fiction is a genre of fiction in which an adventure, an exciting undertaking involving risk and physical danger, forms the main storyline.");
 INSERT INTO Genres (Genre, GenreDesc) VALUES ("Slice of Life", "Slice of life describes the use of realism depicting everyday experiences in art and entertainment");
 INSERT INTO Genres (Genre, GenreDesc) VALUES ("Young Adult", "Young adult is a literary genre that focuses on characters and conflicts for readers aged between 12 and 18.");
-
+INSERT INTO Genres (Genre, GenreDesc) VALUES ("Superhero", "Superhero is a type of speculative fiction examining the adventures of costumed crime fighters known as superheroes, who often possess superhuman powers and battle similarly powered criminals known as supervillains.");
 
 
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9780930289232", "DC Comics Inc", "1986-09-01",  "Watchmen", "899.00", "416", "model/images/9780930289232.jpg", "This Hugo Award-winning graphic novel chronicles the fall from grace of a group of super-heroes plagued by all-too-human failings. Along the way, the concept of the super-hero is dissected as the heroes are stalked by an unknown assassin. <br><br> One of the most influential graphic novels of all time and a perennial best-seller, Watchmen has been studied on college campuses across the nation and is considered a gateway title, leading readers to other graphic novels such as V for Vendetta, Batman: The Dark Knight Returns and The Sandman series. ");

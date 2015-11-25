@@ -6,6 +6,7 @@ from template import display
 from model.database import con
 from passlib.hash import sha512_crypt
 import os, time, sys, session, Cookie, json
+import utilities
 
 def invaidPageError():
 	print "<script type='text/javascript'> \
@@ -50,10 +51,13 @@ def main():
 			for row in rows:
 				if row not in titles:
 					titles.append(row)
+
+		
 		else:
 			search = " "
-			
-		print display("home.html").render(user=user,titles=titles,genre=genre,search=search)
+		
+		sidebar = utilities.getSideBar(email, user[9], cur)	
+		print display("home.html").render(user=user,titles=titles,sidebar=sidebar,genre=genre,search=search)
 
 	except mdb.Error, e:
 	    if con:

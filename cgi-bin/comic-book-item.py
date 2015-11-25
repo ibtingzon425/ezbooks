@@ -6,6 +6,7 @@ from template import display
 from model.database import con
 from passlib.hash import sha512_crypt
 import os, time, sys, session, Cookie, json
+import utilities
 
 def main():
 	form = cgi.FieldStorage()
@@ -70,7 +71,8 @@ def main():
                 if (book_ != None):
                         book_owned = True
 		
-		print display("comic-book-item.html").render(book=books,user=user,writers=writers,illustrators=illustrators,genres=genres,book_exists=book_exists,book_owned=book_owned)
+		sidebar = utilities.getSideBar(email,user[9], cur)
+		print display("comic-book-item.html").render(book=books,user=user,sidebar=sidebar,writers=writers,illustrators=illustrators,genres=genres,book_exists=book_exists,book_owned=book_owned)
 		
 	except mdb.Error, e:
 	    if con:

@@ -6,6 +6,7 @@ from template import display
 from model.database import con
 from passlib.hash import sha512_crypt
 import os, time, sys, session, Cookie, json
+import utilities
 
 def invaidPageError():
 	print "<script type='text/javascript'> \
@@ -17,6 +18,7 @@ def main():
 	
 	email = form.getvalue('email')
 	genre = form.getvalue('genre')
+	publisher = form.getvalue('publisher')
 
 	#TODO: For fname, lname == None redirect to login page
 	#TODO: Implement sessions using Cookies
@@ -30,6 +32,8 @@ def main():
 
 		if(genre != None):
 			command = "SELECT * from ComicBooks NATURAL JOIN BookGenre WHERE Genre='" + genre + "'"
+		elif (publisher != None) :
+			command = "SELECT * from ComicBooks WHERE Publisher='" + publisher + "'"
 		else:
 			command = "SELECT * from ComicBooks"
 			
@@ -45,7 +49,9 @@ def main():
 			cur.execute(command)
 			genre_ = cur.fetchone()
 
-		print display("home.html").render(user=user,titles=titles,genre=genre_[0],genredesc=genre_[1],search=' ')
+		sidebar = utilities.getSideBar(email, user[9], cur)
+
+		print display("home.html").render(user=user,titles=titles,sidebar=sidebar,genre=genre_[0],genredesc=genre_[1],search=' ',publisher=publisher)
 
 	except mdb.Error, e:
 	    if con:

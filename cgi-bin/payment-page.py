@@ -6,6 +6,7 @@ from template import display
 from model.database import con
 from passlib.hash import sha512_crypt
 import os, time, sys, session, Cookie, json
+import utilities
 
 def main():
 	form = cgi.FieldStorage()
@@ -54,7 +55,9 @@ def main():
 				cur.execute(command, (email, isbn))
 				con.commit()
 
-		print display("success.html").render(user=user_)
+		
+		sidebar = utilities.getSideBar(email,user_[9], cur)
+		print display("success.html").render(sidebar=sidebar,user=user_)
 
 	except mdb.Error, e:
 	    if con:
