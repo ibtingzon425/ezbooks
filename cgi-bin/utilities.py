@@ -19,6 +19,20 @@ def generateCountryDropDown(selectedCountry):
 
 	return  dropDown
 
+# Generates Book Items Select 
+def getBookItems(selectedBooks, cur) :
+	bookitems = ""
+	command = "select ISBN, Concat(Title, ' (', ISBN, ')') From ComicBooks order by Title;"
+	cur.execute(command)
+        rows = cur.fetchall()
+        for row in rows:
+		if row[0] in selectedBooks :
+			bookitems = bookitems + '<option value="' + row[0] + '" selected>' + row[1] + '</option>'
+		else :	
+			bookitems = bookitems + '<option value="' + row[0] + '">' + row[1] + '</option>'
+	return bookitems
+
+
 # Initializes Side Bar objects
 def getSideBar(email, isAdministrator, cur) :
 	sidebar = {'genres':[], 'publishers':[], 'users':'', 'writers':'', 'illustrators':'', 'books':''}

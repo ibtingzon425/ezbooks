@@ -1,0 +1,79 @@
+{% extends "sidebar.html" %}
+
+{% block form %}
+        <style>
+            body {
+                padding-top: 70px;
+                background-color: #eee;
+            }
+            .panel-body{
+              height: 300px;
+            }
+            .lead{
+              font-size: 17px;
+            }
+            hr {
+              display: block;
+              height: 1px;
+              border: 0;
+              border-top: 1px solid #ccc;
+              margin: 1em 0;
+              padding: 0; 
+          
+        </style>
+
+	<div class="col-xs-12 col-sm-9">
+
+	{% if (user[9]=='Y') -%}
+	{%- if error -%}
+		<div class="panel panel-danger" >
+                        <div>{{error}}</div>
+                </div>
+	{% endif %}
+        <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+         
+		<form  id="form-user" method="post"  action="create-update-genre.py?email={{user[2]}}&action=save">
+            <h2>
+		{% if genre != None %}
+			{{genreform[0]}}
+			<input class="form-control" name="genre" type="hidden" value="{{genreform[0]}}" />
+		{% else %}
+		 	<input class="form-control" name="genrecreate" type="text" placeholder="Genre" value="{{genreform[0]}}"  required /> 
+		{% endif %}
+            </h2>
+	    <hr>
+            <h6><p class="lead">
+		<textarea class="form-control" name="genredesc" type="text" rows="3"   placeholder="Description" >{{genreform[1]}}</textarea>
+		<br/>
+		Associated Comic Books
+		<br/>
+		<select id="genre-books" name="genrebooks" multiple="multiple">
+    			{{bookitems}}
+		</select>
+		<!-- Initialize the plugin: -->
+		<script type="text/javascript">
+    			$(document).ready(function() {
+        			$('#genre-books').multiselect({includeSelectAllOption: true,enableFiltering: true});
+    			});
+		</script>
+            <p></h6>
+	    <p>
+			<input class="btn btn-success" type="submit" value="Save"></input>
+			{% if genre == None %}
+				<a class="btn btn-danger" href="home.py?email={{user[2]}}" role="button" >Cancel</a>
+			{% else %}
+				<a class="btn btn-danger" href="home.py?email={{user[2]}}&genre={{genreform[0]}}" role="button" >Cancel</a>
+			{% endif %} 
+            </p>
+	    </form >
+	
+	{% else %}
+	<div class="panel panel-danger">
+		<div class="panel-body">You don't have permission to access this page!</div>
+        </div>
+	{% endif %}
+	</div>        
+    
+{% endblock %}

@@ -32,8 +32,12 @@
             {%- elif not publisher  and genre==None and (search != None or search == ' ')  -%}
             <h4>Search Results for '{{search}}'</h4> <hr>
             {% elif genre != None %}
-            <h2>{{genre}}</h2>
-            <hr>
+            <h2>{{genre}}
+		{% if user[9]=="Y" %}
+	    	<a class="btn btn-sm btn-primary" href="create-update-genre.py?email={{user[2]}}&genre={{genre}}" role="button" style="float:right">Edit Genre</a>
+		{% endif %}
+            </h2>
+	    <hr>
             <h6><p class="lead">{{genredesc}}<p></h6>
 	    {% elif publisher != None %}
 	    <h2>Published by {{publisher}}</h2>
