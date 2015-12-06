@@ -22,7 +22,7 @@ CREATE TABLE Users(
 	Birthdate DATE,
 	Image VARCHAR(500),
 	TotalCost DECIMAL(10,2),
-        IsAdmin CHAR(1) DEFAULT 'N'
+    IsAdmin CHAR(1) DEFAULT 'N'
 );
 
 CREATE TABLE ComicBooks(

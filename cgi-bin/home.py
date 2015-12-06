@@ -50,7 +50,6 @@ def main():
 			genre_ = cur.fetchone()
 
 		sidebar = utilities.getSideBar(email, user[9], cur)
-
 		print display("home.html").render(user=user,titles=titles,sidebar=sidebar,genre=genre_[0],genredesc=genre_[1],search=' ',publisher=publisher)
 
 	except mdb.Error, e:
