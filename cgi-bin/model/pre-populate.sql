@@ -22,8 +22,7 @@ INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9780930289232", LAST_INSERT_ID()
 INSERT INTO Illustrators(IllustratorName, Gender, Born, IllustratorImage, IllustratorDescription) VALUES ("Dave Gibbons", "Male", "The United Kingdom", "model/writers/dave-gibbons.jpg", "Dave Gibbons is an English comic book artist, writer and sometime letterer. He is best known for his collaborations with writer Alan Moore, which include the miniseries Watchmen and the Superman story. ");
 INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9780930289232", LAST_INSERT_ID());
 
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780930289232", ".cbr");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780930289232", ".cbz");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9780930289232", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780930289232", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780930289232", "Crime Fiction");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780930289232", "Science Fiction");
@@ -48,15 +47,13 @@ INSERT INTO Illustrators(IllustratorName, Gender, IllustratorImage) VALUES ("Bro
 INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9781608866878", LAST_INSERT_ID());
 INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9781608867370", LAST_INSERT_ID());
 
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9781608866878", ".cbr");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9781608866878", ".cbz");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9781608866878", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608866878", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608866878", "Fantasy");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608866878", "Humor");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608866878", "Young Adult");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608866878", "Slice of Life");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9781608867370", ".cbr");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9781608867370", ".cbz");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9781608867370", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608867370", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608867370", "Fantasy");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608867370", "Humor");
@@ -65,8 +62,7 @@ INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608867370", "Slice of Life");
 INSERT INTO LiteraryAwards(ISBN, Award) Values ("9781608866878", "Will Eisner Comic Industry Awards for Best New Series & Best Publication for Teens (ages 13-17) (2015)");
 INSERT INTO LiteraryAwards(ISBN, Award) Values ("9780062278241", "National Book Award for Young People's Literature (2015)");
 INSERT INTO LiteraryAwards(ISBN, Award) Values ("9780062278241", "Goodreads Choice Awards Best Graphic Novels & Comics (2015)");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780062278241", ".cbr");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780062278241", ".cbz");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9780062278241", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780062278241", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780062278241", "Fantasy");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780062278241", "Humor");
@@ -77,9 +73,7 @@ INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Ima
 INSERT INTO Writers(WriterName, Gender, Born, WriterImage) VALUES ("Daniel Way", "Male", "West Branch, Michigan, The United States  ", "model/writers/daniel-way.jpg");
 INSERT INTO BookWriter(ISBN, WriterId) VALUES ("99780785139546", LAST_INSERT_ID());
 
-INSERT INTO BookFormat(ISBN, Format) VALUES ("99780785139546", ".cbr");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("99780785139546", ".cbz");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("99780785139546", ".cb7");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("99780785139546", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("99780785139546", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("99780785139546", "Humor");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("99780785139546", "Superhero");
@@ -90,9 +84,7 @@ INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9780785184027", LAST_INSERT_ID()
 INSERT INTO Illustrators(IllustratorName, Gender) VALUES ("Matteo Lolli", "Male");
 INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9780785184027", LAST_INSERT_ID());
 
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785184027", ".cbr");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785184027", ".cbz");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785184027", ".cb7");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785184027", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785184027", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785184027", "Humor");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785184027", "Superhero");
@@ -108,14 +100,12 @@ INSERT INTO Illustrators(IllustratorName, Gender, Born, IllustratorImage, Illust
 INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9781607066019", LAST_INSERT_ID());
 INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9781632154385", LAST_INSERT_ID());
 
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9781607066019", ".cbr");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9781607066019", ".cbz");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9781607066019", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781607066019", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781607066019", "Fantasy");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781607066019", "Science Fiction");
 
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9781632154385", ".cbr");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9781632154385", ".cbz");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9781632154385", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781632154385", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781632154385", "Fantasy");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781632154385", "Science Fiction");
@@ -138,23 +128,17 @@ INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9780785190219", LAST_I
 INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9780785190226", LAST_INSERT_ID());
 INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9780785197362", LAST_INSERT_ID());
 
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785190219", ".cbr");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785190219", ".cbz");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785190219", ".cb7");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785190219", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785190219", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785190219", "Superhero");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785190219", "Young Adult");
 
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785190226", ".cbr");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785190226", ".cbz");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785190226", ".cb7");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785190226", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785190226", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785190226", "Superhero");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785190226", "Young Adult");
 
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785197362", ".cbr");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785197362", ".cbz");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785197362", ".cb7");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785197362", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785197362", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785197362", "Superhero");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785197362", "Young Adult");
@@ -165,8 +149,7 @@ INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781563898686", LAST_INSERT_ID()
 INSERT INTO Illustrators(IllustratorName, Gender) VALUES ("Tim Sale", "Male");
 INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9781563898686", LAST_INSERT_ID());
 
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9781563898686", ".cbr");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9781563898686", ".cbz");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9781563898686", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781563898686", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781563898686", "Superhero");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781563898686", "Crime Fiction");
@@ -178,14 +161,12 @@ INSERT INTO Writers(WriterName, Gender, Born, WriterImage) VALUES ("Adam Glass",
 INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781401235444", LAST_INSERT_ID());
 INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781401238445", LAST_INSERT_ID());
 
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9781401238445", ".cbr");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9781401238445", ".cbz");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9781401238445", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781401238445", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781401238445", "Superhero");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781401238445", "Crime Fiction");
 
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9781401235444", ".cbr");
-INSERT INTO BookFormat(ISBN, Format) VALUES ("9781401235444", ".cbz");
+INSERT INTO BookFormat(ISBN, Format) VALUES ("9781401235444", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781401235444", "Action/Adventure");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781401235444", "Superhero");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781401235444", "Crime Fiction")

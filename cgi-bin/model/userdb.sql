@@ -20,7 +20,7 @@ CREATE TABLE Users(
 	DateJoined DATE, 
 	Country VARCHAR(50),
 	Birthdate DATE,
-	Image VARCHAR(500),
+	Image VARCHAR(500) DEFAULT "model/users/default.png",
 	TotalCost DECIMAL(10,2),
     IsAdmin CHAR(1) DEFAULT 'N'
 );
