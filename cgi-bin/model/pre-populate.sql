@@ -3,7 +3,7 @@ INSERT INTO `Users` VALUES ('Admin','User','admin@ezcomics.com','$6$rounds=65600
 
 -- Real Password is 0987
 INSERT INTO `Users` VALUES 
-('Roy Amante','Salvador','roy.salvador@gmail.com@gmail.com','$6$rounds=656000$4SjJk0DANLFXwHG.$bUYDV4GAmkpXudefgrZ7Puw8UnWJgrTgHY4XBnLt0QfKtzIcC6O/spq3x7Q8NNEsdIMeZjfkMoKnZFMPtWR7r1','2015-11-22',NULL,NULL,NULL,0,'N');
+('Roy Amante','Salvador','roy.salvador@gmail.com','$6$rounds=656000$4SjJk0DANLFXwHG.$bUYDV4GAmkpXudefgrZ7Puw8UnWJgrTgHY4XBnLt0QfKtzIcC6O/spq3x7Q8NNEsdIMeZjfkMoKnZFMPtWR7r1','2015-11-22',NULL,NULL,NULL,0,'N');
 
 INSERT INTO Genres (Genre, GenreDesc) VALUES ("Fantasy", "Fantasy is a genre that uses magic and other supernatural forms as a primary element of plot, theme, and/or setting.  ");
 INSERT INTO Genres (Genre, GenreDesc) VALUES ("Humor", "A comic novel is usually a work of fiction in which the writer seeks to amuse the reader, sometimes with subtlety and as part of a carefully woven narrative, sometimes above all other considerations. ");
@@ -17,10 +17,10 @@ INSERT INTO Genres (Genre, GenreDesc) VALUES ("Superhero", "Superhero is a type 
 
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9780930289232", "DC", "1986-09-01",  "Watchmen", "899.00", "416", "model/images/9780930289232.jpg", "This Hugo Award-winning graphic novel chronicles the fall from grace of a group of super-heroes plagued by all-too-human failings. Along the way, the concept of the super-hero is dissected as the heroes are stalked by an unknown assassin. <br><br> One of the most influential graphic novels of all time and a perennial best-seller, Watchmen has been studied on college campuses across the nation and is considered a gateway title, leading readers to other graphic novels such as V for Vendetta, Batman: The Dark Knight Returns and The Sandman series. ");
 INSERT INTO Writers(WriterName, Gender, Born, WriterImage, WriterDescription) VALUES ("Alan Moore", "Male", "Northampton, England, The United Kingdom", "model/writers/alan-moore.jpg", "Alan Moore is an English writer primarily known for his work in comic books including Watchmen, V for Vendetta, and From Hell.");
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9780930289232", LAST_INSERT_ID());
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9780930289232", "Alan Moore");
 
 INSERT INTO Illustrators(IllustratorName, Gender, Born, IllustratorImage, IllustratorDescription) VALUES ("Dave Gibbons", "Male", "The United Kingdom", "model/writers/dave-gibbons.jpg", "Dave Gibbons is an English comic book artist, writer and sometime letterer. He is best known for his collaborations with writer Alan Moore, which include the miniseries Watchmen and the Superman story. ");
-INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9780930289232", LAST_INSERT_ID());
+INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES ("9780930289232", "Dave Gibbons");
 
 INSERT INTO BookFormat(ISBN, Format) VALUES ("9780930289232", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780930289232", "Action/Adventure");
@@ -36,16 +36,16 @@ INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Ima
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9781608867370", "BOOM! Box", "2015-04-07",  "Lumberjanes, Vol. 2: Friendship to the Max", "399.00", "111", "model/images/9781608867370.jpg", "Jo, April, Mal, Molly, and Ripley are not your average campers and Miss Qiunzella Thiskwin Penniquiqul Thistle Crumpet's Camp for Hardcore Lady-Types is not your average summer camp. Between the river monsters, magic, and the art of friendship bracelets, this summer is only just beginning. Join the Lumberjanes as they take on raptors and a sibling rivalry that only myths are made of.");
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9780062278241", "BOOM! Box", "2015-08-12",  "Nimona", "399.00", "172", "model/images/9780062278241.jpg", "Nemeses! Dragons! Science! Symbolism! All these and more await in this brilliantly subversive, sharply irreverent epic from Noelle Stevenson. Featuring an exclusive epilogue not seen in the web comic, along with bonus conceptual sketches and revised pages throughout, this gorgeous full-color graphic novel is perfect for the legions of fans of the web comic and is sure to win Noelle many new ones.<br><br>Nimona is an impulsive young shapeshifter with a knack for villainy. Lord Ballister Blackheart is a villain with a vendetta. As sidekick and supervillain, Nimona and Lord Blackheart are about to wreak some serious havoc. Their mission: prove to the kingdom that Sir Ambrosius Goldenloin and his buddies at the Institution of Law Enforcement and Heroics aren't the heroes everyone thinks they are.");
 INSERT INTO Writers(WriterName, Gender, Born, WriterImage, WriterDescription) VALUES ("Noelle Stevenson", "Female", "Los Angeles, California ", "model/writers/noelle-stevenson.jpg", "Noelle Stevenson is a comic artist and freelance illustrator residing in Los Angeles, California. ");
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781608866878", LAST_INSERT_ID());
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781608867370", LAST_INSERT_ID());
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9780062278241", LAST_INSERT_ID());
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9781608866878", "Noelle Stevenson");
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9781608867370", "Noelle Stevenson");
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9780062278241", "Noelle Stevenson");
 INSERT INTO Writers(WriterName, Gender) VALUES ("Grace Ellis", "Female");
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781608866878", LAST_INSERT_ID());
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781608867370", LAST_INSERT_ID());
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9781608866878", "Grace Ellis");
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9781608867370", "Grace Ellis");
 
 INSERT INTO Illustrators(IllustratorName, Gender, IllustratorImage) VALUES ("Brooke A. Allen", "Female", "model/writers/brooke-allen.jpg");
-INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9781608866878", LAST_INSERT_ID());
-INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9781608867370", LAST_INSERT_ID());
+INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES ("9781608866878", "Brooke A. Allen");
+INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES ("9781608867370", "Brooke A. Allen");
 
 INSERT INTO BookFormat(ISBN, Format) VALUES ("9781608866878", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781608866878", "Action/Adventure");
@@ -71,7 +71,7 @@ INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780062278241", "Young Adult");
 
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("99780785139546", "Marvel", "2009-03-25",  "Deadpool: Secret Invasion", "299.00", "136", "model/images/99780785139546.jpg", "The Merc with a Mouth is back, even deadlier and more deranged than before! The planet has been invaded by Skrulls, everything's gone topsy-turvy... but, in Deadpool's world, that just means it's Monday! Crazy times call for crazy men, but c'mon, this guy's insane! Like it or not, Deadpool may be the only person on the planet who can save us... but who's to say he wants to? An explosive debut story by writer Daniel Way (Wolverine: Origins, Ghost Rider, Bullseye: Greatest Hits) and fan-favorite artist Paco Medina (New Warriors, New X-Men)! Deadpool: His madness is his method! You won't want to miss it!");
 INSERT INTO Writers(WriterName, Gender, Born, WriterImage) VALUES ("Daniel Way", "Male", "West Branch, Michigan, The United States  ", "model/writers/daniel-way.jpg");
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("99780785139546", LAST_INSERT_ID());
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("99780785139546", "Daniel Way");
 
 INSERT INTO BookFormat(ISBN, Format) VALUES ("99780785139546", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("99780785139546", "Action/Adventure");
@@ -80,9 +80,9 @@ INSERT INTO BookGenre(ISBN, Genre) VALUES ("99780785139546", "Superhero");
 
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9780785184027", "Marvel", "2009-03-25",  "Deadpool Killustrated", "299.00", "136", "model/images/9780785184027.jpg", "The Merc with a Mouth is back, even deadlier and more deranged than before! The planet has been invaded by Skrulls, everything's gone topsy-turvy... but, in Deadpool's world, that just means it's Monday! Crazy times call for crazy men, but c'mon, this guy's insane! Like it or not, Deadpool may be the only person on the planet who can save us... but who's to say he wants to? An explosive debut story by writer Daniel Way (Wolverine: Origins, Ghost Rider, Bullseye: Greatest Hits) and fan-favorite artist Paco Medina (New Warriors, New X-Men)! Deadpool: His madness is his method! You won't want to miss it!");
 INSERT INTO Writers(WriterName, Gender, Born, WriterImage) VALUES ("Cullen Bunn", "Male", "Cape Fear, NC, The United States", "model/writers/cullen-bun.jpg");
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9780785184027", LAST_INSERT_ID());
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9780785184027", "Cullen Bunn");
 INSERT INTO Illustrators(IllustratorName, Gender) VALUES ("Matteo Lolli", "Male");
-INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9780785184027", LAST_INSERT_ID());
+INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES ("9780785184027", "Matteo Lolli");
 
 INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785184027", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785184027", "Action/Adventure");
@@ -93,12 +93,12 @@ INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785184027", "Superhero");
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9781607066019", "Indigo", "2009-03-25",  "Saga, Volume 1", "299.00", "60", "model/images/9781607066019.jpg", "When two soldiers from opposite sides of a never-ending galactic war fall in love, they risk everything to bring a fragile new life into a dangerous old universe. <br><br>From bestselling writer Brian K. Vaughan, Saga is the sweeping tale of one young family fighting to find their place in the worlds. Fantasy and science fiction are wed like never before in this sexy, subversive drama for adults. ");
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9781632154385", "Indigo", "2009-03-25",  "Saga, Volume 2", "299.00", "60", "model/images/9781632154385.jpg", "Multiple storylines collide in this cosmos-spanning new volume. While Gwendolyn and Lying Cat risk everything to find a cure for The Will, Marko makes an uneasy alliance with Prince Robot IV to find their missing children, who are trapped on a strange world with terrifying new enemies.");
 INSERT INTO Writers(WriterName, Gender, Born, WriterImage) VALUES ("Brian K. Vaughan", "Male", " Cleveland, Ohio, The United States ", "model/writers/brian-vaughan.jpg");
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781607066019", LAST_INSERT_ID());
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781632154385", LAST_INSERT_ID());
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9781607066019", "Brian K. Vaughan");
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9781632154385", "Brian K. Vaughan");
 
 INSERT INTO Illustrators(IllustratorName, Gender, Born, IllustratorImage, IllustratorDescription) VALUES ("Fiona Staples", "Female", "Canada","model/writers/fiona-staples.jpg", "Fiona Staples is a Canadian comic book artist known for her work on books such as North 40, DV8: Gods and Monsters, T.H.U.N.D.E.R. Agents and Saga. She has been cited as one of the best female artists working in the industry, and one of the best artists overall.");
-INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9781607066019", LAST_INSERT_ID());
-INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9781632154385", LAST_INSERT_ID());
+INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES ("9781607066019", "Fiona Staples");
+INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES ("9781632154385", "Fiona Staples");
 
 INSERT INTO BookFormat(ISBN, Format) VALUES ("9781607066019", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781607066019", "Action/Adventure");
@@ -120,13 +120,13 @@ INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Ima
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9780785197362", "Marvel", "2014-03-25",  "Ms. Marvel, Vol. 4: Last Days", "120.00", "136", "model/images/9780785197362.jpg", "When the world is about to end, do you still keep fighting? From the moment, Kamala put on her costume, she's been challenged, but nothing has prepared her for this: the Last Days of the Marvel Universe. Fists up, let's do this, Jersey City. Plus a VERY special guest appearance fans have been clamoring for!");
 
 INSERT INTO Writers(WriterName, Gender, Born, WriterImage) VALUES ("G. Willow Wilson", "Female", "Cape Fear, NC, The United States", "model/writers/willow-wilson.jpg");
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9780785190219", LAST_INSERT_ID());
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9780785190226", LAST_INSERT_ID());
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9780785197362", LAST_INSERT_ID());
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9780785190219", "G. Willow Wilson");
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9780785190226", "G. Willow Wilson");
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9780785197362", "G. Willow Wilson");
 INSERT INTO Illustrators(IllustratorName, Gender) VALUES ("Adrian Alphona", "Male");
-INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9780785190219", LAST_INSERT_ID());
-INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9780785190226", LAST_INSERT_ID());
-INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9780785197362", LAST_INSERT_ID());
+INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES ("9780785190219", "Adrian Alphona");
+INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES ("9780785190226", "Adrian Alphona");
+INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES ("9780785197362", "Adrian Alphona");
 
 INSERT INTO BookFormat(ISBN, Format) VALUES ("9780785190219", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785190219", "Action/Adventure");
@@ -145,9 +145,9 @@ INSERT INTO BookGenre(ISBN, Genre) VALUES ("9780785197362", "Young Adult");
 
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9781563898686", "DC", "2009-03-25",  "Batman: Dark Victory", "391.00", "136", "model/images/9781563898686.jpg", "The sequel to the critically acclaimed BATMAN: THE LONG HALLOWEEN, DARK VICTORY continues the story of an early time in Batman's life when James Gordon, Harvey Dent, and the vigilante himself were all just beginning their roles as Gotham's protectors.Once a town controlled by organized crime, Gotham City suddenly finds itself being run by lawless freaks, such as Poison Ivy, Mr. Freeze, and the Joker. Witnessing his city's dark evolution, the Dark Knight completes his transformation into the city's greatest defender. He faces multiple threats, including the apparent return of a serial killer called Holiday. Batman's previous investigation of Holiday's killings revealed that more than one person was responsible for the murders. So the question remains: who is committing Holiday's crimes this time? And how many will die before Batman learns the truth?");
 INSERT INTO Writers(WriterName, Gender, Born, WriterImage) VALUES ("Jeph Loeb", "Male", "Stamford, Connecticut, The United States", "model/writers/jeph-loeb.jpg");
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781563898686", LAST_INSERT_ID());
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9781563898686", "Jeph Loeb");
 INSERT INTO Illustrators(IllustratorName, Gender) VALUES ("Tim Sale", "Male");
-INSERT INTO BookIllustrator(ISBN, IllustratorId) VALUES ("9781563898686", LAST_INSERT_ID());
+INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES ("9781563898686", "Jeph Loeb");
 
 INSERT INTO BookFormat(ISBN, Format) VALUES ("9781563898686", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781563898686", "Action/Adventure");
@@ -158,8 +158,8 @@ INSERT INTO LiteraryAwards(ISBN, Award) Values ("9781563898686", "Will Eisner Co
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9781401235444", "DC", "2009-03-25",  "Suicide Squad, Vol. 1: Kicked in the Teeth", "391.00", "136", "model/images/9781401235444.jpg", "As a part of the acclaimed DC Comics--The New 52 event of September 2011, writer and co-creator of the CW show 'Supernatural' Adam Glass rolls out an all-new team of death-row super villains recruited by the government to take on missions so dangerous-they're sheer suicide. <br><br>The story begins with the Suicide Squad defeated, imprisoned and being interrogated about their newest mission. Harley Quinn, King Shark, Deadshot and company must make it out alive without revealing who's pulling the strings behind their illegal operations. Who will be the first to crack under the pressure? More importantly will they make it all out alive? Collects issues #1-7.");
 INSERT INTO ComicBooks(ISBN, Publisher, DatePublished, Title, Price, Length, Image, Description) VALUES ("9781401238445", "DC", "2009-03-25",  "Suicide Squad, Vol. 2: Basilisk Rising", "391.00", "136", "model/images/9781401238445.jpg", "As the surviving Squad members attempt to recover from their disastrous Gotham City mission, we learn a dark secret that has been festering in the team since issue #1: a traitor stalks the Suicide Squad! The saboteur's mission: Assassinate Amanda Waller, expose the Squad and leave Task Force X in ruins! The Basilisk strikes! Collects issues #8-13, issue 0, and Resurrection Man #9");
 INSERT INTO Writers(WriterName, Gender, Born, WriterImage) VALUES ("Adam Glass", "Male", "The United States", "model/writers/adam-glass.jpg");
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781401235444", LAST_INSERT_ID());
-INSERT INTO BookWriter(ISBN, WriterId) VALUES ("9781401238445", LAST_INSERT_ID());
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9781401235444", "Adam Glass");
+INSERT INTO BookWriter(ISBN, WriterName) VALUES ("9781401238445", "Adam Glass");
 
 INSERT INTO BookFormat(ISBN, Format) VALUES ("9781401238445", "Hardbound");
 INSERT INTO BookGenre(ISBN, Genre) VALUES ("9781401238445", "Action/Adventure");

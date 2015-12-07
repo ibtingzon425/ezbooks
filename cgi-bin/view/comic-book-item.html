@@ -75,7 +75,7 @@ a.morelink {
                     </header>                        
                         <h5><bold>by 
                             {% for writer in writers %}
-                            <a href="writer-profile.py?email={{user[2]}}&writer={{writer[1]}}">
+                            <a href="writer-profile.py?email={{user[2]}}&writer={{writer[0]}}">
                             {{writer[0]}}</a> 
                             {%- if loop.index < writers|length -%}
                             ,
@@ -86,7 +86,7 @@ a.morelink {
                             ,
                             {% endif %} 
                             {% for illustrator in illustrators %}
-                            <a href="illustrator-profile.py?email={{user[2]}}&illustrator={{illustrator[1]}}">
+                            <a href="illustrator-profile.py?email={{user[2]}}&illustrator={{illustrator[0]}}">
                             {{illustrator[0]}}</a> <font color="gray">(Illustrator)</font> 
                             {%- if loop.index < illustrators|length -%}
                             ,

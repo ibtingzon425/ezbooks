@@ -20,9 +20,6 @@ def main():
 	genre = form.getvalue('genre')
 	publisher = form.getvalue('publisher')
 
-	#TODO: For fname, lname == None redirect to login page
-	#TODO: Implement sessions using Cookies
-
 	try:
 		cur = con.cursor()
 

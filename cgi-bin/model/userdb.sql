@@ -18,7 +18,7 @@ CREATE TABLE Users(
 	Email VARCHAR(50) PRIMARY KEY,
 	Password VARCHAR(256) NOT NULL,
 	DateJoined DATE, 
-	Country VARCHAR(50),
+	Country VARCHAR(50) DEFAULT "",
 	Birthdate DATE,
 	Image VARCHAR(500) DEFAULT "model/users/default.png",
 	TotalCost DECIMAL(10,2),
@@ -37,8 +37,7 @@ CREATE TABLE ComicBooks(
 );
 
 CREATE TABLE Writers(
-	WriterId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	WriterName VARCHAR(256) NOT NULL,
+	WriterName VARCHAR(256) PRIMARY KEY,
 	WriterDescription VARCHAR(5000) DEFAULT "No description available.",
 	Birthdate DATE,
 	Born VARCHAR(50) DEFAULT "",
@@ -47,8 +46,7 @@ CREATE TABLE Writers(
 );
 
 CREATE TABLE Illustrators(
-	IllustratorId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	IllustratorName VARCHAR(256) NOT NULL,
+	IllustratorName VARCHAR(256) PRIMARY KEY,
 	IllustratorDescription VARCHAR(5000) DEFAULT "No description available.",
 	Birthdate DATE,
 	Born VARCHAR(50) DEFAULT "",
@@ -63,14 +61,14 @@ CREATE TABLE Genres(
 
 CREATE TABLE BookWriter(
 	ISBN VARCHAR(500) NOT NULL,
-	WriterId INT NOT NULL,
-	PRIMARY KEY(ISBN, WriterId)
+	WriterName VARCHAR(256) NOT NULL,
+	PRIMARY KEY(ISBN, WriterName)
 );
 
 CREATE TABLE BookIllustrator(
 	ISBN VARCHAR(500) NOT NULL,
-	IllustratorId INT NOT NULL,
-	PRIMARY KEY(ISBN, IllustratorId)
+	IllustratorName VARCHAR(256) NOT NULL,
+	PRIMARY KEY(ISBN, IllustratorName)
 );
 
 CREATE TABLE BookGenre(
@@ -111,6 +109,6 @@ ALTER TABLE BookReview ADD FOREIGN KEY (Email) REFERENCES Users(Email);
 ALTER TABLE UserCart ADD FOREIGN KEY(Email) References Users(Email);
 ALTER TABLE UserCart ADD FOREIGN KEY(ISBN) References ComicBooks(ISBN);
 ALTER TABLE BookWriter ADD FOREIGN KEY(ISBN) References ComicBooks(ISBN);
-ALTER TABLE BookWriter ADD FOREIGN KEY(WriterId) References Writers(WriterId);
+ALTER TABLE BookWriter ADD FOREIGN KEY(WriterName) References Writers(WriterName);
 ALTER TABLE BookIllustrator ADD FOREIGN KEY(ISBN) References ComicBooks(ISBN);
-ALTER TABLE BookIllustrator ADD FOREIGN KEY(IllustratorId) References Illustrators(IllustratorId)
+ALTER TABLE BookIllustrator ADD FOREIGN KEY(IllustratorName) References Illustrators(IllustratorName)   

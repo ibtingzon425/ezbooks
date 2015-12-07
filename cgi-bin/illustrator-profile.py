@@ -21,11 +21,11 @@ def main():
 		cur.execute(command)
 		user_= cur.fetchone() #
 
-		command = "SELECT * from Illustrators WHERE IllustratorId ='" + illustrator + "'"
+		command = "SELECT * from Illustrators WHERE IllustratorName ='" + illustrator + "'"
 		cur.execute(command)
 		illustrator_ = cur.fetchone()
 
-		command = "SELECT ISBN, Title, Price, Image from ComicBooks NATURAL JOIN BookIllustrator NATURAL JOIN Illustrators WHERE IllustratorId='" + illustrator + "'"
+		command = "SELECT ISBN, Title, Price, Image from ComicBooks NATURAL JOIN BookIllustrator NATURAL JOIN Illustrators WHERE IllustratorName='" + illustrator + "'"
 		
 		cur.execute(command)
 		rows = cur.fetchall()
@@ -33,7 +33,7 @@ def main():
 		for row in rows:
 			titles.append(row)
 
-		command = "SELECT Genre from ComicBooks NATURAL JOIN BookGenre NATURAL JOIN BookIllustrator WHERE IllustratorId ='" + illustrator + "'"
+		command = "SELECT Genre from ComicBooks NATURAL JOIN BookGenre NATURAL JOIN BookIllustrator WHERE IllustratorName ='" + illustrator + "'"
 		cur.execute(command)
 		genres = cur.fetchall()
 		genres_ = []

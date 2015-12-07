@@ -6,17 +6,27 @@
                 <div class="thumbnail">
                 	<div class="col-md-4 left-side">
                         <center>
-                            <img class="img-responsive" src={{illustrator[6]}} style="width:200px;padding-top:30px;padding-bottom:20px;">
+                            <img class="img-responsive" src={{illustrator[5]}} style="width:200px;padding-top:30px;padding-bottom:20px;">
                     </center>
                     </div>
                     <div id="desc" class="col-md-8 right-side" style="padding-top:25px">
                         <header>  
-                        <h4><strong>{{illustrator[1]}}</strong></h4> 
+                        <h4><strong>{{illustrator[0]}}</strong></h4> 
                         </header>                        
                         <hr>
                         <h5>
-                        <p><strong>Born:</strong> {{illustrator[3]}} in {{illustrator[4]}} </p>
-                        <p><strong>Gender:</strong> {{illustrator[5]}}</p>
+                        <p><strong>Born: </strong> 
+                            {%- if illustrator[2] != None -%}
+                                {{illustrator[2]}} 
+                            {% endif %} 
+                            {%- if illustrator[3] != "" -%}
+                                in {{illustrator[3]}} 
+                            {% endif %}
+                            {%- if (illustrator[2] == None) and  (illustrator[3] == "") -%}
+                                Information not available.
+                            {% endif %}
+                        </p>
+                        <p><strong>Gender:</strong> {{illustrator[4]}}</p>
                         <p><strong>Genres:</strong> {% for genre in genres %} 
                             <a href="home.py?email={{user[2]}}&genre={{genre[0]}}">{{genre[0]}} </a>
                             {%- if loop.index < genres|length -%}
@@ -25,17 +35,17 @@
                         </h5>
                         <p><strong>About this illustrator</strong>: 
                             <div class="comment more" style="padding-bottom:30px">
-                            {%- if illustrator[2] == None -%} 
+                            {%- if illustrator[1] == None -%} 
                                 No description available 
                             {% else %} 
-                                {{illustrator[2]}}
+                                {{illustrator[1]}}
                             {% endif %} 
                         </div>
                         </p>
                     </div>
                 </div>
             <br>
-            <h4>{{illustrator[1]}}'s Books</h4>
+            <h4>{{illustrator[0]}}'s Books</h4>
             <hr>
             <p>
             <div class="row">

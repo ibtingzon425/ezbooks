@@ -68,7 +68,7 @@ def main():
 			format = cur.fetchall()
 			title = title + (format,)
 
-			command = "SELECT WriterName, WriterId from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE ISBN='" + title[0] + "'"
+			command = "SELECT WriterName from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE ISBN='" + title[0] + "'"
 			cur.execute(command)
 			row = cur.fetchone()
 

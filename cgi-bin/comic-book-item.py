@@ -39,11 +39,11 @@ def main():
 			awards.append(award[i][0])
 		books.append(awards)
 
-		command = "SELECT WriterName, WriterId from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE ISBN ='" + book[0] + "'"
+		command = "SELECT WriterName from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE ISBN ='" + book[0] + "'"
 		cur.execute(command)
 		writers = cur.fetchall()
 
-		command = "SELECT IllustratorName, IllustratorId from ComicBooks NATURAL JOIN BookIllustrator NATURAL JOIN Illustrators WHERE ISBN ='" + book[0] + "'"
+		command = "SELECT IllustratorName from ComicBooks NATURAL JOIN BookIllustrator NATURAL JOIN Illustrators WHERE ISBN ='" + book[0] + "'"
 		cur.execute(command)
 		illustrators= cur.fetchall()
 
