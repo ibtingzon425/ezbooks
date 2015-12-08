@@ -16,6 +16,8 @@ from template import display
 from model.database import con
 from passlib.hash import sha512_crypt
 import sha, time, os, datetime, session
+import os, time, sys, session, Cookie, json
+import utilities
 
 #Verifies that login credentials (username, password) are correct
 
@@ -34,7 +36,10 @@ def main():
 			enc_password = row[0]
 			verify = sha512_crypt.verify(password, enc_password)
 			if (verify):
-				print "Location: home.py?email=" + email + "\r\n"
+				sess = session.Session(expires=365*24*60*60, cookie_path='/')
+				sess.data['lastvisit'] = repr(time.time())
+				sess.data['user'] = email
+				print "Location: home.py?\r\n"
 			else:
 				print "Location: login.py?redirect=0\r\n"
 		else:

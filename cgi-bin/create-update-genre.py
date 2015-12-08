@@ -16,7 +16,7 @@ def invaidPageError():
 def main():
 	form = cgi.FieldStorage()
 	
-	email = form.getvalue('email')
+	#email = form.getvalue('email')
 	genre = form.getvalue('genre')
 	action = form.getvalue('action')
 	genredesc = form.getvalue('genredesc')
@@ -25,6 +25,11 @@ def main():
 
 	try:
 		cur = con.cursor()
+
+		sess = session.Session(expires=365*24*60*60, cookie_path='/')
+		lastvisit = sess.data.get('lastvisit')
+		email= sess.data.get('user')
+		print sess.cookie
 
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
                 cur.execute(command)

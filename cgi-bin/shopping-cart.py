@@ -11,10 +11,15 @@ import utilities
 def main():
 	form = cgi.FieldStorage()
 	
-	email = form.getvalue('email') #email of current user
+	#email = form.getvalue('email') #email of current user
 
 	try:
 		cur = con.cursor()
+
+		sess = session.Session(expires=365*24*60*60, cookie_path='/')
+		lastvisit = sess.data.get('lastvisit')
+		email= sess.data.get('user')
+		print sess.cookie
 		
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
 		cur.execute(command)
@@ -51,6 +56,7 @@ def main():
 
 		sidebar = utilities.getSideBar(email, user_[9], cur)
 		print display("shopping-cart.html").render(sidebar=sidebar,user=user_,titles=titles,total=total)
+		sess.close()
 
 	except mdb.Error, e:
 	    if con:

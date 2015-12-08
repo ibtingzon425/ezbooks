@@ -16,16 +16,21 @@ def invaidPageError():
 def main():
 	form = cgi.FieldStorage()
 	
-	email = form.getvalue('email')
+	#email = form.getvalue('email')
 	genre = form.getvalue('genre')
 	publisher = form.getvalue('publisher')
 
 	try:
 		cur = con.cursor()
 
+		sess = session.Session(expires=365*24*60*60, cookie_path='/')
+		lastvisit = sess.data.get('lastvisit')
+		email= sess.data.get('user')
+		print sess.cookie
+
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
 		cur.execute(command)
-		user= cur.fetchone()
+		user = cur.fetchone()
 
 		if(genre != None):
 			command = "SELECT * from ComicBooks NATURAL JOIN BookGenre WHERE Genre='" + genre + "'"
@@ -48,7 +53,8 @@ def main():
 
 		sidebar = utilities.getSideBar(email, user[9], cur)
 		print display("home.html").render(user=user,titles=titles,sidebar=sidebar,genre=genre_[0],genredesc=genre_[1],search=' ',publisher=publisher)
-
+		sess.close()
+	
 	except mdb.Error, e:
 	    if con:
 	        con.rollback()

@@ -5,6 +5,8 @@ import MySQLdb as mdb
 from template import display
 from model.database import con
 from passlib.hash import sha512_crypt
+import os, time, sys, session, Cookie, json
+import utilities
 
 sess = None
 
@@ -21,7 +23,11 @@ def register(fname, lname, email, password):
         if con:
             con.rollback()
 
-    print "Location: home.py?email=" + email + "\r\n"
+    sess = session.Session(expires=365*24*60*60, cookie_path='/')
+    sess.data['lastvisit'] = repr(time.time())
+    sess.data['user'] = email
+
+    print "Location: home.py\r\n"
 
 def main():
     form = cgi.FieldStorage()

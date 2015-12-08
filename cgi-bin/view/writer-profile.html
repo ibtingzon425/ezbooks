@@ -28,7 +28,7 @@
                         </p>
                         <p><strong>Gender:</strong> {{writer[4]}}</p>
                         <p><strong>Genres:</strong> {% for genre in genres %} 
-                            <a href="home.py?email={{user[2]}}&genre={{genre[0]}}">{{genre[0]}} </a>
+                            <a href="home.py?genre={{genre[0]}}">{{genre[0]}} </a>
                             {%- if loop.index < genres|length -%}
                             ,
                             {% endif %}  {% endfor %}</p> 
@@ -54,10 +54,10 @@
               <div class="panel panel-default">
               <div class="panel-body">
               <center> 
-              <a href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}" ><img src= {{title[3]}} style="height:160px;" margin=15px> </img></a>
-              <h5><a href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
+              <a href="comic-book-item.py?ISBN={{title[0]}}" ><img src= {{title[3]}} style="height:160px;" margin=15px> </img></a>
+              <h5><a href="comic-book-item.py?ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
               <p><h6>Price: P{{title[2]}}</h6></p>
-              <p><a class="btn btn-danger" href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}" role="button">Learn more &raquo;</a></p>
+              <p><a class="btn btn-danger" href="comic-book-item.py?ISBN={{title[0]}}" role="button">Learn more &raquo;</a></p>
               </center>
             </div>
             </div>

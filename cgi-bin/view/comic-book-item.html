@@ -23,7 +23,7 @@ a.morelink {
 				{%- if book_owned == True -%}
 				<a class="btn btn-primary" href="model/images/sample_comic.pdf" target="_blank" role="button">Download</a>
                                 {%- elif book_exists == False -%} 
-                                <form id="form" action="add-to-cart.py" method="GET">
+                                <form id="form" action="add-to-cart.py" method="POST">
                                 <input type="hidden" id="email" name="email" class="form-control" value="{{user[2]}}">
                                 <input type="hidden" id="ISBN" name="ISBN" class="form-control" value="{{book[0]}}">
                                 <button type="submit" id="btn" class="btn btn-success" onclick="onConfirm()" style="width:100%">Add to Cart &raquo;</button>
@@ -42,7 +42,7 @@ a.morelink {
                                 </script>
                                 </form>
                                 {% else %} 
-                                <form id="form" action="remove-from-cart.py" method="GET">
+                                <form id="form" action="remove-from-cart.py" method="POST">
                                 <input type="hidden" id="email" name="email" class="form-control" value="{{user[2]}}">
                                 <input type="hidden" id="ISBN" name="ISBN" class="form-control" value="{{book[0]}}">
                                 <button type="submit" id="btn" class="btn btn-danger" onclick="onRemove()">Remove from Cart &raquo;</button>
@@ -75,7 +75,7 @@ a.morelink {
                     </header>                        
                         <h5><bold>by 
                             {% for writer in writers %}
-                            <a href="writer-profile.py?email={{user[2]}}&writer={{writer[0]}}">
+                            <a href="writer-profile.py?writer={{writer[0]}}">
                             {{writer[0]}}</a> 
                             {%- if loop.index < writers|length -%}
                             ,
@@ -86,7 +86,7 @@ a.morelink {
                             ,
                             {% endif %} 
                             {% for illustrator in illustrators %}
-                            <a href="illustrator-profile.py?email={{user[2]}}&illustrator={{illustrator[0]}}">
+                            <a href="illustrator-profile.py?illustrator={{illustrator[0]}}">
                             {{illustrator[0]}}</a> <font color="gray">(Illustrator)</font> 
                             {%- if loop.index < illustrators|length -%}
                             ,
@@ -130,7 +130,7 @@ a.morelink {
                         </tr>
                         {% endif %}
                         <tr><td > Genre:  </td> <td> {% for genre in genres %} 
-                            <a href="home.py?email={{user[2]}}&genre={{genre[0]}}">{{genre[0]}} </a>
+                            <a href="home.py?genre={{genre[0]}}">{{genre[0]}} </a>
                             {%- if loop.index < genres|length -%}
                             ,
                             {% endif %}  {% endfor %}

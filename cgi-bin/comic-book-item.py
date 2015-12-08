@@ -12,9 +12,14 @@ def main():
 	form = cgi.FieldStorage()
 	
 	ISBN = form.getvalue('ISBN')
-	email = form.getvalue('email')
+	#email = form.getvalue('email')
 	try:
 		cur = con.cursor()
+
+		sess = session.Session(expires=365*24*60*60, cookie_path='/')
+		lastvisit = sess.data.get('lastvisit')
+		email= sess.data.get('user')
+		print sess.cookie
 		
 		books = []
 		command = "SELECT * from ComicBooks WHERE ISBN='" + ISBN + "'"
@@ -73,6 +78,7 @@ def main():
 		
 		sidebar = utilities.getSideBar(email,user[9], cur)
 		print display("comic-book-item.html").render(book=books,user=user,sidebar=sidebar,writers=writers,illustrators=illustrators,genres=genres,book_exists=book_exists,book_owned=book_owned)
+		sess.close()
 		
 	except mdb.Error, e:
 	    if con:

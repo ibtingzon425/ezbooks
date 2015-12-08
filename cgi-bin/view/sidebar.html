@@ -17,14 +17,14 @@
         <div class="list-group">
             <div class="list-group-item" style="background-color:#222; color:#aaa; ">Browse By Genre</div>
 	    {% for genre in sidebar['genres'] %}
-            <a href="home.py?email={{user[2]}}&genre={{genre}}" id="{{genre}}" class="list-group-item">{{genre}}</a>
+            <a href="home.py?genre={{genre}}" id="{{genre}}" class="list-group-item">{{genre}}</a>
             {% endfor %}
           </div>
 
         <div class="list-group">
 	  <div class="list-group-item" style="background-color:#222; color:#aaa; ">Browse By Publisher</div>
 	  {% for publisher in sidebar['publishers'] %}
-          <a href="home.py?email={{user[2]}}&publisher={{publisher}}" id="{{publisher}}" class="list-group-item">{{publisher}}</a>
+          <a href="home.py?publisher={{publisher}}" id="{{publisher}}" class="list-group-item">{{publisher}}</a>
           {% endfor %}	
         </div>
 
@@ -104,7 +104,7 @@
 	    <a href="#"   class="list-group-item">Comic Book</a>
 	    <a href="create-update-genre.py?email=admin@ezcomics.com"   class="list-group-item">Genre</a>
 	    <a href="#"   class="list-group-item">Illustrator</a>
-	    <a href="user-profile.py?email={{user[2]}}&action=create" class="list-group-item">User</a>
+	    <a href="user-profile.py?action=create" class="list-group-item">User</a>
             <a href="#"   class="list-group-item">Writer</a>
 	</div>
 	</div>

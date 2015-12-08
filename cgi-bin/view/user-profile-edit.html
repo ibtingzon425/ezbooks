@@ -18,7 +18,7 @@
                         <h4><strong>{{userprof[2]}}</strong></h4> 
                         </header>                        
                         <hr>
-			<form  id="form-user" method="post" enctype="multipart/form-data" action="update-user.py?email={{user[2]}}&user={{userprof[2]}}">			
+			<form  id="form-user" method="post" enctype="multipart/form-data" action="update-user.py?user={{userprof[2]}}">			
 			<table>
                         	<tr>
 			  		<td><p>First Name:</p></td>
@@ -60,7 +60,7 @@
                         <br />
 			<p>
 				<input class="btn btn-success" type="submit" value="Save"></input>
-				<a class="btn btn-danger" href="user-profile.py?email={{user[2]}}&user={{userprof[2]}}" role="button" >Cancel</a> 
+				<a class="btn btn-danger" href="user-profile.py?user={{userprof[2]}}" role="button" >Cancel</a> 
                         </p>
 			</form >
 			<br />

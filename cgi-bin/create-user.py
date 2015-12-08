@@ -25,6 +25,11 @@ def main():
 	try:
 		cur = con.cursor()
 
+		sess = session.Session(expires=365*24*60*60, cookie_path='/')
+		lastvisit = sess.data.get('lastvisit')
+		email= sess.data.get('user')
+		print sess.cookie
+
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
                 cur.execute(command)
                 user= cur.fetchone()
@@ -110,7 +115,7 @@ def main():
 
                 	sidebar = utilities.getSideBar(email,user[9], cur)
                 	print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own)			
-
+                	sess.close()
 	except mdb.Error, e:
 	    if con:
 	        con.rollback()

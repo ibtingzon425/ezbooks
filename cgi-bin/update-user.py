@@ -12,7 +12,7 @@ def main():
 	form = cgi.FieldStorage()
 	
 	userprof = form.getvalue('user') #email of userprofile
-	email = form.getvalue('email') #email of current user
+	#email = form.getvalue('email') #email of current user
 	firstname = form.getvalue('first_name')
 	lastname = form.getvalue('last_name')
 	current_password = form.getvalue('current_password')
@@ -26,6 +26,11 @@ def main():
 	try:
 
 		cur = con.cursor()
+
+		sess = session.Session(expires=365*24*60*60, cookie_path='/')
+		lastvisit = sess.data.get('lastvisit')
+		email= sess.data.get('user')
+		print sess.cookie
 
 		update_command = "UPDATE Users SET FirstName = '" + firstname + "', LastName = '" + lastname + "' "
 
@@ -94,7 +99,8 @@ def main():
 			own.append(row)
 	
 		sidebar = utilities.getSideBar(email,user[9], cur)
-		print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own)		
+		print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own)
+		sess.close()		
 	
 	except mdb.Error, e:
 	    if con:

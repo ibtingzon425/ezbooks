@@ -34,7 +34,7 @@
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
          
-		<form  id="form-user" method="post"  action="create-update-genre.py?email={{user[2]}}&action=save">
+		<form  id="form-user" method="post"  action="create-update-genre.py?action=save">
             <h2>
 		{% if genre != None %}
 			{{genreform[0]}}
@@ -64,7 +64,7 @@
 			{% if genre == None %}
 				<a class="btn btn-danger" href="home.py?email={{user[2]}}" role="button" >Cancel</a>
 			{% else %}
-				<a class="btn btn-danger" href="home.py?email={{user[2]}}&genre={{genreform[0]}}" role="button" >Cancel</a>
+				<a class="btn btn-danger" href="home.py?genre={{genreform[0]}}" role="button" >Cancel</a>
 			{% endif %} 
             </p>
 	    </form >

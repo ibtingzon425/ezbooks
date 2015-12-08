@@ -11,10 +11,15 @@ import utilities
 def main():
 
 	form = cgi.FieldStorage()
-	email = form.getvalue('email') #email of current user
+	#email = form.getvalue('email') #email of current user
 	book = form.getvalue('ISBN')
 
 	try:
+		sess = session.Session(expires=365*24*60*60, cookie_path='/')
+		lastvisit = sess.data.get('lastvisit')
+		email= sess.data.get('user')
+		print sess.cookie
+
 		# Checks if book already exists in cart
 		command = "SELECT * FROM UserCart WHERE Email=%s AND ISBN=%s"
 		cur = con.cursor()
@@ -83,6 +88,7 @@ def main():
 		sidebar = utilities.getSideBar(email,user[9], cur)
 		print display("shopping-cart.html").render(sidebar=sidebar,user=user,titles=titles,total=total)
 		print format
+		sess.close()
 
 	except mdb.Error, e:
 		if con:

@@ -1,18 +1,15 @@
 import sha, shelve, time, Cookie, os
 
-# Sessions Code from http://webpython.codepoint.net/cgi_session_class
-# Copyright 2006 Clodoaldo Pinto Neto cpn@codepoint.net
-# See Code License at: http://webpython.codepoint.net/code_license
-
 class Session(object):
 
    def __init__(self, expires=None, cookie_path=None):
-      string_cookie = os.environ.get('HTTP_COOKIE')
-      self.cookie = Cookie.Cookie()
+      string_cookie = os.environ.get('HTTP_COOKIE', '')
+      self.cookie = Cookie.SimpleCookie()
       self.cookie.load(string_cookie)
 
       if self.cookie.get('sid'):
          sid = self.cookie['sid'].value
+         # Clear session cookie from other cookies
          self.cookie.clear()
 
       else:
@@ -28,9 +25,10 @@ class Session(object):
       if not os.path.exists(session_dir):
          try:
             os.mkdir(session_dir, 02770)
-         # If the apache user can't create it create it manually
+         # If the apache user can't create it create it manualy
          except OSError, e:
-            errmsg =  """%s when trying to create the session directory. Create it as '%s' and chmod 777""" % (e.strerror, os.path.abspath(session_dir))
+            errmsg =  """%s when trying to create the session directory. \
+Create it as '%s'""" % (e.strerror, os.path.abspath(session_dir))
             raise OSError, errmsg
       self.data = shelve.open(session_dir + '/sess_' + sid, writeback=True)
       os.chmod(session_dir + '/sess_' + sid, 0660)
@@ -41,6 +39,9 @@ class Session(object):
 
       self.set_expires(expires)
 
+   def close(self):
+      self.data.close()
+
    def set_expires(self, expires=None):
       if expires == '':
          self.data['cookie']['expires'] = ''
@@ -48,12 +49,3 @@ class Session(object):
          self.data['cookie']['expires'] = expires
          
       self.cookie['sid']['expires'] = self.data['cookie']['expires']
-
-   def cookieValidationFailed(message):
-      print display("login.html").render()
-      print "<script type='text/javascript'> \
-                alert('Session Expired. Please log in. %s');\
-                </script>" % message 
-
-   def close(self):
-      self.data.close()

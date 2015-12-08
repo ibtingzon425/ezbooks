@@ -60,7 +60,7 @@ def getSideBar(email, isAdministrator, cur) :
                 cur.execute(command)
                 rows = cur.fetchall()
                 for row in rows:
-                        sidebar['books'] = sidebar['books'] + '<li><a href="comic-book-item.py?email=' + email + '&ISBN=' + str(row[0]) + '">'+ row[1] +'</a></li>'
+                        sidebar['books'] = sidebar['books'] + '<li><a href="comic-book-item.py?ISBN=' + str(row[0]) + '">'+ row[1] +'</a></li>'
 
 
 		# Get Genres
@@ -69,31 +69,30 @@ def getSideBar(email, isAdministrator, cur) :
                 cur.execute(command)
                 rows = cur.fetchall()
                 for row in rows:
-                        sidebar['genres'] = sidebar['genres'] + '<li><a href="home.py?email=' + email + '&genre=' + row[0] + '">'+ row[0] +'</a></li>'		
+                        sidebar['genres'] = sidebar['genres'] + '<li><a href="home.py?genre=' + row[0] + '">'+ row[0] +'</a></li>'		
 
 		# Get Illustrators
-		command = "select IllustratorId, IllustratorName from Illustrators order by IllustratorName"
+		command = "select IllustratorName from Illustrators order by IllustratorName"
                 cur.execute(command)
                 rows = cur.fetchall()
                 for row in rows:
-                        sidebar['illustrators'] = sidebar['illustrators'] + '<li><a href="illustrator-profile.py?email=' + email + '&illustrator=' + str(row[0]) + '">'+ row[1] +'</a></li>'
+                        sidebar['illustrators'] = sidebar['illustrators'] + '<li><a href="illustrator-profile.py?illustrator=' + str(row[0]) + '">'+ row[0] +'</a></li>'
 
 
 		# Get Writers
-		command = "select WriterId, WriterName from Writers order by WriterName"
+		command = "select WriterName from Writers order by WriterName"
                 cur.execute(command)
                 rows = cur.fetchall()
                 for row in rows:
-                        sidebar['writers'] = sidebar['writers'] + '<li><a href="writer-profile.py?email=' + email + '&writer=' + str(row[0]) + '">'+ row[1] +'</a></li>'
+                        sidebar['writers'] = sidebar['writers'] + '<li><a href="writer-profile.py?writer=' + str(row[0]) + '">'+ row[0] +'</a></li>'
 
 		# Get Users
 		command = "select Email, CONCAT(FirstName, ' ', LastName, ' (',  Email, ')')   from Users order by FirstName, LastName;"
 		cur.execute(command)
                 rows = cur.fetchall()
 		for row in rows:
-			sidebar['users'] = sidebar['users'] + '<li><a href="user-profile.py?email=' + email + '&user=' + row[0] + '">'+ row[1] +'</a></li>'
+			sidebar['users'] = sidebar['users'] + '<li><a href="user-profile.py?user=' + row[0] + '">'+ row[1] +'</a></li>'
 	
-
 	return sidebar;
 
 

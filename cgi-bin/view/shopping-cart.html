@@ -31,9 +31,9 @@ th {
 
                           {% for title in titles %}
                           <tr>
-                            <td><a href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}">{{title[0]}}</a></td>
-                            <td><a href="comic-book-item.py?email={{user[2]}}&ISBN={{title[0]}}">{{title[1]}}</a></td>
-                            <td><a href="writer-profile.py?email={{user[2]}}&writer={{title[4]}}">{{title[4]}}</a></td>
+                            <td><a href="comic-book-item.py?ISBN={{title[0]}}">{{title[0]}}</a></td>
+                            <td><a href="comic-book-item.py?ISBN={{title[0]}}">{{title[1]}}</a></td>
+                            <td><a href="writer-profile.py?writer={{title[4]}}">{{title[4]}}</a></td>
                             <td>
                             {% for format in title[3] %}
                             {{format[0]}} 
