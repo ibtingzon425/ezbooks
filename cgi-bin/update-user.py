@@ -31,6 +31,9 @@ def main():
 		lastvisit = sess.data.get('lastvisit')
 		email= sess.data.get('user')
 		print sess.cookie
+		
+		if email is None:
+			print "Location: login.py?redirect=1\r\n"
 
 		update_command = "UPDATE Users SET FirstName = '" + firstname + "', LastName = '" + lastname + "' "
 

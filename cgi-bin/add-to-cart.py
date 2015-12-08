@@ -20,6 +20,9 @@ def main():
 		email= sess.data.get('user')
 		print sess.cookie
 
+		if email is None:
+			print "Location: login.py?redirect=1\r\n"
+
 		# Checks if book already exists in cart
 		command = "SELECT * FROM UserCart WHERE Email=%s AND ISBN=%s"
 		cur = con.cursor()

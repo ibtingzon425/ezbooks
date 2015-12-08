@@ -22,6 +22,9 @@ def main():
 		cur.execute(command, (email, book))
 		book_ = cur.fetchone()
 
+		if email is None:
+			print "Location: login.py?redirect=1\r\n"
+
 		#Insert book into user's cart
 		if book_ != None:
 			command = "DELETE FROM UserCart WHERE Email=%s AND ISBN=%s"

@@ -21,6 +21,9 @@ def main():
 		email= sess.data.get('user')
 		print sess.cookie
 		
+		if email is None:
+			print "Location: login.py?redirect=1\r\n"
+		
 		books = []
 		command = "SELECT * from ComicBooks WHERE ISBN='" + ISBN + "'"
 		cur.execute(command)

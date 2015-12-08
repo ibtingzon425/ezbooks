@@ -7,13 +7,13 @@
                 <li><a href="user-profile.py?user={{user[2]}}">View Profile</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="user-profile.py?user={{user[2]}}&action=edit">Edit Profile</a></li>
-                <li><a href="login.py">Sign out</a></li>
+                <li><a href="logout.py">Sign out</a></li>
               </ul>
 </li>
 {% if user[9] == "N" %}
 <li><a href="shopping-cart.py">Shopping Cart</a></li>
 {% endif%}
-<li><a href="login.py">Log out</a></li>
+<li><a href="logout.py">Log out</a></li>
 </ul>
 <form class="navbar-form navbar-right" action="search.py" method="GET">
 <input type="hidden" name="email" class="form-control" value="{{user[2]}}" />
