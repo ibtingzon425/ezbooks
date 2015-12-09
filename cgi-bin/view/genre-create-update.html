@@ -1,7 +1,7 @@
 {% extends "sidebar.html" %}
 
 {% block form %}
-        <style>
+    <style>
             body {
                 padding-top: 70px;
                 background-color: #eee;
@@ -19,10 +19,14 @@
               border-top: 1px solid #ccc;
               margin: 1em 0;
               padding: 0; 
-          
-        </style>
-
-	<div class="col-xs-12 col-sm-9">
+          	}
+    </style>
+    <link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
+	<link type="text/css" href="view/css/jquery-ui.css" rel="stylesheet">
+	 
+    <div class="col-sm-9" style="overflow:visible;">
+    <div class="list-group-item" style="background-color:#222; color:#aaa; "> <h4>Create New Comic Genre </h4></div>
+    <div class="thumbnail" style="padding:50px; padding-top:20px; padding-bottom:20px; overflow: visible;">
 
 	{% if (user[9]=='Y') -%}
 	{%- if error -%}
@@ -35,22 +39,20 @@
           </p>
          
 		<form  id="form-user" method="post"  action="create-update-genre.py?action=save">
-            <h2>
+            <h3><strong>
 		{% if genre != None %}
 			{{genreform[0]}}
 			<input class="form-control" name="genre" type="hidden" value="{{genreform[0]}}" />
 		{% else %}
-		 	<input class="form-control" name="genrecreate" type="text" placeholder="Genre" value="{{genreform[0]}}"  required /> 
+		 	<input class="form-control" name="genrecreate" type="text" placeholder="Genre" value="{{genreform[0]}}" style="width:330px;"  required /> 
 		{% endif %}
-            </h2>
+            </strong></h3>
 	    <hr>
-            <h6><p class="lead">
-		<textarea class="form-control" name="genredesc" type="text" rows="3"   placeholder="Description" >{{genreform[1]}}</textarea>
+		<textarea class="form-control" name="genredesc" type="text" rows="3"  placeholder="Description" >{{genreform[1]}}</textarea>
 		<br/>
-		Associated Comic Books
-		<br/>
+		<p><strong>Associated Comic Books </strong> </p>
 		<select id="genre-books" name="genrebooks" multiple="multiple">
-    			{{bookitems}}
+    	 {{bookitems}}
 		</select>
 		<!-- Initialize the plugin: -->
 		<script type="text/javascript">
@@ -58,22 +60,23 @@
         			$('#genre-books').multiselect({includeSelectAllOption: true,enableFiltering: true});
     			});
 		</script>
-            <p></h6>
-	    <p>
-			<input class="btn btn-success" type="submit" value="Save"></input>
+		<br> <br>
+	    <p align="right">
+			<input class="btn btn-success" type="submit" value="Save" style="width:100px;"></input>
 			{% if genre == None %}
-				<a class="btn btn-danger" href="home.py?email={{user[2]}}" role="button" >Cancel</a>
+				<a class="btn btn-danger" href="home.py?" role="button" style="width:100px;">Cancel</a>
 			{% else %}
-				<a class="btn btn-danger" href="home.py?genre={{genreform[0]}}" role="button" >Cancel</a>
+				<a class="btn btn-danger" href="home.py?genre={{genreform[0]}}" role="button" style="width:100px;">Cancel</a>
 			{% endif %} 
-            </p>
+        </p>
 	    </form >
 	
 	{% else %}
 	<div class="panel panel-danger">
 		<div class="panel-body">You don't have permission to access this page!</div>
         </div>
-	{% endif %}
-	</div>        
+	{% endif %}  
+	</div>    
+	</div>  
     
 {% endblock %}

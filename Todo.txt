@@ -1,4 +1,4 @@
-- Sessions (subsequently, remove all email=<email> in links)
+- Sessions 				[DONE]
 - Book Profile 			[DONE]
 - Author Profile 		[DONE]
 - User Profile 			[DONE]
@@ -10,10 +10,10 @@
 	- Payment Page 		[DONE]
 - Populate Database (Around 50 - 100 entries if possible) [DONE]
 
-- Book Reviews / Comments Section
-
 - Admin Module
 	- Add Book
 	- Update Book Details
 	- Delete Book
+
+Create Error 404 Page
 

@@ -37,23 +37,22 @@ def getBookItems(selectedBooks, cur) :
 def getSideBar(email, isAdministrator, cur) :
 	sidebar = {'genres':[], 'publishers':[], 'users':'', 'writers':'', 'illustrators':'', 'books':''}
 
-	if isAdministrator == "N":
+	# Get Genres
+	command = "select Genre FROM Genres order by Genre"
+	cur.execute(command)
+	rows = cur.fetchall()
+	for row in rows:
+		if row[0] not in sidebar['genres']:
+			sidebar['genres'].append(row[0])
 
-		# Get Genres
-		command = "select Genre FROM Genres order by Genre"
-		cur.execute(command)
-		rows = cur.fetchall()
-		for row in rows:
-			if row[0] not in sidebar['genres']:
-				sidebar['genres'].append(row[0])
+	command = "select distinct Publisher from ComicBooks order by Publisher"
+	cur.execute(command)
+	rows = cur.fetchall()
+	for row in rows:
+		if row[0] not in sidebar['publishers']:
+			sidebar['publishers'].append(row[0])
 
-		command = "select distinct Publisher from ComicBooks order by Publisher"
-                cur.execute(command)
-                rows = cur.fetchall()
-                for row in rows:
-                        if row[0] not in sidebar['publishers']:
-                        	sidebar['publishers'].append(row[0])
-	else :
+	if isAdministrator == "Y":
 		# Get Books
                 sidebar['books'] = ''
                 command = "select ISBN, Concat(Title, ' (', ISBN, ')') From ComicBooks order by Title;"
@@ -64,12 +63,12 @@ def getSideBar(email, isAdministrator, cur) :
 
 
 		# Get Genres
-		sidebar['genres'] = '' 
+		sidebar['genres-dd'] = '' 
 		command = "select Genre FROM Genres order by Genre"
                 cur.execute(command)
                 rows = cur.fetchall()
                 for row in rows:
-                        sidebar['genres'] = sidebar['genres'] + '<li><a href="home.py?genre=' + row[0] + '">'+ row[0] +'</a></li>'		
+                        sidebar['genres-dd'] = sidebar['genres-dd'] + '<li><a href="home.py?genre=' + row[0] + '">'+ row[0] +'</a></li>'		
 
 		# Get Illustrators
 		command = "select IllustratorName from Illustrators order by IllustratorName"

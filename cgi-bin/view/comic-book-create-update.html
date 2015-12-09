@@ -1,0 +1,94 @@
+{% extends "sidebar.html" %}
+
+{% block form %}
+    <style>
+            body {
+              padding-top: 70px;
+              background-color: #eee;
+            }
+            .panel-body{
+                height: 300px;
+            }
+            .lead{
+                font-size: 17px;
+            }
+            hr {
+              display: block;
+              height: 1px;
+              border: 0;
+              border-top: 1px solid #ccc;
+              margin: 1em 0;
+              padding: 0; 
+            }
+    </style>
+    <link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
+    <link type="text/css" href="view/css/jquery-ui.css" rel="stylesheet">
+     
+    <div class="col-sm-9" style="overflow:visible;">
+    <div class="list-group-item" style="background-color:#222; color:#aaa; "> <h4>Create New Comic Book </h4></div>
+    <div class="thumbnail" style="padding:50px; padding-top:20px; padding-bottom:20px; overflow: visible;">
+
+    {% if (user[9]=='Y') -%}
+    {%- if error -%}
+        <div class="panel panel-danger" >
+                        <div>{{error}}</div>
+                </div>
+    {% endif %}
+        <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+         
+        <form  id="form-user" method="post"  action="create-update-comic-book.py?action=save">
+        <strong>ISBN</strong>
+        <h6><p class="lead">
+            {% if book != None %}
+            <input class="form-control" name="book" type="text" value="{{bookform[0]}}" />
+            {% else %}
+            <input class="form-control" name="bookcreate" type="text" placeholder="ISBN" value="{{bookform[0]}}" style="width:200px;"  required /> 
+            {% endif %}
+        </p></h6>
+        <p><strong>Title</strong> </p>
+        <h6><p class="lead">
+            {% if book != None %}
+            <input class="form-control" name="book" type="text" value="{{bookform[1]}}" />
+            {% else %}
+            <input class="form-control" name="bookcreate" type="text" placeholder="Title" value="{{bookform[1]}}" style="width:300px;"  required /> 
+            {% endif %}
+        </p></h6>
+        <strong>Description </strong> 
+        <h6><p class="lead">
+        <textarea class="form-control" name="bookdesc" type="text" rows="3" placeholder="Description" >{{bookform[2]}}</textarea>
+        </p></h6>
+        <p><strong>Format</strong> </p>
+        <h6><p class="lead">
+            {% if book != None %}
+            <input class="form-control" name="book" type="text" value="{{bookform[3]}}" />
+            {% else %}
+            <input class="form-control" name="bookcreate" type="text" placeholder="Format" value="{{bookform[3]}}" style="width:250px;"  required /> 
+            {% endif %}
+        </p></h6>
+        <p><strong>Length</strong> </p>
+        <h6><p class="lead">
+            {% if book != None %}
+            <input class="form-control" name="book" type="text" value="{{bookform[3]}}" />
+            {% else %}
+            <input class="form-control" name="bookcreate" type="text" placeholder="Length" value="{{bookform[3]}}" style="width:150px;"  required /> 
+            {% endif %}
+        </p></h6>
+        <p align="right">
+            <input class="btn btn-success" type="submit" value="Save" style="width:100px;"></input>
+            {% if book == None %}
+                <a class="btn btn-danger" href="home.py?" role="button" style="width:100px;">Cancel</a>
+            {% else %}
+                <a class="btn btn-danger" href="home.py?isbn={{bookform[0]}}" role="button" style="width:100px;">Cancel</a>
+            {% endif %} 
+        </p>
+        </form >
+    {% else %}
+    <div class="panel panel-danger">
+        <div class="panel-body">You don't have permission to access this page!</div>
+        </div>
+    {% endif %}  
+    </div>    
+    </div>  
+{% endblock %}

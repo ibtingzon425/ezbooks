@@ -15,13 +15,17 @@ a.morelink {
                 <div class="thumbnail">
                 	<div class="col-md-4 left-side">
                         <center>
-                        <img class="img-responsive" src={{book[5]}} style="width:200px;padding-top:30px;padding-bottom:20px;">
+                        <img class="img-responsive" src={{book[5]}} style="width:200px;padding-top:30px;padding-bottom:20px;">  
+                        {%- if user[9]=='Y' -%}         
+                        <a class="btn btn-danger" href="#" role="button">Edit Comic Book</a>
+                        {% endif %}
+                        {%- if user[9]=='N' -%}
                         <div class="btn-group dropup">
                         <div class="dropdown">
                                 <input type="hidden" id="book" name="book" class="form-control" value="{{book[1]}}">
                                 <input type="hidden" id="price" name="book" class="form-control" value="{{book[2]}}">
-				{%- if book_owned == True -%}
-				<a class="btn btn-primary" href="model/images/sample_comic.pdf" target="_blank" role="button">Download</a>
+				                {%- if book_owned == True -%}
+				                <a class="btn btn-primary" href="model/images/sample_comic.pdf" target="_blank" role="button">Download</a>
                                 {%- elif book_exists == False -%} 
                                 <form id="form" action="add-to-cart.py" method="POST">
                                 <input type="hidden" id="email" name="email" class="form-control" value="{{user[2]}}">
@@ -63,6 +67,7 @@ a.morelink {
                                 {% endif %} 
                           </div>
                         </div>
+                        {% endif %}
                     </center>
                     </div>
                     <div id="desc" class="col-md-8 right-side" style="padding-top:25px">

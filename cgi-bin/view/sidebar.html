@@ -12,8 +12,89 @@
     </script>
     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
 
-	<!-- Normal View -->          
-        {%if  user[9] == "N"  %}
+    <!-- Admin View -->
+    {%if  user[9] == "Y"  %}
+    <div class="list-group">
+          <div class="list-group-item" style="background-color:#222; color:#aaa; "> View
+          </div>
+
+          <div class="list-group-item">
+        <table>
+        <tr>
+        <td width="150 px">
+        <div class="dropdown" >
+                        <button class="btn btn-normal" type="button" data-toggle="dropdown">Comic Book
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                                {{sidebar['books']}}
+                        </ul>
+                </div>
+                <br/>
+        </td>
+        
+        <td>
+        <!-- Genres -->
+                <div class="dropdown" >
+                        <button class="btn btn-normal" type="button" data-toggle="dropdown">Genre
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                                {{sidebar['genres-dd']}}
+                        </ul>
+                </div>
+        <br/>
+        </td>
+        </tr>
+
+
+        <td width="150px">
+        <!-- Illustrators -->
+                <div class="dropdown" >
+                        <button class="btn btn-normal" type="button" data-toggle="dropdown">Illustrator
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                                {{sidebar['illustrators']}}
+                        </ul>
+                </div>
+                <br/>
+        </td>
+        <td>
+            <!-- Writers -->
+            <div class="dropdown" style="text-align:center">
+                        <button class="btn btn-normal" type="button" data-toggle="dropdown">Writer
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                                {{sidebar['writers']}}
+                        </ul>
+                </div>
+        <br/>
+        </td>
+        </tr>
+        <tr><td>
+        <!-- Users -->
+        <div class="dropdown">
+                        <button class="btn btn-normal" type="button" data-toggle="dropdown">User
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                                {{sidebar['users']}}
+                        </ul>
+                </div>
+        </td></tr>
+        </table>
+          </div>
+
+      <br/>
+      <div class="list-group">
+            <div class="list-group-item" style="background-color:#222; color:#aaa; ">Create New</div>
+        <a href="create-update-comic-book.py"   class="list-group-item">Comic Book</a>
+        <a href="create-update-genre.py"   class="list-group-item">Genre</a>        
+        <a href="#"   class="list-group-item">Writer</a>
+        <a href="#"   class="list-group-item">Illustrator</a>
+        <a href="user-profile.py?action=create" class="list-group-item">User</a>
+    </div>
+    </div>
+    
+    {% else %} 
+    <!-- Normal View -->      
         <div class="list-group">
             <div class="list-group-item" style="background-color:#222; color:#aaa; ">Browse By Genre</div>
 	    {% for genre in sidebar['genres'] %}
@@ -27,88 +108,6 @@
           <a href="home.py?publisher={{publisher}}" id="{{publisher}}" class="list-group-item">{{publisher}}</a>
           {% endfor %}	
         </div>
-
-	<!-- Admin View -->
-	{% else %}
-	<div class="list-group">
-          <div class="list-group-item" style="background-color:#222; color:#aaa; "> View
-          </div>
-
-          <div class="list-group-item">
- 		<table>
-		<tr>
-		<td width="150 px">
-		<div class="dropdown" >
-                        <button class="btn btn-normal" type="button" data-toggle="dropdown"">Comic Book
-                        <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                                {{sidebar['books']}}
-                        </ul>
-                </div>
-                <br/>
-		</td>
-		
-		<td>
-		<!-- Genres -->
-                <div class="dropdown" >
-                        <button class="btn btn-normal" type="button" data-toggle="dropdown"">Genre
-                        <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                                {{sidebar['genres']}}
-                        </ul>
-                </div>
-		<br/>
-		</td>
-		</tr>
-
-
-		<td width="150px">
-		<!-- Illustrators -->
-                <div class="dropdown" >
-                        <button class="btn btn-normal" type="button" data-toggle="dropdown"">Illustrator
-                        <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                                {{sidebar['illustrators']}}
-                        </ul>
-                </div>
-                <br/>
-		</td>
-		<td>
-	        <!-- Writers -->
-        	<div class="dropdown" style="text-align:center">
-                        <button class="btn btn-normal" type="button" data-toggle="dropdown">Writer
-                        <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                                {{sidebar['writers']}}
-                        </ul>
-                </div>
-		<br/>
-		</td>
-		</tr>
-		<tr><td>
-		<!-- Users -->
-		<div class="dropdown">
-                        <button class="btn btn-normal" type="button" data-toggle="dropdown">User
-                        <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                                {{sidebar['users']}}
-                        </ul>
-                </div>
-		</td></tr>
-		</table>
-          </div>
-
-	  <br/>
-	  <div class="list-group">
-            <div class="list-group-item" style="background-color:#222; color:#aaa; ">Create New (TO DO)</div>
-	    <a href="#"   class="list-group-item">Comic Book</a>
-	    <a href="create-update-genre.py?email=admin@ezcomics.com"   class="list-group-item">Genre</a>
-	    <a href="#"   class="list-group-item">Illustrator</a>
-	    <a href="user-profile.py?action=create" class="list-group-item">User</a>
-            <a href="#"   class="list-group-item">Writer</a>
-	</div>
-	</div>
-	{% endif %}
-
+    {% endif %} 
    </div>
 {% endblock %}

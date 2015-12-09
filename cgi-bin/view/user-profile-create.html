@@ -4,21 +4,17 @@
 	<link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
 	<link type="text/css" href="view/css/jquery-ui.css" rel="stylesheet">
 	 
-            <div class="col-md-9">
+    <div class="col-sm-9" style="overflow:visible;">
+    <div class="list-group-item" style="background-color:#222; color:#aaa; "> <h4>Create New User</h4></div>
 
-                {%- if (user[9]=='Y') -%}
+        {%- if (user[9]=='Y') -%}
 		{%- if error -%}
 		<div class="panel panel-danger">
                         <div class="panel-body">{{error}}</div>
                 </div>
 		{% endif %}
                 <div class="thumbnail">
-                	<div class="col-md-4 left-side">
-                        <center>
-                        <img class="img-responsive"  style="width:200px;padding-top:30px;padding-bottom:20px;">
-                        </center>
-                    </div>
-                    <div id="desc" class="col-md-8 right-side" style="padding-top:25px">
+                    <div id="desc" class="col-sm-11" style="padding:20px;padding-left:80px">
                         <header>  
                         <h4><strong>Create New User</strong></h4> 
                         </header>                        
@@ -26,29 +22,28 @@
 			<form  id="form-user" method="post" enctype="multipart/form-data" action="create-user.py?">			
 			<table>
 				<tr>
-                                        <td><p>Email:</p></td>
-                                        <td><p><input type="email"  name="user"   value="{{createform[0]}}"  required /> </p></td>
-                                </tr>
-                        	<tr>
+                    <td><p>Email:</p></td>
+                    <td><p><input type="email"  name="user"   value="{{createform[0]}}"  required /> </p></td>
+                </tr>
+                <tr>
 			  		<td><p>First Name:</p></td>
-                                        <td><p><input type="text"  name="first_name"  value="{{createform[1]}}" required /> </p></td>
+                    <td><p><input type="text"  name="first_name"  value="{{createform[1]}}" required /> </p></td>
 				</tr>
 				<tr>
 					<td><p>Last Name:</p></td>
-                                        <td><p><input type="text" name="last_name" value="{{createform[2]}}" required /> </p></td>
+                    <td><p><input type="text" name="last_name" value="{{createform[2]}}" required /> </p></td>
 				</tr>
 				<tr>
-                                        <td><p>Password:</p></td>
-                                        <td><p><input type="password" name="password" value="{{createform[3]}}" required />
-					   </p></td>
-                                </tr>
-                        	<tr>
-                                        <td><p>Country:</p></td>
-                                        <td><p>{{countryDropDown}}</p></td>
-                                </tr>
+                    <td><p>Password:</p></td>
+                    <td><p><input type="password" name="password" value="{{createform[3]}}" required /></p></td>
+                </tr>
+                <tr>
+                    <td><p>Country:</p></td>
+                    <td><p>{{countryDropDown}}</p></td>
+                </tr>
 				<tr>
-                                        <td><p>Birthdate:</p></td>
-                                        <td><p><input type="date" id="birth_date" name="birth_date" maxlength="10" size="8" value="{{createform[4]}}" ></p></td>
+                    <td><p>Birthdate:</p></td>
+                    <td><p><input type="date" id="birth_date" name="birth_date" maxlength="10" size="8" value="{{createform[4]}}" ></p></td>
 				</tr>
 				<tr>
 					<td><p>Image:</p></td>
@@ -64,18 +59,18 @@
 				</tr>
                         </table>
                         <br />
-			<p>
-				<input class="btn btn-success" type="submit" value="Save"></input>
-				<a class="btn btn-danger" href="home.py?" role="button" >Cancel</a> 
+			<p align = "right">
+				<input class="btn btn-success" type="submit" value="Save" style="width:100px;"></input>
+				<a class="btn btn-danger" href="home.py?" role="button" style="width:100px;">Cancel</a> 
                         </p>
 			</form >
 			<br />
                     </div>
                 </div>
+            </div>
                 {%- else -%}
-		<div class="panel panel-danger">
-			<div class="panel-body">You don't have permission to access this page!</div>
+		        <div class="panel panel-danger">
+			          <div class="panel-body">You don't have permission to access this page!</div>
                 </div>
                 {%- endif -%}
-            </div>
 {% endblock %}

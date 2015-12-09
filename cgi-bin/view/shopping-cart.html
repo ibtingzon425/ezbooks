@@ -15,11 +15,9 @@ th {
 </style>
 	<link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
             <div class="col-md-9">
+                <div class="list-group-item" style="background-color:#222; color:#aaa;"> <h4>EZComics Shopping Cart</h4></div>
                 <div class="thumbnail">
                     <div style="padding:40px">
-                        <header> <h4><strong>EzBooks Shopping Cart Checkout</strong></h4> </header>  
-                        <hr>
-                         <br>
                         <table border="1" style="width:100%">
                           <tr>
                             <th>ISBN</th>
@@ -53,7 +51,7 @@ th {
                             </tr>
                         </tfoot>
                         </table>
-                        <br> 
+                        <br> <br>
                         <div align="right"> <a class="btn btn-primary" href="home.py?email={{user[2]}}" role="button">Continue Shopping &raquo;</a> &nbsp;
                             {%- if total > 0 -%}
                             <a class="btn btn-success" href="checkout.py?email={{user[2]}}" role="button">Proceed to Payment &raquo;</a> 
