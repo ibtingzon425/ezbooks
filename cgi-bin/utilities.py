@@ -22,7 +22,7 @@ def generateCountryDropDown(selectedCountry):
 # Generates Book Items Select 
 def getBookItems(selectedBooks, cur) :
 	bookitems = ""
-	command = "select ISBN, Concat(Title, ' (', ISBN, ')') From ComicBooks order by Title;"
+	command = "SELECT ISBN, Concat(Title, ' (', ISBN, ')') From ComicBooks order by Title;"
 	cur.execute(command)
         rows = cur.fetchall()
         for row in rows:
@@ -32,6 +32,30 @@ def getBookItems(selectedBooks, cur) :
 			bookitems = bookitems + '<option value="' + row[0] + '">' + row[1] + '</option>'
 	return bookitems
 
+# Generates Writer Select 
+def getWriters(selectedWriters, cur) :
+	writers = ""
+	command = "SELECT WriterName From Writers order by WriterName;"
+	cur.execute(command)
+        rows = cur.fetchall()
+        for row in rows:
+		if row[0] in selectedWriters:
+			writers= writers + '<option value="' + row[0] + '" selected>' + row[0] + '</option>'
+		else :	
+			writers = writers + '<option value="' + row[0] + '">' + row[0] + '</option>'
+	return writers
+
+def getIllustrators(selectedIllustrators, cur) :
+	illustrators = ""
+	command = "SELECT IllustratorName From Illustrators order by IllustratorName;"
+	cur.execute(command)
+        rows = cur.fetchall()
+        for row in rows:
+		if row[0] in selectedIllustrators:
+			illustrators= illustrators + '<option value="' + row[0] + '" selected>' + row[0] + '</option>'
+		else :	
+			illustrators = illustrators + '<option value="' + row[0] + '">' + row[0] + '</option>'
+	return illustrators
 
 # Initializes Side Bar objects
 def getSideBar(email, isAdministrator, cur) :

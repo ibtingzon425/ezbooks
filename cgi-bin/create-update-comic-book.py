@@ -19,7 +19,12 @@ def main():
 	#email = form.getvalue('email')
 	action = form.getvalue('action')
 	desc = form.getvalue('desc')
-	create = form.getvalue('create')
+	format = form.getvalue('format')
+	length = form.getvalue('length')
+	publisher = form.getvalue('publisher')
+	datepub = form.getvalue('datepub')
+	price = form.getvalue('price')
+	awards = form.getvalue('awards')
 	isbn = form.getvalue('ISBN')
 
 	try:
@@ -38,30 +43,60 @@ def main():
                 user= cur.fetchone()
 
 		if action == None :
+			bookform = []
 			if isbn != None :
+				bookform = []
 				command = "SELECT * FROM  ComicBooks where ISBN='" + isbn + "'";
 				cur.execute(command)
-				bookform = cur.fetchone()
+				book = cur.fetchone()
+				for i in book:
+					bookform.append(i)
 
-				command = "SELECT ISBN from ComicBooks WHERE ISBN='" + isbn + "' order by Title"
+				awards = []
+				command = "SELECT Award from LiteraryAwards WHERE ISBN='" + isbn + "'"
+				cur.execute(command)
+				award = cur.fetchall()
+				for i in range(len(award)):
+					awards.append(award[i][0])
+				bookform.append(awards)
+
+				command = "SELECT WriterName from BookWriter WHERE ISBN='" + isbn + "'"
 				cur.execute(command)
 				rows = cur.fetchall()
 
-				titles = []
+				writers_= []
 				for row in rows:
-					titles.append(row[0])
+					writers_.append(row[0])
+				writers = utilities.getWriters(writers_, cur)
 
-				bookitems = utilities.getBookItems(titles, cur)
+				command = "SELECT IllustratorName from BookIllustrator WHERE ISBN='" + isbn + "'"
+				cur.execute(command)
+				rows = cur.fetchall()
+
+				illustrators_= []
+				for row in rows:
+					illustrators_.append(row[0])
+				illustrators = utilities.getIllustrators(illustrators_, cur)
+
+				command = "SELECT Genre from ComicBooks NATURAL JOIN BookGenre WHERE ISBN ='" + book[0] + "'"
+				cur.execute(command)
+				rows = cur.fetchall()
+				genres_= []
+				for row in rows:
+					genres_.append(row[0])
+				genres = utilities.getGenres(genres_, cur)
+
 			else :
-				bookform = None
-        			bookitems = utilities.getBookItems([], cur)	
+				writers = utilities.getWriters([], cur)	
+				illustrators = utilities.getIllustrators([], cur)
+				genres = utilities.getGenres([], cur)
 
 			sidebar = utilities.getSideBar(email, user[9], cur)
-			print display("comic-book-create-update.html").render(user=user,sidebar=sidebar,book=isbn,bookform=bookform,bookitems=bookitems)
+			print display("comic-book-create-update.html").render(user=user,sidebar=sidebar,book=isbn,bookform=bookform,genres=genres,writers=writers,illustrators=illustrators)
 			return
 
-		else :
-			# Update
+		else:
+			# Update book attributes
 			if isbn != None :
 				update_command = "UPDATE ComicBooks SET "
 				
@@ -76,17 +111,15 @@ def main():
 
 				command = "DELETE FROM ComicBooks WHERE ISBN = '"  + isbn + "'"
 				cur.execute(command)
-
-				
-                        	command = "SELECT * from ComicBooks NATURAL JOIN Bookbook WHERE ISBN ='" + isbn + "'"
-                        	cur.execute(command)
-                        	rows = cur.fetchall()
-                        	titles = []
-                        	for row in rows:
-                                	titles.append(row)
-
-                        	sidebar = utilities.getSideBar(email, user[9], cur)
-                        	print display("home.html").render(user=user,titles=titles,sidebar=sidebar,book=book,bookdesc=bookdesc,search=' ')
+				command = "SELECT * from ComicBooks WHERE ISBN ='" + isbn + "'"
+				cur.execute(command)
+				rows = cur.fetchall()
+				titles = []
+				for row in rows:
+					titles.append(row)
+				sidebar = utilities.getSideBar(email, user[9], cur)
+				print display("home.html").render(user=user,titles=titles,sidebar=sidebar,book=book,bookdesc=bookdesc,search=' ')
+			
 			else :
 				# Check if book exists
 				command = "SELECT ISBN from ComicBooks where ISBN = '" + isbn + "'"
@@ -98,17 +131,18 @@ def main():
 					bookform.append(create)
 					bookform.append(desc)
 					sidebar = utilities.getSideBar(email, user[9], cur)
-					bookitems = utilities.getBookItems(bookbooks, cur)
+					writers = utilities.getWriters([], cur)
 					error = "Comic book " + create + " already exists! Provide another comic book."
 					sidebar = utilities.getSideBar(email, user[9], cur)
-					print display("comic-book-create-update.html").render(user=user,sidebar=sidebar,book=book,bookform=bookform,bookitems=bookitems,error=error)
+					print display("comic-book-create-update.html").render(user=user,sidebar=sidebar,book=book,bookform=bookform,writers=writers,error=error)
 				else :
-					insert_command = "INSERT INTO ComicBooks(ISBN, Description) VALUES ('" + create + "','" + desc + "') "
+					insert_command = "INSERT INTO ComicBooks(ISBN, Description) VALUES ('" + create + "','" + desc + "') \
+										"
 					cur.execute(insert_command)
 
 					book = bookcreate 			 
 					command = "SELECT * from ComicBooks  WHERE ISBN='" + isbn + "'"
-                                	cur.execute(command)
+					cur.execute(command)
                                 	rows = cur.fetchall()
                                 	titles = []
                                 	for row in rows:
