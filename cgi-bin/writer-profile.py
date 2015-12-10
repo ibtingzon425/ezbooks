@@ -13,6 +13,7 @@ def main():
 	
 	writer= form.getvalue('writer') 
 	#email = form.getvalue('email') #email of current user
+	action = form.getvalue('action') # action 
 
 	try:
 		cur = con.cursor()
@@ -29,28 +30,34 @@ def main():
 		cur.execute(command)
 		user_= cur.fetchone() #
 
-		command = "SELECT * from Writers WHERE WriterName='" + writer + "'"
-		cur.execute(command)
-		writer_ = cur.fetchone()
+		if action != 'create' :
+			command = "SELECT * from Writers WHERE WriterName='" + writer + "'"
+			cur.execute(command)
+			writer_ = cur.fetchone()
 
-		command = "SELECT ISBN, Title, Price, Image from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE WriterName='" + writer + "'"
+			command = "SELECT ISBN, Title, Price, Image from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE WriterName='" + writer + "'"
 		
-		cur.execute(command)
-		rows = cur.fetchall()
-		titles = []
-		for row in rows:
-			titles.append(row)
+			cur.execute(command)
+			rows = cur.fetchall()
+			titles = []
+			for row in rows:
+				titles.append(row)
 
-		command = "SELECT Genre from ComicBooks NATURAL JOIN BookGenre NATURAL JOIN BookWriter WHERE WriterName='" + writer + "'"
-		cur.execute(command)
-		genres = cur.fetchall()
-		genres_ = []
-		for genre in genres:
-			if genre not in genres_:
-				genres_.append(genre)
+			command = "SELECT Genre from ComicBooks NATURAL JOIN BookGenre NATURAL JOIN BookWriter WHERE WriterName='" + writer + "'"
+			cur.execute(command)
+			genres = cur.fetchall()
+			genres_ = []
+			for genre in genres:
+				if genre not in genres_:
+					genres_.append(genre)
 
 		sidebar = utilities.getSideBar(email, user_[9], cur)
-		print display("writer-profile.html").render(sidebar=sidebar,user=user_,writer=writer_,titles=titles,genres=genres_)
+		if action == 'create' :
+			countryDropDown = utilities.generateCountryDropDown(None)
+			bookitems = utilities.getBookItems([], cur)
+			print display("writer-profile-create.html").render(user=user_,createform=None,sidebar=sidebar,bookitems=bookitems,countryDropDown=countryDropDown)
+		else :
+			print display("writer-profile.html").render(sidebar=sidebar,user=user_,writer=writer_,titles=titles,genres=genres_)
 		sess.close()
 		
 	except mdb.Error, e:

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 
-allowedCountries = ['Canada', 'England', 'France', 'Japan', 'Philippines', 'Singapore', 'United States']
+allowedCountries = ['Canada',  'France', 'Japan', 'Philippines', 'Singapore', 'United Kingdom', 'United States']
 
 # Generates the HTML Country Drop Down Element
 def generateCountryDropDown(selectedCountry):

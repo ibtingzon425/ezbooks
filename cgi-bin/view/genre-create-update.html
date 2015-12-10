@@ -25,7 +25,9 @@
 	<link type="text/css" href="view/css/jquery-ui.css" rel="stylesheet">
 	 
     <div class="col-sm-9" style="overflow:visible;">
-    <div class="list-group-item" style="background-color:#222; color:#aaa; "> <h4>Create New Comic Genre </h4></div>
+    {% if genre == None %}
+	<div class="list-group-item" style="background-color:#222; color:#aaa; "> <h4>Create New Comic Genre </h4></div>
+    {% endif %}
     <div class="thumbnail" style="padding:50px; padding-top:20px; padding-bottom:20px; overflow: visible;">
 
 	{% if (user[9]=='Y') -%}
