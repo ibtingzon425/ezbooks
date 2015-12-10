@@ -79,14 +79,14 @@ def main():
                         	if fileitem.file :
                                 	extension = os.path.splitext(fileitem.filename)[1]
                                 	if extension != '' :
-                                        	fout = file ("model/users/" +  email + extension , 'wb')
+                                        	fout = file ("model/users/" +  userprof_form + extension , 'wb')
                                         	while 1:
                                                 	chunk = fileitem.file.read(100000)
                                                 	if not chunk: break
                                                 	fout.write(chunk)
                                         	fout.close()
                                         	insert_command_1 = insert_command_1 + ", Image " 
-						insert_command_2 = insert_command_2 + ", 'model/users/" +  email + extension  + "' "
+						insert_command_2 = insert_command_2 + ", 'model/users/" +  userprof_form + extension  + "' "
 
 
 			insert_command_1 = insert_command_1 + ") "
