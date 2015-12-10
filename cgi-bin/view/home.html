@@ -44,7 +44,18 @@
             {% elif genre != None %}
             <h2>{{genre}}
         		{% if user[9] == "Y" %}
-        	    	<a class="btn btn-sm btn-primary" href="create-update-genre.py?genre={{genre}}" role="button" style="float:right">Edit Genre</a>
+			<div style="float:right">
+        	    		<a class="btn btn-sm btn-primary" href="create-update-genre.py?genre={{genre}}" role="button">Edit Genre</a>
+				<a class="btn btn-sm btn-danger" role="button" onclick="confirmDelete('{{genre}}')">Delete</a>
+				<a id="continue-deletion" style="display:none" href="delete-genre.py?genre={{genre}}"></a>
+					<script>
+						function confirmDelete(genre) {
+							if (confirm('Are you sure you want to delete genre ' + genre + '?')) {
+								document.getElementById("continue-deletion").click()
+							}
+						}
+					</script>
+			</div>
         		{% endif %}
             </h2>
 	    <hr>

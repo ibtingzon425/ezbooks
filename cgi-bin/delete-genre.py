@@ -50,7 +50,7 @@ def main():
 		
 
 		sidebar = utilities.getSideBar(email, user[9], cur)
-		successMsg = "Genre '" + genre + "' has been deleted."
+		successMsg = "<strong>Success:</strong> Genre '" + genre + "' has been deleted."
 		print display("home.html").render(user=user,titles=titles,sidebar=sidebar,search=' ',genre=None,publisher=None, success=successMsg)
 
 	except mdb.Error, e:
@@ -75,7 +75,7 @@ def main():
 
             #print display("home.html").render(user=user,sidebar=sidebar,error=e.args[1])
 	    if 'FOREIGN KEY' in e.args[1] :
-		errMsg = 'Foreign key constraint violated. Make sure to remove child records first.'
+		errMsg = '<strong>Database Error:</strong> Foreign key constraint violated. Make sure to remove child records first.'
 	    else : 
 	    	errMsg = e.args[1]
             print display("home.html").render(user=user,titles=titles,sidebar=sidebar,genre=genre_[0],genredesc=genre_[1],search=' ',publisher=None,error=errMsg)
