@@ -55,7 +55,7 @@ def main():
 		cur.execute(command)
 		user= cur.fetchone() 
 
-		command = "SELECT ISBN, Title, Price from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
+		command = "SELECT ISBN, Title, Price, Format from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
 		
 		cur.execute(command)
 		rows = cur.fetchall()
@@ -66,10 +66,6 @@ def main():
 		titles = []
 		total = 0
 		for title in titles_temp:
-			command = "SELECT Format from BookFormat NATURAL JOIN ComicBooks NATURAL JOIN UserCart WHERE ISBN='" + title[0] + "'"
-			cur.execute(command)
-			format = cur.fetchall()
-			title = title + (format,)
 
 			command = "SELECT WriterName from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE ISBN='" + title[0] + "'"
 			cur.execute(command)

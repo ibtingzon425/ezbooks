@@ -17,11 +17,10 @@ def main():
 	form = cgi.FieldStorage()
 	
 	#email = form.getvalue('email')
-	book = form.getvalue('book')
 	action = form.getvalue('action')
 	desc = form.getvalue('desc')
 	create = form.getvalue('create')
-	isbn = form.getlist('isbn')
+	isbn = form.getvalue('ISBN')
 
 	try:
 		cur = con.cursor()
@@ -39,12 +38,11 @@ def main():
                 user= cur.fetchone()
 
 		if action == None :
-			if book != None :
+			if isbn != None :
 				command = "SELECT * FROM  ComicBooks where ISBN='" + isbn + "'";
 				cur.execute(command)
 				bookform = cur.fetchone()
 
-				# Get books associated with book
 				command = "SELECT ISBN from ComicBooks WHERE ISBN='" + isbn + "' order by Title"
 				cur.execute(command)
 				rows = cur.fetchall()
@@ -59,18 +57,18 @@ def main():
         			bookitems = utilities.getBookItems([], cur)	
 
 			sidebar = utilities.getSideBar(email, user[9], cur)
-			print display("comic-book-create-update.html").render(user=user,sidebar=sidebar,book=book,bookform=bookform,bookitems=bookitems)
+			print display("comic-book-create-update.html").render(user=user,sidebar=sidebar,book=isbn,bookform=bookform,bookitems=bookitems)
 			return
 
 		else :
 			# Update
-			if book != None :
-				update_command = "UPDATE books SET "
+			if isbn != None :
+				update_command = "UPDATE ComicBooks SET "
 				
 				if bookdesc == None:
 					update_command = update_command + " Description = NULL "
 				else :
-					update_command = update_command + " Description = '" +desc + "' "
+					update_command = update_command + " Description = '" + desc + "' "
 				
 				update_command =  update_command + " WHERE ISBN = '" + isbn +  "'"
 				cur.execute(update_command)

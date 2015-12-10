@@ -31,14 +31,6 @@ def main():
 		for i in range(len(book)):
 			books.append(book[i])
 
-		formats = []
-		command = "SELECT Format from BookFormat WHERE ISBN='" + ISBN + "'"
-		cur.execute(command)
-		format = cur.fetchall()
-		for i in range(len(format)):
-			formats.append(format[i][0])
-		books.append(formats)
-
 		awards = []
 		command = "SELECT Award from LiteraryAwards WHERE ISBN='" + ISBN + "'"
 		cur.execute(command)
@@ -81,6 +73,7 @@ def main():
 		
 		sidebar = utilities.getSideBar(email,user[9], cur)
 		print display("comic-book-item.html").render(book=books,user=user,sidebar=sidebar,writers=writers,illustrators=illustrators,genres=genres,book_exists=book_exists,book_owned=book_owned)
+		#print books
 		sess.close()
 		
 	except mdb.Error, e:

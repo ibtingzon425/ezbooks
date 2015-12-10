@@ -42,7 +42,7 @@
         <strong>ISBN</strong>
         <h6><p class="lead">
             {% if book != None %}
-            <input class="form-control" name="book" type="text" value="{{bookform[0]}}" />
+            <input class="form-control" name="book" type="text" value="{{bookform[0]}}" style="width:200px;"/>
             {% else %}
             <input class="form-control" name="bookcreate" type="text" placeholder="ISBN" value="{{bookform[0]}}" style="width:200px;"  required /> 
             {% endif %}
@@ -50,32 +50,40 @@
         <p><strong>Title</strong> </p>
         <h6><p class="lead">
             {% if book != None %}
-            <input class="form-control" name="book" type="text" value="{{bookform[1]}}" />
+            <input class="form-control" name="book" type="text" value="{{bookform[1]}}" style="width:350px;"/>
             {% else %}
-            <input class="form-control" name="bookcreate" type="text" placeholder="Title" value="{{bookform[1]}}" style="width:300px;"  required /> 
+            <input class="form-control" name="bookcreate" type="text" placeholder="Title" value="{{bookform[1]}}" style="width:350px;"  required /> 
             {% endif %}
         </p></h6>
-        <strong>Description </strong> 
+        <p><strong>Publisher</strong> </p>
         <h6><p class="lead">
-        <textarea class="form-control" name="bookdesc" type="text" rows="3" placeholder="Description" >{{bookform[2]}}</textarea>
+            {% if book != None %}
+            <input class="form-control" name="book" type="text" value="{{bookform[3]}}" style="width:350px;"/>
+            {% else %}
+            <input class="form-control" name="bookcreate" type="text" placeholder="Publisher" value="{{bookform[3]}}" style="width:350px;"  required /> 
+            {% endif %}
         </p></h6>
         <p><strong>Format</strong> </p>
         <h6><p class="lead">
             {% if book != None %}
-            <input class="form-control" name="book" type="text" value="{{bookform[3]}}" />
+            <input class="form-control" name="book" type="text" value="{{bookform[8]}}" style="width:350px;"/>
             {% else %}
-            <input class="form-control" name="bookcreate" type="text" placeholder="Format" value="{{bookform[3]}}" style="width:250px;"  required /> 
+            <input class="form-control" name="bookcreate" type="text" placeholder="Format" value="{{bookform[8]}}" style="width:350px;"  required /> 
             {% endif %}
         </p></h6>
         <p><strong>Length</strong> </p>
         <h6><p class="lead">
             {% if book != None %}
-            <input class="form-control" name="book" type="text" value="{{bookform[3]}}" />
+            <input class="form-control" name="book" type="text" value="{{bookform[7]}}" style="width:350px;"/>
             {% else %}
-            <input class="form-control" name="bookcreate" type="text" placeholder="Length" value="{{bookform[3]}}" style="width:150px;"  required /> 
+            <input class="form-control" name="bookcreate" type="text" placeholder="Length" value="{{bookform[7]}}" style="width:350px;"  required /> 
             {% endif %}
         </p></h6>
-        <p align="right">
+        <strong>Description </strong> 
+        <h6><p class="lead">
+        <textarea class="form-control" name="bookdesc" type="text" rows="3" placeholder="Description" style="width:100%;height:150px;">{{bookform[4]}}</textarea>
+        </p></h6>
+        <p class="lead" align="right">
             <input class="btn btn-success" type="submit" value="Save" style="width:100px;"></input>
             {% if book == None %}
                 <a class="btn btn-danger" href="home.py?" role="button" style="width:100px;">Cancel</a>
