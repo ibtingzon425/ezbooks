@@ -9,8 +9,8 @@
 
         {%- if (user[9]=='Y') -%}
 		{%- if error -%}
-		<div class="panel panel-danger">
-                        <div class="panel-body">{{error}}</div>
+		<div class="alert alert-danger">
+                        {{error}}
                 </div>
 		{% endif %}
                 <div class="thumbnail">
@@ -69,8 +69,8 @@
                 </div>
             </div>
                 {%- else -%}
-		        <div class="panel panel-danger">
-			          <div class="panel-body">You don't have permission to access this page!</div>
+		        <div class="alert alert-danger">
+			         <strong>Permission Error:</strong> You don't have permission to access this page!
                 </div>
                 {%- endif -%}
 {% endblock %}

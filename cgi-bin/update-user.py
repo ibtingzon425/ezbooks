@@ -102,7 +102,8 @@ def main():
 			own.append(row)
 	
 		sidebar = utilities.getSideBar(email,user[9], cur)
-		print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own)
+		successmsg = '<strong>Success:</strong> User Profile has been updated.'
+		print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own,success=successmsg)
 		sess.close()		
 	
 	except mdb.Error, e:

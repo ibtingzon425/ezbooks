@@ -95,7 +95,8 @@ def main():
                                 	titles.append(row)
 
                         	sidebar = utilities.getSideBar(email, user[9], cur)
-                        	print display("home.html").render(user=user,titles=titles,sidebar=sidebar,genre=genre,genredesc=genredesc,search=' ')
+				success = '<strong>Success: </strong> Genre has been updated.'
+                        	print display("home.html").render(user=user,titles=titles,sidebar=sidebar,genre=genre,genredesc=genredesc,search=' ',success=success)
 			else :
 				# Check if genre exists
 				command = "SELECT Genre from Genres where Genre = '" + genrecreate + "'"
@@ -108,7 +109,7 @@ def main():
 					genreform.append(genredesc)
 					sidebar = utilities.getSideBar(email, user[9], cur)
 					bookitems = utilities.getBookItems(genrebooks, cur)
-					error = "Genre " + genrecreate + " already exists! Provide another genre name."
+					error = "<strong>Database Error:</strong>  Genre " + genrecreate + " already exists! Provide another genre name."
 					sidebar = utilities.getSideBar(email, user[9], cur)
 					print display("genre-create-update.html").render(user=user,sidebar=sidebar,genre=genre,genreform=genreform,bookitems=bookitems,error=error)
 				else :
@@ -130,7 +131,8 @@ def main():
                                         	titles.append(row)
 
                                 	sidebar = utilities.getSideBar(email, user[9], cur)
-                                	print display("home.html").render(user=user,titles=titles,sidebar=sidebar,genre=genre,genredesc=genredesc,search=' ')			
+					success = '<strong>Success: </strong> Genre '  + genrecreate + ' has been created.'
+                                	print display("home.html").render(user=user,titles=titles,sidebar=sidebar,genre=genre,genredesc=genredesc,search=' ',success=success)			
 
 	except mdb.Error, e:
 	    if con:

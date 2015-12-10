@@ -53,7 +53,7 @@ def main():
 			createform.append(birthdate)
 			createform.append(is_administrator)
 
-			error = 'User with email ' + userprof_form + ' already exists.' 
+			error = '<strong>Database Error:</strong> User with email ' + userprof_form + ' already exists.' 
                         countryDropDown = utilities.generateCountryDropDown(country)	
 			print display("user-profile-create.html").render(user=user,createform=createform,sidebar=sidebar,countryDropDown=countryDropDown,error=error)
 		else :
@@ -117,7 +117,8 @@ def main():
                         	own.append(row)
 
                 	sidebar = utilities.getSideBar(email,user[9], cur)
-                	print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own)			
+			successmsg = '<strong>Success:</strong> User has been created.'
+                	print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own,success=successmsg)			
                 	sess.close()
 	except mdb.Error, e:
 	    if con:

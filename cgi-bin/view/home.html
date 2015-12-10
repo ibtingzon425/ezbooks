@@ -26,6 +26,16 @@
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
+            {%- if error -%}
+                        <div class="alert alert-danger">
+                                {{error}}
+                        </div>
+            {%- elif success -%}
+                        <div class="alert alert-success">
+                                {{success}}
+                        </div>
+            {% endif %}
+
             {%- if genre == None and search == ' ' and publisher == None -%}
             <h2>Hello, {{user[0]}} {{user[1]}}.</h2>
             <hr>

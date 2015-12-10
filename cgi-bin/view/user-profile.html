@@ -3,6 +3,15 @@
 {% block form %}
 	<link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
             <div class="col-md-9">
+		{%- if error -%}
+                	<div class="alert alert-danger">
+                        	{{error}}
+                	</div>
+		{%- elif success -%}
+			<div class="alert alert-success">
+                        	{{success}}
+                	</div>
+                {% endif %}
                 <div class="thumbnail">
                 	<div class="col-md-4 left-side">
                         <center>
