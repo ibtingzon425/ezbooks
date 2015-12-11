@@ -36,7 +36,7 @@
                         <br/>
                     </div>
                 </div>
-
+                {%- if userprof[9]=="N" -%}
                 <br>
                 <h4><strong>{{userprof[0]}} {{userprof[1]}}'s eBook Collection</strong></h4> 
                 <hr>
@@ -65,7 +65,7 @@
             {% endfor %}
           </div><!--/row-->
           {% endif %}
-
+              
                 <br>
                 <h4><strong>{{userprof[0]}} {{userprof[1]}}'s Shopping Cart </strong>
 		            {%- if userprof[2] == user[2] -%}
@@ -94,6 +94,8 @@
             {% endfor %}
           </div><!--/row-->
           {% endif %}
+          {% endif %}
+
 
           
 

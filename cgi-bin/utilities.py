@@ -57,6 +57,18 @@ def getIllustrators(selectedIllustrators, cur) :
 			illustrators = illustrators + '<option value="' + row[0] + '">' + row[0] + '</option>'
 	return illustrators
 
+def getGenres(selectedGenre, cur) :
+	genre = ""
+	command = "SELECT Genre From Genres order by Genre;"
+	cur.execute(command)
+        rows = cur.fetchall()
+        for row in rows:
+		if row[0] in selectedGenre:
+			genre= genre + '<option value="' + row[0] + '" selected>' + row[0] + '</option>'
+		else :	
+			genre = genre + '<option value="' + row[0] + '">' + row[0] + '</option>'
+	return genre
+
 # Initializes Side Bar objects
 def getSideBar(email, isAdministrator, cur) :
 	sidebar = {'genres':[], 'publishers':[], 'users':'', 'writers':'', 'illustrators':'', 'books':''}

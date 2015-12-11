@@ -18,7 +18,8 @@ def main():
 	
 	#email = form.getvalue('email')
 	action = form.getvalue('action')
-	desc = form.getvalue('desc')
+	title = form.getvalue('title')
+	desc = form.getvalue('bookdesc')
 	format = form.getvalue('format')
 	length = form.getvalue('length')
 	publisher = form.getvalue('publisher')
@@ -92,33 +93,27 @@ def main():
 				genres = utilities.getGenres([], cur)
 
 			sidebar = utilities.getSideBar(email, user[9], cur)
-			print display("comic-book-create-update.html").render(user=user,sidebar=sidebar,book=isbn,bookform=bookform,genres=genres,writers=writers,illustrators=illustrators)
+			print display("comic-book-create-update.html").render(user=user,sidebar=sidebar,bookform=bookform,genres=genres,writers=writers,illustrators=illustrators)
 			return
 
 		else:
 			# Update book attributes
 			if isbn != None :
-				update_command = "UPDATE ComicBooks SET "
-				
-				if bookdesc == None:
-					update_command = update_command + " Description = NULL "
-				else :
-					update_command = update_command + " Description = '" + desc + "' "
-				
-				update_command =  update_command + " WHERE ISBN = '" + isbn +  "'"
-				cur.execute(update_command)
+				update_command = "UPDATE ComicBooks SET Description = '" + desc + "' WHERE ISBN = '" + isbn +  "'"
+				cur.execute(update_command) # This doesn't work? 
 				
 
-				command = "DELETE FROM ComicBooks WHERE ISBN = '"  + isbn + "'"
-				cur.execute(command)
-				command = "SELECT * from ComicBooks WHERE ISBN ='" + isbn + "'"
+				#command = "DELETE FROM ComicBooks WHERE ISBN = '"  + isbn + "'"
+				#cur.execute(command)
+				command = "SELECT * from ComicBooks WHERE ISBN = '" + isbn + "'"
 				cur.execute(command)
 				rows = cur.fetchall()
 				titles = []
 				for row in rows:
 					titles.append(row)
 				sidebar = utilities.getSideBar(email, user[9], cur)
-				print display("home.html").render(user=user,titles=titles,sidebar=sidebar,book=book,bookdesc=bookdesc,search=' ')
+				print display("home.html").render(user=user,titles=titles,sidebar=sidebar,search=' ')
+				print update_command
 			
 			else :
 				# Check if book exists
@@ -143,13 +138,13 @@ def main():
 					book = bookcreate 			 
 					command = "SELECT * from ComicBooks  WHERE ISBN='" + isbn + "'"
 					cur.execute(command)
-                                	rows = cur.fetchall()
-                                	titles = []
-                                	for row in rows:
-                                        	titles.append(row)
+					rows = cur.fetchall()
+					titles = []
+					for row in rows:
+						titles.append(row)
 
-                                	sidebar = utilities.getSideBar(email, user[9], cur)
-                                	print display("home.html").render(user=user,titles=titles,sidebar=sidebar,book=book,bookdesc=bookdesc,search=' ')			
+					sidebar = utilities.getSideBar(email, user[9], cur)
+					print display("home.html").render(user=user,titles=titles,sidebar=sidebar,book=book,bookdesc=bookdesc,search=' ')			
 
 	except mdb.Error, e:
 	    if con:

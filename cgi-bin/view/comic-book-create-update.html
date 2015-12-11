@@ -38,13 +38,13 @@
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
          
-        <form  id="form-user" method="post"  action="create-update-comic-book.py?action=save">
+        <form  id="form-user" method="POST"  action="create-update-comic-book.py?action=save">
         <strong>ISBN</strong>
         <h6><p class="lead">
             {% if book != None %}
             <input class="form-control" name="ISBN" type="text" value="{{bookform[0]}}" style="width:200px;"/>
             {% else %}
-            <input class="form-control" name="ISBN" type="text" placeholder="ISBN" value="{{bookform[0]}}" style="width:200px;"  required /> 
+            <input class="form-control" name="ISBN" type="text" placeholder="ISBN" style="width:200px;"  required /> 
             {% endif %}
         </p></h6>
         <p><strong>Title</strong> </p>
@@ -112,7 +112,7 @@
             {% if book != None %}
             <input class="form-control" name="datepub" type="text" value="{{bookform[6]}}" style="width:350px;"/>
             {% else %}
-            <input class="form-control" name="datepub" type="text" placeholder="Publisher" value="{{bookform[6]}}" style="width:350px;"  required /> 
+            <input class="form-control" name="datepub" type="text" placeholder="Date Published" value="{{bookform[6]}}" style="width:350px;"  required /> 
             {% endif %}
         </p></h6>
         <p><strong>Format</strong> </p>
@@ -139,7 +139,7 @@
         <br>
         <strong>Description </strong> 
         <h6><p class="lead">
-        <textarea class="form-control" name="desc" type="text" rows="3" placeholder="Description" style="width:100%;height:150px;">{{bookform[4]}}</textarea>
+        <textarea class="form-control" name="bookdesc" type="text" rows="3" placeholder="Description" style="width:100%;height:150px;">{{bookform[4]}}</textarea>
         </p></h6>
         <p class="lead" align="right">
             <input class="btn btn-success" type="submit" value="Save" style="width:100px;"></input>
