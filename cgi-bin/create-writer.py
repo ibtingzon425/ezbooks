@@ -71,7 +71,7 @@ def main():
 				insert_command_2 = insert_command_2 + " ,'" + birthdate + "' "
 
 			# Gender
-			if gender != 'Unknown' :
+			if gender is not None :
 				insert_command_1 = insert_command_1 + ", Gender "
 				insert_command_2 = insert_command_2 + " ,'" + gender + "' "
 
