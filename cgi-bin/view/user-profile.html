@@ -18,12 +18,27 @@
                         <img class="img-responsive" src="{{userprof[7]}}" style="width:200px;padding-top:30px;padding-bottom:20px;">
                         </center>
                     </div>
-                    <div id="desc" class="col-md-8 right-side" style="padding-top:25px">
-                        {%- if (userprof[2] == user[2]) or (user[9]=='Y')  -%}
-                        <a class="btn btn-sm btn-primary" href="user-profile.py?user={{userprof[2]}}&action=edit" role="button" style="float:right">Edit Profile</a>
-                        {% endif %}
+                    <div id="desc" class="col-md-8 right-side" style="padding-top:25px">	
                         <header>  
-                        <h4><strong>{{userprof[0]}} {{userprof[1]}}</strong></h4> 
+                        <h4>
+				<strong>{{userprof[0]}} {{userprof[1]}}</strong>
+				{%- if (userprof[2] == user[2]) or (user[9]=='Y')  -%}
+                        		<div style="float:right">
+                                		<a class="btn btn-sm btn-primary" href="user-profile.py?user={{userprof[2]}}&action=edit" role="button">Edit Profile</a>
+                                		{%- if (user[9]=='Y')  -%}
+                                        		&nbsp;<a class="btn btn-sm btn-danger" role="button" onclick="confirmDelete('{{userprof[2]}}')">Delete</a>
+							<a id="continue-deletion" style="display:none" href="delete-user.py?user={{userprof[2]}}"></a>
+							<script>
+								function confirmDelete(email) {
+									if (confirm('Are you sure you want to delete user with email ' + email  + '?')) {
+										document.getElementById("continue-deletion").click()
+									}
+								}
+							</script>
+                                		{% endif %}
+                        		</div>
+                        	{% endif %}
+			</h4> 
                         </header>                        
                         <hr>
                         <p><strong>Email:</strong> {{userprof[2]}} </p>
