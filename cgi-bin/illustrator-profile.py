@@ -13,6 +13,7 @@ def main():
 	
 	illustrator= form.getvalue('illustrator') 
 	#email = form.getvalue('email') #email of current user
+	action = form.getvalue('action') # action 
 
 	try:
 		cur = con.cursor()
@@ -29,28 +30,44 @@ def main():
 		cur.execute(command)
 		user_= cur.fetchone() #
 
-		command = "SELECT * from Illustrators WHERE IllustratorName ='" + illustrator + "'"
-		cur.execute(command)
-		illustrator_ = cur.fetchone()
+		if action != 'create' :
+			command = "SELECT * from Illustrators WHERE IllustratorName ='" + illustrator + "'"
+			cur.execute(command)
+			illustrator_ = cur.fetchone()
 
-		command = "SELECT ISBN, Title, Price, Image from ComicBooks NATURAL JOIN BookIllustrator NATURAL JOIN Illustrators WHERE IllustratorName='" + illustrator + "'"
+			command = "SELECT ISBN, Title, Price, Image from ComicBooks NATURAL JOIN BookIllustrator NATURAL JOIN Illustrators WHERE IllustratorName='" + illustrator + "'"
 		
-		cur.execute(command)
-		rows = cur.fetchall()
-		titles = []
-		for row in rows:
-			titles.append(row)
+			cur.execute(command)
+			rows = cur.fetchall()
+			titles = []
+			for row in rows:
+				titles.append(row)
 
-		command = "SELECT Genre from ComicBooks NATURAL JOIN BookGenre NATURAL JOIN BookIllustrator WHERE IllustratorName ='" + illustrator + "'"
-		cur.execute(command)
-		genres = cur.fetchall()
-		genres_ = []
-		for genre in genres:
-			if genre not in genres_:
-				genres_.append(genre)
+			command = "SELECT Genre from ComicBooks NATURAL JOIN BookGenre NATURAL JOIN BookIllustrator WHERE IllustratorName ='" + illustrator + "'"
+			cur.execute(command)
+			genres = cur.fetchall()
+			genres_ = []
+			for genre in genres:
+				if genre not in genres_:
+					genres_.append(genre)
 
 		sidebar = utilities.getSideBar(email,user_[9], cur)
-		print display("illustrator-profile.html").render(sidebar=sidebar,user=user_,illustrator=illustrator_,titles=titles,genres=genres_)
+
+		if action == 'create' :
+			countryDropDown = utilities.generateCountryDropDown(None)
+			bookitems = utilities.getBookItems([], cur)
+			print display("illustrator-profile-create.html").render(user=user_,createform=None,sidebar=sidebar,bookitems=bookitems,countryDropDown=countryDropDown)
+		elif action == 'edit':
+			countryDropDown = utilities.generateCountryDropDown(illustrator_[3])
+
+			selectedBooks = []
+			for title in titles :
+				selectedBooks.append(title[0])
+			bookitems = utilities.getBookItems(selectedBooks, cur)
+			print display("illustrator-profile-edit.html").render(sidebar=sidebar,user=user_,illustrator=illustrator_,bookitems=bookitems,countryDropDown=countryDropDown)
+		else :
+			print display("illustrator-profile.html").render(sidebar=sidebar,user=user_,illustrator=illustrator_,titles=titles,genres=genres_)
+		sess.close()
 
 	except mdb.Error, e:
 	    if con:
