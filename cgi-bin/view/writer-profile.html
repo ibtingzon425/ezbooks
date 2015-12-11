@@ -20,7 +20,23 @@
                     </div>
                     <div id="desc" class="col-md-8 right-side" style="padding-top:25px">
                         <header>  
-                        <h4><strong>{{writer[0]}}</strong></h4> 
+                        <h4>
+				<strong>{{writer[0]}}</strong>
+				{% if user[9] == "Y" %}
+					<div style="float:right">
+        	    				<a class="btn btn-sm btn-primary" href="writer-profile.py?writer={{writer[0]}}&action=edit" role="button">Edit Profile</a>
+						<a class="btn btn-sm btn-danger" role="button" onclick="confirmDelete('{{writer[0]}}')">Delete</a>
+						<a id="continue-deletion" style="display:none" href="delete-writer.py?writer={{writer[0]}}"></a>
+						<script>
+							function confirmDelete(writer) {
+								if (confirm('Are you sure you want to delete writer ' + writer + '?')) {
+									document.getElementById("continue-deletion").click()
+								}
+							}
+						</script>
+					</div>
+        			{% endif %}
+			</h4> 
                         </header>                        
                         <hr>
                         <h5>
@@ -66,7 +82,7 @@
               <a href="comic-book-item.py?ISBN={{title[0]}}" ><img src= {{title[3]}} style="height:160px;" margin=15px> </img></a>
               <h5><a href="comic-book-item.py?ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
               <p><h6>Price: P{{title[2]}}</h6></p>
-              <p><a class="btn btn-danger" href="comic-book-item.py?ISBN={{title[0]}}" role="button">Learn more &raquo;</a></p>
+              <p><a class="btn btn-info" href="comic-book-item.py?ISBN={{title[0]}}" role="button">Learn more &raquo;</a></p>
               </center>
             </div>
             </div>

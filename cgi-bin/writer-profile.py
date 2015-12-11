@@ -56,6 +56,15 @@ def main():
 			countryDropDown = utilities.generateCountryDropDown(None)
 			bookitems = utilities.getBookItems([], cur)
 			print display("writer-profile-create.html").render(user=user_,createform=None,sidebar=sidebar,bookitems=bookitems,countryDropDown=countryDropDown)
+		elif action == 'edit' :
+			countryDropDown = utilities.generateCountryDropDown(writer_[3])
+
+			selectedBooks = []
+			for title in titles :
+				selectedBooks.append(title[0])
+				
+			bookitems = utilities.getBookItems(selectedBooks, cur)
+			print display("writer-profile-edit.html").render(sidebar=sidebar,user=user_,writer=writer_,bookitems=bookitems,countryDropDown=countryDropDown)
 		else :
 			print display("writer-profile.html").render(sidebar=sidebar,user=user_,writer=writer_,titles=titles,genres=genres_)
 		sess.close()

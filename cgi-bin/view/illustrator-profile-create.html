@@ -1,0 +1,80 @@
+{% extends "sidebar.html" %}
+
+{% block form %}
+
+	<link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
+	<link type="text/css" href="view/css/jquery-ui.css" rel="stylesheet">
+	 
+    <div class="col-sm-9" style="overflow:visible;">
+    <div class="list-group-item" style="background-color:#222; color:#aaa; "> <h4>Create New Illustrator</h4></div>
+    <div class="thumbnail col-sm-9" style="padding-left:80px;padding:50px; padding-top:20px; padding-bottom:20px; overflow: visible;">
+        {%- if (user[9]=='Y') -%}
+		{%- if error -%}
+		<div class="alert alert-danger">
+                        {{error}}
+                </div>
+		{% endif %}
+         
+			<form  id="form-writer" method="post" enctype="multipart/form-data" action="create-illustrator.py?">			
+			<table>
+                		<tr>
+			  		<td><p><strong>Name:</strong></p></td>
+                    			<td width="90%"><p><input type="text"  name="name"  value="{{createform[0]}}" required /> </p></td>
+				</tr>
+                		<tr>
+                    			<td><p><strong>Born:</strong></p></td>
+                    			<td><p>{{countryDropDown}}</p></td>
+                		</tr>
+				<tr>
+                    			<td><p><strong>Birthdate:</strong></p></td>
+                    			<td><p><input type="date" id="birth_date" name="birth_date" maxlength="10" size="8" value="{{createform[1]}}" ></p></td>
+				</tr>
+				<tr>
+					<td><p><strong>Image:</strong></p></td>
+					<td><p><input id="image_file" name="image_file" type="file" class="file-loading" ></p></td>
+
+                                </tr>
+				<tr>
+                                        <td><p><strong>Gender:</strong></p></td>
+					<td><p>
+						&nbsp;<input type="radio" name="gender" value="Male" {% if createform[2]=="Male" %} checked {% endif %}> Male
+						&nbsp;<input type="radio" name="gender" value="Female" {% if createform[2]=="Female" %} checked {% endif %}> Female
+						&nbsp;<input type="radio" name="gender" value="Unknown" {% if createform[2]!="Male" and  createform[2]!="Female" %} checked {% endif %}> Unknown
+					</p></td>
+				</tr>
+				<tr>
+					<td><p><strong>Description:&nbsp;</strong></p></td>
+					<td><p>
+						<textarea class="form-control" name="desc" type="text" rows="3"  >{{createform[3]}}</textarea>
+					</p></td>
+				</tr>
+                        </table>
+			<br/>
+			<hr/>
+			<p><strong>Illustrated Comic Books </strong> </p>
+			<select id="illustrator-books" name="illustratorbooks" multiple="multiple">
+    	 			{{bookitems}}
+			</select>
+			<!-- Initialize the plugin: -->
+			<script type="text/javascript">
+    				$(document).ready(function() {
+        				$('#illustrator-books').multiselect({includeSelectAllOption: true,enableFiltering: true});
+    				});
+			</script>
+			<br>
+                        <br>
+			<p align = "right">
+				<input class="btn btn-success" type="submit" value="Save" style="width:100px;"></input>
+				<a class="btn btn-danger" href="home.py?" role="button" style="width:100px;">Cancel</a> 
+                        </p>
+			</form >
+			<br />
+                    </div>
+                </div>
+            	
+                {%- else -%}
+		        <div class="alert alert-danger">
+			         <strong>Permission Error:</strong> You don't have permission to access this page!
+                	</div>
+                {%- endif -%}
+{% endblock %}

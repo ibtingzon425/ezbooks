@@ -3,15 +3,39 @@
 {% block form %}
 	<link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
             <div class="col-md-9">
+		{%- if error -%}
+                	<div class="alert alert-danger">
+                        	{{error}}
+                	</div>
+		{%- elif success -%}
+			<div class="alert alert-success">
+                        	{{success}}
+                	</div>
+                {% endif %}
                 <div class="thumbnail">
                 	<div class="col-md-4 left-side">
                         <center>
-                            <img class="img-responsive" src={{illustrator[5]}} style="width:200px;padding-top:30px;padding-bottom:20px;">
+                            <img class="img-responsive" src="{{illustrator[5]}}" style="width:200px;padding-top:30px;padding-bottom:20px;">
                     </center>
                     </div>
                     <div id="desc" class="col-md-8 right-side" style="padding-top:25px">
                         <header>  
-                        <h4><strong>{{illustrator[0]}}</strong></h4> 
+                        <h4><strong>{{illustrator[0]}}</strong>
+				{% if user[9] == "Y" %}
+					<div style="float:right">
+        	    				<a class="btn btn-sm btn-primary" href="illustrator-profile.py?illustrator={{illustrator[0]}}&action=edit" role="button">Edit Profile</a>
+						<a class="btn btn-sm btn-danger" role="button" onclick="confirmDelete('{{illustrator[0]}}')">Delete</a>
+						<a id="continue-deletion" style="display:none" href="delete-illustrator.py?illustrator={{illustrator[0]}}"></a>
+						<script>
+							function confirmDelete(illustrator) {
+								if (confirm('Are you sure you want to delete illustrator ' + illustrator + '?')) {
+									document.getElementById("continue-deletion").click()
+								}
+							}
+						</script>
+					</div>
+        			{% endif %}
+			</h4> 
                         </header>                        
                         <hr>
                         <h5>
@@ -57,7 +81,7 @@
               <a href="comic-book-item.py?ISBN={{title[0]}}" ><img src= {{title[3]}} style="height:160px;" margin=15px> </img></a>
               <h5><a href="comic-book-item.py?ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
               <p><h6>Price: P{{title[2]}}</h6></p>
-              <p><a class="btn btn-danger" href="comic-book-item.py?ISBN={{title[0]}}" role="button">Learn more &raquo;</a></p>
+              <p><a class="btn btn-info" href="comic-book-item.py?ISBN={{title[0]}}" role="button">Learn more &raquo;</a></p>
               </center>
             </div>
             </div>

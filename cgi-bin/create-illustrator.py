@@ -18,7 +18,7 @@ def main():
 	birthdate = form.getvalue('birth_date')
 	gender = form.getvalue('gender') 	
 	description = form.getvalue('desc')
-	writerbooks = form.getlist('writerbooks')
+	illustratorbooks = form.getlist('illustratorbooks')
 
 	#TODO: If current user != email 
 
@@ -37,7 +37,7 @@ def main():
                 cur.execute(command)
                 user= cur.fetchone()
 
-		command = "SELECT * from Writers WHERE lower(WriterName)=lower('" + name + "')"
+		command = "SELECT * from Illustrators WHERE lower(IllustratorName)=lower('" + name + "')"
 		cur.execute(command)
 		writer_ = cur.fetchone()		
 		
@@ -51,13 +51,13 @@ def main():
 			createform.append(gender)
 			createform.append(description)
 
-			error = '<strong>Database Error:</strong> Writer with name ' + name + ' already exists.' 
+			error = '<strong>Database Error:</strong> Illustrator with name ' + name + ' already exists.' 
                         countryDropDown = utilities.generateCountryDropDown(born)
-			bookitems = utilities.getBookItems(writerbooks, cur)	
-			print display("writer-profile-create.html").render(user=user,createform=createform,sidebar=sidebar,countryDropDown=countryDropDown,error=error,bookitems=bookitems)
+			bookitems = utilities.getBookItems(illustratorbooks, cur)	
+			print display("illustrator-profile-create.html").render(user=user,createform=createform,sidebar=sidebar,countryDropDown=countryDropDown,error=error,bookitems=bookitems)
 		else :
 			# Required Fields
-			insert_command_1 = "INSERT INTO Writers(WriterName "
+			insert_command_1 = "INSERT INTO Illustrators(IllustratorName "
 			insert_command_2 = "VALUES ( '" + name + "'"
 
 			# Born / Country
@@ -77,7 +77,7 @@ def main():
 
 			# Description
 			if description is not None:
-				insert_command_1 = insert_command_1 + ", WriterDescription "
+				insert_command_1 = insert_command_1 + ", IllustratorDescription "
                                 insert_command_2 = insert_command_2 + " ,'" + description + "' "
 		
 			 # upload image is user specified
@@ -87,14 +87,14 @@ def main():
                         	if fileitem.file :
                                 	extension = os.path.splitext(fileitem.filename)[1]
                                 	if extension != '' :
-                                        	fout = file ("model/writers/writer-" +  name + extension , 'wb')
+                                        	fout = file ("model/writers/illustrator-" +  name + extension , 'wb')
                                         	while 1:
                                                 	chunk = fileitem.file.read(100000)
                                                 	if not chunk: break
                                                 	fout.write(chunk)
                                         	fout.close()
-                                        	insert_command_1 = insert_command_1 + ", WriterImage " 
-						insert_command_2 = insert_command_2 + ", 'model/writers/writer-" +  name + extension  + "' "
+                                        	insert_command_1 = insert_command_1 + ", IllustratorImage " 
+						insert_command_2 = insert_command_2 + ", 'model/writers/illustrator-" +  name + extension  + "' "
 
 
 			insert_command_1 = insert_command_1 + ") "
@@ -102,8 +102,8 @@ def main():
 			cur.execute(insert_command_1 + insert_command_2)
 
 			# Associate Books to Writer
-                        for book in writerbooks:
-                                command = "INSERT INTO BookWriter(ISBN, WriterName) VALUES (" + book + ",'"  + name + "')"
+                        for book in illustratorbooks:
+                                command = "INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES (" + book + ",'"  + name + "')"
                                 cur.execute(command)
                 	con.commit()
 
@@ -111,29 +111,29 @@ def main():
 			cur.execute(command)
 			user_= cur.fetchone() #
 
-			command = "SELECT * from Writers WHERE WriterName='" + name + "'"
+			command = "SELECT * from Illustrators WHERE IllustratorName ='" + name + "'"
 			cur.execute(command)
-			writer_ = cur.fetchone()
+			illustrator_ = cur.fetchone()
 
-			command = "SELECT ISBN, Title, Price, Image from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE WriterName='" + name + "'"	
+			command = "SELECT ISBN, Title, Price, Image from ComicBooks NATURAL JOIN BookIllustrator NATURAL JOIN Illustrators WHERE IllustratorName='" + name + "'"
+		
 			cur.execute(command)
 			rows = cur.fetchall()
 			titles = []
 			for row in rows:
 				titles.append(row)
 
-			command = "SELECT Genre from ComicBooks NATURAL JOIN BookGenre NATURAL JOIN BookWriter WHERE WriterName='" + name + "'"
+			command = "SELECT Genre from ComicBooks NATURAL JOIN BookGenre NATURAL JOIN BookIllustrator WHERE IllustratorName ='" + name + "'"
 			cur.execute(command)
 			genres = cur.fetchall()
 			genres_ = []
 			for genre in genres:
 				if genre not in genres_:
 					genres_.append(genre)
-						
 
                 	sidebar = utilities.getSideBar(email,user[9], cur)
-			successmsg = '<strong>Success:</strong> Writer has been created.'
-			print display("writer-profile.html").render(sidebar=sidebar,user=user_,writer=writer_,titles=titles,genres=genres_,success=successmsg)		
+			successmsg = '<strong>Success:</strong> Illustrator has been created.'
+			print display("illustrator-profile.html").render(sidebar=sidebar,user=user_,illustrator=illustrator_,titles=titles,genres=genres_,success=successmsg)		
                 	sess.close()
 	except mdb.Error, e:
 	    if con:

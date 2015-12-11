@@ -1,0 +1,80 @@
+{% extends "sidebar.html" %}
+
+{% block form %}
+	<link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
+            <div class="col-md-9">
+		{%- if error -%}
+                	<div class="alert alert-danger">
+                        	{{error}}
+                	</div>
+		{%- elif success -%}
+			<div class="alert alert-success">
+                        	{{success}}
+                	</div>
+                {% endif %}
+                <div class="thumbnail" style="overflow: visible;height:460px">
+                	<div class="col-md-4 left-side">
+                        <center>
+                            <img class="img-responsive" src="{{illustrator[5]}}" style="width:200px;padding-top:30px;padding-bottom:20px;">
+                    </center>
+                    </div>
+                    <div id="desc" class="col-md-8 right-side" style="padding-top:25px">
+                        <header>  
+                        <h4><strong>{{illustrator[0]}}</strong></h4>
+                        </header>                        
+                        <hr/>
+
+			<form  id="form-illustrator" method="post" enctype="multipart/form-data" action="update-illustrator.py?">
+				<input type="hidden" name="name" value="{{illustrator[0]}}" />
+				<table>
+					<tr>
+                            			<td><p><strong>Born:</strong></p></td>
+                                        	<td width="90%"><p>{{countryDropDown}}</p></td>
+					</tr>
+					<tr>
+                                        	<td><p><strong>Birthdate:</strong></p></td>
+                                        	<td><p><input type="date" id="birth_date" name="birth_date" maxlength="10" size="8" value="{{illustrator[2]}}" ></p></td>
+                                	</tr>
+                                	<tr>
+                                        	<td><p><strong>Image:</strong></p></td>
+                                        	<td><p><input id="image_file" name="image_file" type="file" class="file-loading" ></p></td>
+                                	</tr>
+					<tr>
+                                        	<td><p><strong>Gender:</strong></p></td>
+                                        	<td><p>
+                                                	&nbsp;<input type="radio" name="gender" value="Male" {% if illustrator[4]=="Male" %} checked {% endif %}> Male
+                                                	&nbsp;<input type="radio" name="gender" value="Female" {% if illustrator[4]=="Female" %} checked {% endif %}> Female
+                                                	&nbsp;<input type="radio" name="gender" value="Unknown" {% if illustrator[4]!="Male" and illustrator[4]!="Female" %} checked {% endif %}> Unknown
+                                        	</p></td>
+                                	</tr>
+                                	<tr>
+                                        	<td><p><strong>Description:&nbsp;</strong></p></td>
+                                        	<td><p>
+                                                	<textarea class="form-control" name="desc" type="text" rows="3"  >{{illustrator[1]}}</textarea>
+                                        	</p></td>
+                                	</tr>
+				</table>
+				<hr/>
+				<p><strong>Illustrated Comic Books </strong> </p>
+                        	<select id="illustrator-books" name="illustratorbooks" multiple="multiple">
+                                	{{bookitems}}
+                        	</select>
+                        	<!-- Initialize the plugin: -->
+                        	<script type="text/javascript">
+                                	$(document).ready(function() {
+                                        	$('#illustrator-books').multiselect({includeSelectAllOption: true,enableFiltering: true});
+                                	});
+                        	</script>
+                        	<br>
+                        	<br>
+                        	<p align = "right">
+                                	<input class="btn btn-success" type="submit" value="Save" style="width:100px;"></input>
+                                	<a class="btn btn-danger" href="illustrator-profile.py?illustrator={{illustrator[0]}}" role="button" style="width:100px;">Cancel</a>
+                        	</p>
+			</form >
+                        <br />
+                     </div>
+                </div>
+	</div>
+
+{% endblock %}

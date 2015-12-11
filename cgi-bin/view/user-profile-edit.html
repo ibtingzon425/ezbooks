@@ -21,35 +21,35 @@
 			<form  id="form-user" method="post" enctype="multipart/form-data" action="update-user.py?user={{userprof[2]}}">			
 			<table>
                         	<tr>
-			  		<td><p>First Name: </p></td>
+			  		<td><p><strong>First Name: </strong></p></td>
                                         <td><p><input type="text"  name="first_name"  value="{{userprof[0]}}" required /> </p></td>
 				</tr>
 				<tr>
-					<td><p>Last Name: </p></td>
+					<td><p><strong>Last Name: </strong></p></td>
                                         <td><p><input type="text" name="last_name" value="{{userprof[1]}}" required /> </p></td>
 				</tr>
 				<tr>
-                                        <td><p>Password: </p></td>
+                                        <td><p><strong>Password: </strong></p></td>
                                         <td><p><input type="password" name="new_password" value="{{userprof[3]}}" required /> 
 					       <input type="hidden" name="current_password" value="{{userprof[3]}}" />
 					   </p></td>
                                 </tr>
                         	<tr>
-                                        <td><p>Country: </p></td>
+                                        <td><p><strong>Country: </strong></p></td>
                                         <td><p>{{countryDropDown}}</p></td>
                                 </tr>
 				<tr>
-                                        <td><p>Birthdate: </p></td>
+                                        <td><p><strong>Birthdate: </strong></p></td>
                                         <td><p><input type="date" id="birth_date" name="birth_date" maxlength="10" size="8" value="{{userprof[6]}}" format="yyyy/mm/dd"></p></td>
 				</tr>
 				<tr>
-					<td><p>Image:</p></td>
+					<td><p><strong>Image:</strong></p></td>
 					<td><p><input id="image_file" name="image_file" type="file" class="file-loading" ></p></td>
 
                                 </tr>
 			        {% if user[9] == "Y" and (user[2] != userprof[2]) %}
 				<tr>
-                                        <td><p>Is Administrator: </p></td>
+                                        <td><p><strong>Is Administrator: </strong></p></td>
 					<td><p>
 						&nbsp;<input type="radio" name="is_administrator" value="Y" {% if userprof[9] == "Y" %} checked {% endif %}> Yes
 						&nbsp;<input type="radio" name="is_administrator" value="N" {% if userprof[9] == "N" %} checked {% endif %}> No
@@ -58,7 +58,7 @@
 				{% endif %}
                         </table>
                         <br />
-			<p>
+			<p align = "right">
 				<input class="btn btn-success" type="submit" value="Save"></input>
 				<a class="btn btn-danger" href="user-profile.py?user={{userprof[2]}}" role="button" >Cancel</a> 
                         </p>
