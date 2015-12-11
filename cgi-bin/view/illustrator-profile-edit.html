@@ -12,7 +12,7 @@
                         	{{success}}
                 	</div>
                 {% endif %}
-                <div class="thumbnail" style="overflow: visible;height:430px">
+                <div class="thumbnail" style="overflow: visible;height:460px">
                 	<div class="col-md-4 left-side">
                         <center>
                             <img class="img-responsive" src="{{illustrator[5]}}" style="width:200px;padding-top:30px;padding-bottom:20px;">
@@ -28,19 +28,19 @@
 				<input type="hidden" name="name" value="{{illustrator[0]}}" />
 				<table>
 					<tr>
-                            			<td><p>Born:</p></td>
+                            			<td><p><strong>Born:</strong></p></td>
                                         	<td width="90%"><p>{{countryDropDown}}</p></td>
 					</tr>
 					<tr>
-                                        	<td><p>Birthdate:</p></td>
+                                        	<td><p><strong>Birthdate:</strong></p></td>
                                         	<td><p><input type="date" id="birth_date" name="birth_date" maxlength="10" size="8" value="{{illustrator[2]}}" ></p></td>
                                 	</tr>
                                 	<tr>
-                                        	<td><p>Image:</p></td>
+                                        	<td><p><strong>Image:</strong></p></td>
                                         	<td><p><input id="image_file" name="image_file" type="file" class="file-loading" ></p></td>
                                 	</tr>
 					<tr>
-                                        	<td><p>Gender:</p></td>
+                                        	<td><p><strong>Gender:</strong></p></td>
                                         	<td><p>
                                                 	&nbsp;<input type="radio" name="gender" value="Male" {% if illustrator[4]=="Male" %} checked {% endif %}> Male
                                                 	&nbsp;<input type="radio" name="gender" value="Female" {% if illustrator[4]=="Female" %} checked {% endif %}> Female
@@ -48,12 +48,13 @@
                                         	</p></td>
                                 	</tr>
                                 	<tr>
-                                        	<td><p>Description:</p></td>
+                                        	<td><p><strong>Description:&nbsp;</strong></p></td>
                                         	<td><p>
                                                 	<textarea class="form-control" name="desc" type="text" rows="3"  >{{illustrator[1]}}</textarea>
                                         	</p></td>
                                 	</tr>
 				</table>
+				<hr/>
 				<p><strong>Illustrated Comic Books </strong> </p>
                         	<select id="illustrator-books" name="illustratorbooks" multiple="multiple">
                                 	{{bookitems}}

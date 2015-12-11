@@ -18,24 +18,24 @@
 			<form  id="form-writer" method="post" enctype="multipart/form-data" action="create-illustrator.py?">			
 			<table>
                 		<tr>
-			  		<td><p>Name:</p></td>
+			  		<td><p><strong>Name:</strong></p></td>
                     			<td width="90%"><p><input type="text"  name="name"  value="{{createform[0]}}" required /> </p></td>
 				</tr>
                 		<tr>
-                    			<td><p>Born:</p></td>
+                    			<td><p><strong>Born:</strong></p></td>
                     			<td><p>{{countryDropDown}}</p></td>
                 		</tr>
 				<tr>
-                    			<td><p>Birthdate:</p></td>
+                    			<td><p><strong>Birthdate:</strong></p></td>
                     			<td><p><input type="date" id="birth_date" name="birth_date" maxlength="10" size="8" value="{{createform[1]}}" ></p></td>
 				</tr>
 				<tr>
-					<td><p>Image:</p></td>
+					<td><p><strong>Image:</strong></p></td>
 					<td><p><input id="image_file" name="image_file" type="file" class="file-loading" ></p></td>
 
                                 </tr>
 				<tr>
-                                        <td><p>Gender:</p></td>
+                                        <td><p><strong>Gender:</strong></p></td>
 					<td><p>
 						&nbsp;<input type="radio" name="gender" value="Male" {% if createform[2]=="Male" %} checked {% endif %}> Male
 						&nbsp;<input type="radio" name="gender" value="Female" {% if createform[2]=="Female" %} checked {% endif %}> Female
@@ -43,15 +43,14 @@
 					</p></td>
 				</tr>
 				<tr>
-					<td><p>Description:</p></td>
+					<td><p><strong>Description:&nbsp;</strong></p></td>
 					<td><p>
 						<textarea class="form-control" name="desc" type="text" rows="3"  >{{createform[3]}}</textarea>
 					</p></td>
 				</tr>
                         </table>
-			 
-
 			<br/>
+			<hr/>
 			<p><strong>Illustrated Comic Books </strong> </p>
 			<select id="illustrator-books" name="illustratorbooks" multiple="multiple">
     	 			{{bookitems}}

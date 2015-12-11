@@ -26,13 +26,13 @@
                         <h4><strong>{{userprof[0]}} {{userprof[1]}}</strong></h4> 
                         </header>                        
                         <hr>
-                        <p>Email: {{userprof[2]}} </p>
-                        <p>Country: {{userprof[5]}} </p>
-		        <p>Birthdate: {{userprof[6]}} </p>
+                        <p><strong>Email:</strong> {{userprof[2]}} </p>
+                        <p><strong>Country:</strong> {{userprof[5]}} </p>
+		        <p><strong>Birthdate:</strong> {{userprof[6]}} </p>
 			{%- if (user[9]=='Y')  -%} 
-			<p>Is Administrator: {%- if userprof[9]=="Y" -%} Yes {% else %} No {% endif %}</p>
+			<p><strong>Is Administrator:</strong> {%- if userprof[9]=="Y" -%} Yes {% else %} No {% endif %}</p>
 		        {% endif %}
-                        <p>Joined on {{userprof[4]}}</p>
+                        <p><strong>Joined: </strong> {{userprof[4]}}</p>
                         <br/>
                     </div>
                 </div>
