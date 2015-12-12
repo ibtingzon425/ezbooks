@@ -45,24 +45,62 @@ def main():
 			for row in rows:
 				titles.append(row)
 
-			command = "SELECT * from ComicBooks NATURAL JOIN UserOwned WHERE Email='" + userprofile + "'"
-		
+			# Retrieve Pending Orders
+			command = "SELECT o.OrderID, OrderDate, Quantity, cb.ISBN, cb.Title, DeliveryAddress, Status " + \
+				  "FROM Orders o, BookOrder bo, ComicBooks cb " + \
+				  "WHERE o.OrderID = bo.OrderID " + \
+  				  "  AND bo.ISBN = cb.ISBN " + \
+  				  "  AND o.Status in ('Paid', 'Shipped') " + \
+				  "  AND o.CustomerEmail = '" + userprofile + "' " + \
+				  "ORDER BY OrderDate DESC"
 			cur.execute(command)
 			rows = cur.fetchall()
-			own = []
-			for row in rows:
-				own.append(row)
+			pendingOrders = []
+			i=0
+			while i < len(rows) :
+				j = i + 1
+				bookHTML = str(rows[i][2]) + ' X <a href="comic-book-item.py?ISBN=' + str(rows[i][3]) + '">' + str(rows[i][4]) + \
+					   ' (' +str(rows[i][3]) +  ')</a>'
+				while j < len(rows) and (rows[i][0]==rows[j][0]):
+					bookHTML = bookHTML + '<br/>' + str(rows[j][2]) + ' X <a href="comic-book-item.py?ISBN=' + str(rows[j][3]) + '">' + \
+						   str(rows[j][4]) + ' (' +str(rows[i][3]) +  ')</a>'
+					j = j + 1
+				pendingOrders.append( [rows[i][0], rows[i][1], bookHTML, rows[i][5], rows[i][6]] )
+				i = j
 
+			# Retrieve 3 Latest Completed Orders
+			command = "SELECT o.OrderID, OrderDate, Quantity, cb.ISBN, cb.Title, DeliveryAddress, Status " + \
+				  "FROM BookOrder bo, ComicBooks cb, " + \
+				  "(SELECT OrderID, OrderDate, DeliveryAddress, Status " + \
+ 				   "FROM Orders WHERE Status in ('Delivered', 'Canceled') AND CustomerEmail = '" + userprofile + "' " + \
+ 				   "ORDER BY OrderDate DESC LIMIT 3) o " + \
+				   "WHERE o.OrderID = bo.OrderID AND bo.ISBN = cb.ISBN"
+			cur.execute(command)
+                        rows = cur.fetchall()
+			completedOrders = []
+                        i=0
+                        while i < len(rows) :
+                                j = i + 1
+                                bookHTML = str(rows[i][2]) + ' X <a href="comic-book-item.py?ISBN=' + str(rows[i][3]) + '">' + str(rows[i][4]) + \
+                                           ' (' +str(rows[i][3]) +  ')</a>'
+                                while j < len(rows) and (rows[i][0]==rows[j][0]):
+                                        bookHTML = bookHTML + '<br/>' + str(rows[j][2]) + ' X <a href="comic-book-item.py?ISBN=' + str(rows[j][3]) + '">' + \
+                                                   str(rows[j][4]) + ' (' +str(rows[i][3]) +  ')</a>'
+                                        j = j + 1
+                                completedOrders.append( [rows[i][0], rows[i][1], bookHTML, rows[i][5], rows[i][6]] )
+                                i = j
+
+				
 		sidebar = utilities.getSideBar(email,user[9], cur)
 		
 		if action == 'edit':
 			countryDropDown = utilities.generateCountryDropDown(userprof[5]) 
-			print display("user-profile-edit.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own,countryDropDown=countryDropDown)
+			print display("user-profile-edit.html").render(user=user,userprof=userprof,sidebar=sidebar,countryDropDown=countryDropDown)
 		elif action == 'create':
 			countryDropDown = utilities.generateCountryDropDown(None)
 			print display("user-profile-create.html").render(user=user,createform=None,sidebar=sidebar,countryDropDown=countryDropDown)	
 		else :
-			print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own)
+			print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,pendingOrders=pendingOrders,completedOrders=completedOrders)
 		sess.close()
 
 	except mdb.Error, e:

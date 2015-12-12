@@ -93,32 +93,15 @@ def main():
 			insert_command_2 = insert_command_2 + ") " 
 			cur.execute(insert_command_1 + insert_command_2)
                 	con.commit()
-
 		
 
 			command = "SELECT * FROM Users WHERE Email = '" + userprof_form + "'";
                 	cur.execute(command)
                 	userprof = cur.fetchone() #
 
-                	command = "SELECT * from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
-
-                	cur.execute(command)
-                	rows = cur.fetchall()
-                	titles = []
-                	for row in rows:
-                        	titles.append(row)
-
-                	command = "SELECT * from ComicBooks NATURAL JOIN UserOwned WHERE Email='" + email + "'"
-
-                	cur.execute(command)
-                	rows = cur.fetchall()
-                	own = []
-                	for row in rows:
-                        	own.append(row)
-
                 	sidebar = utilities.getSideBar(email,user[9], cur)
 			successmsg = '<strong>Success:</strong> User has been created.'
-                	print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own,success=successmsg)			
+                	print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=[],success=successmsg)			
                 	sess.close()
 	except mdb.Error, e:
 	    if con:

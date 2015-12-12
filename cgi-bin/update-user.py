@@ -12,6 +12,7 @@ def main():
 	form = cgi.FieldStorage()
 	
 	userprof = form.getvalue('user') #email of userprofile
+	userprofile = form.getvalue('user')
 	#email = form.getvalue('email') #email of current user
 	firstname = form.getvalue('first_name')
 	lastname = form.getvalue('last_name')
@@ -93,17 +94,56 @@ def main():
 		for row in rows:
 			titles.append(row)
 
-		command = "SELECT * from ComicBooks NATURAL JOIN UserOwned WHERE Email='" + email + "'"
 		
-		cur.execute(command)
-		rows = cur.fetchall()
-		own = []
-		for row in rows:
-			own.append(row)
+		# Retrieve Pending Orders
+                command = "SELECT o.OrderID, OrderDate, Quantity, cb.ISBN, cb.Title, DeliveryAddress, Status " + \
+                          "FROM Orders o, BookOrder bo, ComicBooks cb " + \
+                          "WHERE o.OrderID = bo.OrderID " + \
+                          "  AND bo.ISBN = cb.ISBN " + \
+                          "  AND o.Status in ('Paid', 'Shipped') " + \
+                          "  AND o.CustomerEmail = '" + userprofile + "' " + \
+                          "ORDER BY OrderDate DESC"
+                cur.execute(command)
+                rows = cur.fetchall()
+                pendingOrders = []
+                i=0
+                while i < len(rows) :
+                	j = i + 1
+                        bookHTML = str(rows[i][2]) + ' X <a href="comic-book-item.py?ISBN=' + str(rows[i][3]) + '">' + str(rows[i][4]) + \
+                                   ' (' +str(rows[i][3]) +  ')</a>'
+                        while j < len(rows) and (rows[i][0]==rows[j][0]):
+                        	bookHTML = bookHTML + '<br/>' + str(rows[j][2]) + ' X <a href="comic-book-item.py?ISBN=' + str(rows[j][3]) + '">' + \
+                                           str(rows[j][4]) + ' (' +str(rows[i][3]) +  ')</a>'
+                                j = j + 1
+                        pendingOrders.append( [rows[i][0], rows[i][1], bookHTML, rows[i][5], rows[i][6]] )
+                       	i = j
+
+
+		# Retrieve 3 Latest Completed Orders
+                command = "SELECT o.OrderID, OrderDate, Quantity, cb.ISBN, cb.Title, DeliveryAddress, Status " + \
+                          "FROM BookOrder bo, ComicBooks cb, " + \
+                          "(SELECT OrderID, OrderDate, DeliveryAddress, Status " + \
+                           "FROM Orders WHERE Status in ('Delivered', 'Canceled') AND CustomerEmail = '" + userprofile + "' " + \
+                           "ORDER BY OrderDate DESC LIMIT 3) o " + \
+                           "WHERE o.OrderID = bo.OrderID AND bo.ISBN = cb.ISBN"
+                cur.execute(command)
+                rows = cur.fetchall()
+                completedOrders = []
+                i=0
+                while i < len(rows) :
+                	j = i + 1
+                        bookHTML = str(rows[i][2]) + ' X <a href="comic-book-item.py?ISBN=' + str(rows[i][3]) + '">' + str(rows[i][4]) + \
+                                   ' (' +str(rows[i][3]) +  ')</a>'
+                        while j < len(rows) and (rows[i][0]==rows[j][0]):
+                        	bookHTML = bookHTML + '<br/>' + str(rows[j][2]) + ' X <a href="comic-book-item.py?ISBN=' + str(rows[j][3]) + '">' + \
+                                           str(rows[j][4]) + ' (' +str(rows[i][3]) +  ')</a>'
+                                j = j + 1
+                        completedOrders.append( [rows[i][0], rows[i][1], bookHTML, rows[i][5], rows[i][6]] )
+                        i = j
 	
 		sidebar = utilities.getSideBar(email,user[9], cur)
 		successmsg = '<strong>Success:</strong> User Profile has been updated.'
-		print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,own=own,success=successmsg)
+		print display("user-profile.html").render(user=user,userprof=userprof,sidebar=sidebar,titles=titles,pendingOrders=pendingOrders,completedOrders=completedOrders,success=successmsg)
 		sess.close()		
 	
 	except mdb.Error, e:

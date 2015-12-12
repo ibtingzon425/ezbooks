@@ -53,43 +53,18 @@
                 </div>
                 {%- if userprof[9]=="N" -%}
                 <br>
-                <h4><strong>{{userprof[0]}} {{userprof[1]}}'s eBook Collection</strong></h4> 
-                <hr>
-          {%- if own|length == 0 -%}
-                <p>Looks like you don't own any books yet! Start shopping <a href="home.py?email={{user[2]}}">here</a>. </p>
-                {%- else -%}
-                <p>
-                <div class="row">
-                {% for title in own%}
-                <div class="col-sm- col-lg-3">
-                  <div class="panel panel-default">
-                  <div class="panel-body">
-                  <center> 
-                  <a href="comic-book-item.py?ISBN={{title[0]}}" ><img src= {{title[5]}} style="height:160px;" margin=15px> </img></a>
-                  <h5><a href="comic-book-item.py?ISBN={{title[0]}}" style="color: #B00000 ">{{title[1]}}</a></h5>
-                  <p><h6>Price: P{{title[2]}}</h6></p>
-	          {%- if (userprof[2] == user[2]) %}
-                  <p><a class="btn btn-primary" href="model/images/sample_comic.pdf" role="button" target="_blank">Download</a></p>
-		  {% else %}
-	          <p><a class="btn btn-info" href="comic-book-item.py?ISBN={{title[0]}}" role="button">Learn More &raquo;</a></p>
-		  {% endif %} 
-                  </center>
-                </div>
-                </div>              
-                </div><!--/.col-xs-6.col-lg-4-->
-            {% endfor %}
-          </div><!--/row-->
-          {% endif %}
-              
-                <br>
                 <h4><strong>{{userprof[0]}} {{userprof[1]}}'s Shopping Cart </strong>
-		            {%- if userprof[2] == user[2] -%}
+		    {%- if userprof[2] == user[2] -%}
                     <a class="btn btn-sm btn-success" href="shopping-cart.py?email={{user[2]}}" role="button" style="float:right">Checkout &raquo; </a>
                     {% endif %}
                 </h4> 
                 <hr>
                 {%- if titles|length == 0 -%}
-                <p>Looks like you haven't got any book in your cart yet! Start shopping <a href="home.py?email={{user[2]}}">here</a>. </p>
+			{% if user[9] != 'Y' %}
+                		<p>Looks like you haven't got any book in your cart yet! Start shopping <a href="home.py?email={{user[2]}}">here</a>. </p>
+			{% else %}
+				<p>None</p>
+			{% endif %}
                 {%- else -%}
                 <p>
                 <div class="row">
@@ -107,12 +82,67 @@
                 </div>              
                 </div><!--/.col-xs-6.col-lg-4-->
             {% endfor %}
-          </div><!--/row-->
-          {% endif %}
+
           {% endif %}
 
+	   <br/>
+           <h4><strong>{{userprof[0]}} {{userprof[1]}}'s Pending Orders </strong></h4>
+	   <hr/>
+		{% if pendingOrders|length != 0%}
+	   	<table class="table table-bordered">
+			<tr style="background-color:#222; color:#aaa; ">
+  	   			<th style="text-align:right">Order ID</th>
+				<th>Order Date</th>
+				<!--th style="text-align:center">Quantity</th-->
+				<th>Comic Book Items</th>
+				<th>Delivery Address</th>
+				<th>Status</th>
+			</tr>
+			{% for order in pendingOrders %}	
+			<tr class="{% if order[4] == 'Paid' %}warning{% else %}info{%endif%}">
+				<td style="text-align:right" width="5%">{{order[0]}}</td>
+				<td width="12%">{{order[1]}}</td>
+				<!-- td style="text-align:center">{{order[2]}}</td-->
+				<td>{{order[2]}}</td>
+			        <td>{{order[3]}}</td>
+				<td>{{order[4]}}</td>
+			</tr>
+			{% endfor %}
+	   	</table>		
+		{% else %}
+		None
+		{% endif %}
 
-          
+           <br/>
+  	   <br/>
+           <h4><strong>{{userprof[0]}} {{userprof[1]}}'s Latest Completed Orders </strong></h4>
+           <hr/>
+                {% if completedOrders|length != 0%}
+                <table class="table table-bordered">
+                        <tr style="background-color:#222; color:#aaa; ">
+                                <th style="text-align:right">Order ID</th>
+                                <th>Order Date</th>
+                                <!--th style="text-align:center">Quantity</th-->
+                                <th>Comic Book Items</th>
+                                <th>Delivery Address</th>
+                                <th>Status</th>
+                        </tr>
+                        {% for order in completedOrders %}
+                        <tr class="{% if order[4] == 'Delivered' %}success{% else %}danger{%endif%}">
+                                <td style="text-align:right" width="5%">{{order[0]}}</td>
+                                <td width="12%">{{order[1]}}</td>
+                                <!-- td style="text-align:center">{{order[2]}}</td-->
+                                <td>{{order[2]}}</td>
+                                <td>{{order[3]}}</td>
+                                <td>{{order[4]}}</td>
+                        </tr>
+                        {% endfor %}
+                </table>
+                {% else %}
+                None
+                {% endif %} 
+
+          {% endif %}
 
                 </div>
 {% endblock %}
