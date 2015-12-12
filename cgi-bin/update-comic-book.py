@@ -109,7 +109,8 @@ def main():
 				
 			update_command =  update_command + " WHERE ISBN = '" + isbn +  "'"
 			cur.execute(update_command)
-				
+			con.commit()	
+			
 			command = "SELECT * from ComicBooks WHERE ISBN ='" + isbn + "'"
 			cur.execute(command)
 			rows = cur.fetchall()
