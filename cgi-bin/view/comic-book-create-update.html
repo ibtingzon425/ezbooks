@@ -33,7 +33,7 @@
     </style>
     <link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
     <link type="text/css" href="view/css/jquery-ui.css" rel="stylesheet">
-     
+
     <div class="col-sm-9" style="overflow:visible;">
     <div class="list-group-item" style="background-color:#222; color:#aaa; "> 
         <h4> 
@@ -79,7 +79,7 @@
         <tr>
         <td class="head"><p><strong>Writers</p></strong></td>
         <td class="body"><p><br> 
-        <select class="head" id="writers" name="writers" multiple="multiple">
+        <select class="head" id="writers" name="writers" multiple="multiple" required >
          {{writers}}
         </select>
         <!-- Initialize the plugin: -->
@@ -90,12 +90,12 @@
         </script>
         </p></td>          
         </tr>
-        <tr><td class="head"></td><td class="body"><p>Writer not in the list? <a>Create a new writer.</a> </p></td></tr>
+        <tr><td class="head"></td><td class="body"><p>Writer not in the list? <a href="writer-profile.py?action=create">Create a new writer.</a> </p></td></tr>
 
         <tr>
         <td class="head"><strong>Illustrators</strong></td>
         <td class="body"><p>
-        <select class="head" id="illustrators" name="illustrators" multiple="multiple">
+        <select class="head" id="illustrators" name="illustrators" multiple="multiple" required >
          {{illustrators}}
         </select>
         <!-- Initialize the plugin: -->
@@ -107,13 +107,13 @@
         </p></td> 
         </tr>
         <tr><td class="head"></td>
-            <td class="body"><p>Illustrator not in the list? <a>Create a new illustrator.</a> </p></td>
+            <td class="body"><p>Illustrator not in the list? <a href="illustrator-profile.py?action=create">Create a new illustrator.</a> </p></td>
         </tr>
         
         <tr>
         <td class="head"><strong>Genres</strong></td>
         <td class="body"><p>
-        <select class="head" id="genres" name="genres" multiple="multiple" >
+        <select class="head" id="genres" name="genres" multiple="multiple" required  >
          {{genres}}
         </select>
         <!-- Initialize the plugin: -->
@@ -125,7 +125,7 @@
         </p></td>  
         </tr>
         <tr>
-            <td class="head"></td><td class="body"><p>Genre not in the list? <a>Create a new genre.</a> </p></td>
+            <td class="head"></td><td class="body"><p>Genre not in the list? <a href="create-update-genre.py">Create a new genre.</a> </p></td>
         </tr>
 
         <tr>
@@ -175,7 +175,7 @@
         <td class="head"><strong>Description </strong></td>
         <td class="body">
         <p>
-        <textarea class="form-control" name="desc" type="text" rows="3"  >{{bookform[4]}}</textarea>
+        <textarea class="form-control" name="desc" type="text" placeholder="Description" rows="3" required >{{bookform[4]}}</textarea>
         </p>
         </td> 
         </tr>

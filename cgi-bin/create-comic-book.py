@@ -17,16 +17,20 @@ def main():
 	form = cgi.FieldStorage()
 	
 	#email = form.getvalue('email')
+	val = []
 	action = form.getvalue('action')
+	isbn = form.getvalue('ISBN')
 	title = form.getvalue('title')
-	desc = form.getvalue('bookdesc')
+	desc = form.getvalue('desc')
 	format = form.getvalue('format')
 	length = form.getvalue('length')
 	publisher = form.getvalue('publisher')
 	datepub = form.getvalue('datepub')
 	price = form.getvalue('price')
 	awards = form.getvalue('awards')
-	isbn = form.getvalue('ISBN')
+	genres = form.getlist('genres')
+	illustrators= form.getlist('illustrators')
+	writers= form.getlist('writers')
 
 	try:
 		state = "create"
@@ -66,31 +70,78 @@ def main():
 
 				if bookRecord is not None:
 					bookform = []
-					bookform.append(create)
+					bookform.append(isbn)
+					bookform.append(title)
+					bookform.append(price)
+					bookform.append(publisher)
 					bookform.append(desc)
+					bookform.append(" ")
+					bookform.append(datepub)
+					bookform.append(length)
+					bookform.append(format)
+					writers_= []
+					for writer in writers:
+						writers_.append(writer)
+					writers = utilities.getWriters(writers_, cur)
+					illustrators_= []
+					for illustrator in illustrators:
+						illustrators_.append(illustrator)
+					illustrators = utilities.getIllustrators(illustrators_, cur)
+					genres_= []
+					for genre in genres:
+						genres_.append(genre)
+					genres = utilities.getGenres(genres_, cur)
 					sidebar = utilities.getSideBar(email, user[9], cur)
-					writers = utilities.getWriters([], cur)
-					error = "Comic book " + create + " already exists! Provide another comic book."
+					error = "Comic book " + isbn + " already exists! Provide another comic book."
 					sidebar = utilities.getSideBar(email, user[9], cur)
-					print display("comic-book-create-update.html").render(user=user,sidebar=sidebar,bookform=bookform,writers=writers,error=error)
-				else :
-					insert_command = "INSERT INTO ComicBooks(ISBN, Description) VALUES ('" + isbn + "','" + desc + "') \
-										"
-					cur.execute(insert_command)
-					book = bookcreate 			 
-					command = "SELECT * from ComicBooks  WHERE ISBN='" + isbn + "'"
-					cur.execute(command)
-					rows = cur.fetchall()
-					titles = []
-					for row in rows:
-						titles.append(row)
 
-					sidebar = utilities.getSideBar(email, user[9], cur)
-					print display("home.html").render(user=user,titles=titles,sidebar=sidebar,book=book,bookdesc=bookdesc,search=' ')
+					print display("comic-book-create-update.html").render(state="create",user=user,sidebar=sidebar,bookform=bookform,genres=genres,writers=writers,illustrators=illustrators,error=error)
+				else :
+
+					insert_command = "INSERT INTO ComicBooks(ISBN, Description, Title, Price, Publisher, DatePublished, Length, Format) VALUES"
+					insert_command = insert_command + "(" 
+					insert_command = insert_command + "'" + isbn + "'," 
+					insert_command = insert_command + """ " """ + desc + """ " """ + ", '" + title + "','" + price + "','" + publisher + "','" + datepub + "','" + length + "','" + format + "')"
+
+					cur.execute(insert_command)	
+					con.commit() 
+
+					if awards != None:
+						awards = awards.split(',')
+						for award in awards:
+							insert_command = "INSERT INTO LiteraryAwards(ISBN, Award) VALUES "
+							insert_command =  insert_command + "( '" + isbn + """' , " """ + award + """ ")"""
+							cur.execute(insert_command)
+							con.commit() 
+					
+					if genres is not None:
+						for genre in genres:
+							insert_command = "INSERT INTO BookGenre(ISBN, Genre) VALUES "
+							insert_command =  insert_command + "( '" + isbn + "' , '" + genre + "')"
+							cur.execute(insert_command)
+							con.commit() 
+					
+					if illustrators is not None:
+						for illustrator in illustrators:
+							insert_command = "INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES "
+							insert_command =  insert_command + "( '" + isbn + "' , '" + illustrator + "')"
+							cur.execute(insert_command)
+							con.commit() 
+
+					if writers is not None:
+						for writer in writers:
+							insert_command = "INSERT INTO BookWriter(ISBN, WriterName) VALUES "
+							insert_command =  insert_command + "( '" + isbn + "' , '" + writer + "')"
+							cur.execute(insert_command)
+							con.commit() 
+
+					print "Location: comic-book-item.py?ISBN=" + isbn + "&success=2\r\n"
+					
 
 	except mdb.Error, e:
 	    if con:
 	        con.rollback()
+
 
 	    
 

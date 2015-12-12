@@ -10,6 +10,11 @@ a.morelink {
     display: none;
 }
 </style>
+    {%- if success != None -%}
+        <div class="alert alert-success">
+                {{success}}
+        </div>
+    {% endif %}
 	<link type="text/css" href="view/css/book-item.css" rel="stylesheet">
             <div class="col-md-9">
                 <div class="thumbnail">

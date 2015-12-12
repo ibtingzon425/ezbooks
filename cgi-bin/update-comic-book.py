@@ -19,7 +19,7 @@ def main():
 	#email = form.getvalue('email')
 	action = form.getvalue('action')
 	title = form.getvalue('title')
-	description = form.getvalue('desc')
+	desc = form.getvalue('desc')
 	format = form.getvalue('format')
 	length = form.getvalue('length')
 	publisher = form.getvalue('publisher')
@@ -27,6 +27,9 @@ def main():
 	price = form.getvalue('price')
 	awards = form.getvalue('awards')
 	isbn = form.getvalue('ISBN')
+	genres = form.getlist('genres')
+	illustrators= form.getlist('illustrators')
+	writers= form.getlist('writers')
 
 	try:
 		state = "update"
@@ -53,13 +56,15 @@ def main():
 				book = cur.fetchone()
 				for i in book:
 					bookform.append(i)
+				bookform[4] = bookform[4].strip() 
 
 				awards = []
 				command = "SELECT Award from LiteraryAwards WHERE ISBN='" + isbn + "'"
 				cur.execute(command)
 				award = cur.fetchall()
 				for i in range(len(award)):
-					awards.append(award[i][0])
+					award_ = award[i][0].strip()
+					awards.append(award_)
 				bookform.append(awards)
 
 				command = "SELECT WriterName from BookWriter WHERE ISBN='" + isbn + "'"
@@ -98,28 +103,75 @@ def main():
 
 		elif action == "save":
 			update_command = "UPDATE ComicBooks SET "
-
-			# set description
-			#if description is None:
-			#	 update_command = update_command + "Description = null "
-			#else :
-			#	 update_command = update_command + "Description = '" + description + "' "
-					
+			
 			update_command = update_command + " Format = '" + format + "' "
-				
+			update_command = update_command + ", Title = '" + title + "' "
+			update_command = update_command + ", Length = '" + length + "' "
+			update_command = update_command + ", Publisher = '" + publisher + "' "
+			update_command = update_command + ", DatePublished = '" + datepub + "' "
+			update_command = update_command + ", Price = '" + price + "' "
+
+			if desc is None:
+				 update_command = update_command + ", Description = null "
+			else :
+				update_command = update_command + """, Description = " """ + desc + """ " """	
+
 			update_command =  update_command + " WHERE ISBN = '" + isbn +  "'"
 			cur.execute(update_command)
+			
+			con.commit() 
+
+			command = "DELETE FROM LiteraryAwards Where ISBN = '" + isbn +  "'";		
+
 			con.commit()	
 			
 			command = "SELECT * from ComicBooks WHERE ISBN ='" + isbn + "'"
+
 			cur.execute(command)
-			rows = cur.fetchall()
-			titles = []
-			for row in rows:
-				titles.append(row)
-			sidebar = utilities.getSideBar(email, user[9], cur)
-			print display("home.html").render(user=user,titles=titles,sidebar=sidebar,search=' ')
-			print update_command
+			con.commit()
+
+			if awards != None:
+				awards = awards.split(',')
+				for award in awards:
+					insert_command = "INSERT INTO LiteraryAwards(ISBN, Award) VALUES "
+					insert_command =  insert_command + "( '" + isbn + """' , " """ + award + """ ")"""
+					cur.execute(insert_command)
+					con.commit() 
+
+			command = "DELETE FROM BookGenre Where ISBN = '" + isbn +  "'";		
+			cur.execute(command)
+			con.commit()
+			
+			if genres is not None:
+				for genre in genres:
+					insert_command = "INSERT INTO BookGenre(ISBN, Genre) VALUES "
+					insert_command =  insert_command + "( '" + isbn + "' , '" + genre + "')"
+					cur.execute(insert_command)
+					con.commit() 
+
+			command = "DELETE FROM BookIllustrator Where ISBN = '" + isbn +  "'";		
+			cur.execute(command)
+			con.commit()
+			
+			if illustrators is not None:
+				for illustrator in illustrators:
+					insert_command = "INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES "
+					insert_command =  insert_command + "( '" + isbn + "' , '" + illustrator + "')"
+					cur.execute(insert_command)
+					con.commit() 
+
+			command = "DELETE FROM BookWriter Where ISBN = '" + isbn +  "'";		
+			cur.execute(command)
+			con.commit()
+			
+			if writers is not None:
+				for writer in writers:
+					insert_command = "INSERT INTO BookWriter(ISBN, WriterName) VALUES "
+					insert_command =  insert_command + "( '" + isbn + "' , '" + writer + "')"
+					cur.execute(insert_command)
+					con.commit() 
+			
+			print "Location: comic-book-item.py?ISBN=" + isbn + "&success=1\r\n"
 			
 	except mdb.Error, e:
 	    if con:
