@@ -164,8 +164,8 @@ def main():
 					insert_command =  insert_command + "( '" + isbn + "' , '" + writer + "')"
 					cur.execute(insert_command)
 					con.commit() 
-				
-			print "Location: comic-book-item.py?ISBN=" + isbn + "\r\n"
+			
+			print "Location: comic-book-item.py?ISBN=" + isbn + "&success=1\r\n"
 			
 	except mdb.Error, e:
 	    if con:

@@ -31,7 +31,7 @@ CREATE TABLE ComicBooks(
 	Publisher VARCHAR(256) DEFAULT "", 
 	Description VARCHAR(5000) DEFAULT "No description available.",
 	Image VARCHAR(500) DEFAULT "model/writers/default.png",
-	DatePublished VARCHAR(500),
+	DatePublished DATE,
 	Length INTEGER DEFAULT 0,
 	Format VARCHAR(500) DEFAULT "Information not available."
 );

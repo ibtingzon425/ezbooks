@@ -12,9 +12,16 @@ def main():
 	form = cgi.FieldStorage()
 	
 	ISBN = form.getvalue('ISBN')
-	
+	code = form.getvalue('success')
+
 	try:
 		cur = con.cursor()
+
+		success = None
+		if code == '1':
+			success = '<strong>Success: </strong> Comic Book successfully updated.'
+		elif code == '2':
+			success = '<strong>Success: </strong> Comic Book successfully created.'
 
 		sess = session.Session(expires=365*24*60*60, cookie_path='/')
 		lastvisit = sess.data.get('lastvisit')
@@ -70,9 +77,10 @@ def main():
                 book_ = cur.fetchone()
                 if (book_ != None):
                         book_owned = True
+        
 		
 		sidebar = utilities.getSideBar(email,user[9], cur)
-		print display("comic-book-item.html").render(book=books,user=user,sidebar=sidebar,writers=writers,illustrators=illustrators,genres=genres,book_exists=book_exists,book_owned=book_owned)
+		print display("comic-book-item.html").render(success=success,book=books,user=user,sidebar=sidebar,writers=writers,illustrators=illustrators,genres=genres,book_exists=book_exists,book_owned=book_owned)
 		#print books
 		sess.close()
 		
