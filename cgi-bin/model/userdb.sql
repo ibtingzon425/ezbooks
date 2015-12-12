@@ -8,7 +8,6 @@ DROP TABLE IF EXISTS BookWriter;
 DROP TABLE IF EXISTS BookIllustrator;
 DROP TABLE IF EXISTS ComicBooks;
 DROP TABLE IF EXISTS UserCart;
---DROP TABLE IF EXISTS UserOwned;
 DROP TABLE IF EXISTS LiteraryAwards;
 DROP TABLE IF EXISTS BookOrder;
 DROP TABLE IF EXISTS Orders;
@@ -35,7 +34,7 @@ CREATE TABLE ComicBooks(
 	Image VARCHAR(500) DEFAULT "model/writers/default.png",
 	DatePublished DATE,
 	Length INTEGER DEFAULT 0,
-	Format VARCHAR(500) DEFAULT "Information not available."
+	Format VARCHAR(500) DEFAULT "Paperback"
 );
 
 CREATE TABLE Writers(
@@ -91,11 +90,6 @@ CREATE TABLE UserCart(
 	PRIMARY KEY(Email, ISBN) 
 );
 
---CREATE TABLE UserOwned(
---	Email VARCHAR(50) NOT NULL,
---	ISBN VARCHAR(500) NOT NULL,
---	PRIMARY KEY(Email, ISBN) 
---);
 
 CREATE TABLE Orders(
 	OrderID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -121,7 +115,7 @@ ALTER TABLE UserCart ADD FOREIGN KEY(ISBN) References ComicBooks(ISBN);
 ALTER TABLE BookWriter ADD FOREIGN KEY(ISBN) References ComicBooks(ISBN);
 ALTER TABLE BookWriter ADD FOREIGN KEY(WriterName) References Writers(WriterName);
 ALTER TABLE BookIllustrator ADD FOREIGN KEY(ISBN) References ComicBooks(ISBN);
-ALTER TABLE BookIllustrator ADD FOREIGN KEY(IllustratorName) References Illustrators(IllustratorName)   
-ALTER TABLE Orders ADD FOREIGN KEY (CustomerEmail) REFERENCES Users(Email);
+ALTER TABLE BookIllustrator ADD FOREIGN KEY(IllustratorName) References Illustrators(IllustratorName);   
+ALTER TABLE Orders ADD FOREIGN KEY(CustomerEmail) REFERENCES Users(Email);
 ALTER TABLE BookOrder ADD FOREIGN KEY (ISBN) REFERENCES ComicBooks(ISBN);
-ALTER TABLE BookOrder ADD FOREIGN KEY (OrderID) REFERENCES Orders(OrderID);
+ALTER TABLE BookOrder ADD FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
