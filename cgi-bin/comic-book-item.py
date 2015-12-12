@@ -12,7 +12,7 @@ def main():
 	form = cgi.FieldStorage()
 	
 	ISBN = form.getvalue('ISBN')
-	#email = form.getvalue('email')
+	
 	try:
 		cur = con.cursor()
 
