@@ -13,6 +13,7 @@ def main():
 	
 	#email = form.getvalue('email') #email of current user
 	creditcard = form.getvalue("creditcard")
+	deliveryaddress = form.getvalue("deliveryaddress")
 
 	try:
 		cur = con.cursor()
@@ -22,48 +23,67 @@ def main():
 		email= sess.data.get('user')
 		print sess.cookie
 
-		
+		#f = open("temp", "w")		
+
 		if email is None:
 			print "Location: login.py?redirect=1\r\n"
 		
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
 		cur.execute(command)
-		user_= cur.fetchone() 
+		user_= cur.fetchone()
 
+		# Create order record and retrieve its OrderID
+		command = "INSERT INTO Orders(OrderDate, CustomerEmail, DeliveryAddress, Status) VALUES( NOW(), '" + email + "','" + deliveryaddress + "','Paid')"
+		#f.write(command)
+		cur.execute(command)
+		command = "SELECT max(OrderID) FROM Orders where CustomerEmail ='" + email + "'"
+		cur.execute(command)
+		orderID = cur.fetchone()[0]
+  
+		# Retrieve books in User Cart
 		command = "SELECT ISBN from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
-		
 		cur.execute(command)
 		rows = cur.fetchall()
 		ISBN_set = []
 		for row in rows:
 			ISBN_set.append(row[0])
 
+		# Add Book to Order
 		for isbn in ISBN_set:
-			command = "SELECT * FROM UserCart WHERE Email=%s AND ISBN=%s"
-			cur = con.cursor()
-			cur.execute(command, (email, isbn))
-			book_ = cur.fetchone()
+			command = "INSERT INTO BookOrder(ISBN,OrderID) values(" + isbn + "," + str(orderID) + ")"
+			cur.execute(command)
 
-			#Delete book into user's cart
-			if book_ != None:
-				command = "DELETE FROM UserCart WHERE Email=%s AND ISBN=%s"
-				cur = con.cursor()
-				cur.execute(command, (email, isbn))
-				con.commit()
+		# Empty User Cart
+		command = "DELETE FROM UserCart WHERE Email='" + email + "'"
+		cur.execute(command)
+		
+		con.commit()
+		
+
+		#for isbn in ISBN_set:
+		#	command = "SELECT * FROM UserCart WHERE Email=%s AND ISBN=%s"
+		#	cur = con.cursor()
+		#	cur.execute(command, (email, isbn))
+		#	book_ = cur.fetchone()
+
+			# Delete book from user's cart
+		#	if book_ != None:
+		#		command = "DELETE FROM UserCart WHERE Email=%s AND ISBN=%s"
+		#		cur = con.cursor()
+		#		cur.execute(command, (email, isbn))
+ 
 
 			# Checks if book already exists in owned
-			command = "SELECT * FROM UserOwned WHERE Email=%s AND ISBN=%s"
-			cur = con.cursor()
-			cur.execute(command, (email, isbn))
-			book_ = cur.fetchone()
+			#command = "SELECT * FROM UserOwned WHERE Email=%s AND ISBN=%s"
+			#cur = con.cursor()
+			#cur.execute(command, (email, isbn))
+			#book_ = cur.fetchone()
 
 			#Insert book into user's cart
-			if book_ == None:
-				command = "INSERT INTO UserOwned(Email, ISBN) VALUES(%s, %s)"
-				cur = con.cursor()
-				cur.execute(command, (email, isbn))
-				con.commit()
-
+			#if book_ == None:
+				#command = "INSERT INTO UserOwned(Email, ISBN) VALUES(%s, %s)"
+				#cur = con.cursor()
+				#cur.execute(command, (email, isbn))
 		
 		sidebar = utilities.getSideBar(email,user_[9], cur)
 		print display("success.html").render(sidebar=sidebar,user=user_)

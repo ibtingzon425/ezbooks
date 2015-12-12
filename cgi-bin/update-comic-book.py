@@ -118,9 +118,15 @@ def main():
 
 			update_command =  update_command + " WHERE ISBN = '" + isbn +  "'"
 			cur.execute(update_command)
+<<<<<<< HEAD
 			con.commit() 
 
 			command = "DELETE FROM LiteraryAwards Where ISBN = '" + isbn +  "'";		
+=======
+			con.commit()	
+			
+			command = "SELECT * from ComicBooks WHERE ISBN ='" + isbn + "'"
+>>>>>>> aac0c173188d26eb1d8d8baa828848e788eb1054
 			cur.execute(command)
 			con.commit()
 
