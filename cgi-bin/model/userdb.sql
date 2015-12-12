@@ -33,7 +33,7 @@ CREATE TABLE ComicBooks(
 	Image VARCHAR(500) DEFAULT "model/writers/default.png",
 	DatePublished VARCHAR(500),
 	Length INTEGER DEFAULT 0,
-	Format VARCHAR(500) DEFAULT "Hardbound"
+	Format VARCHAR(500) DEFAULT "Information not available."
 );
 
 CREATE TABLE Writers(

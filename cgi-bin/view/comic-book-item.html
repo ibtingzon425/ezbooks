@@ -17,7 +17,7 @@ a.morelink {
                         <center>
                         <img class="img-responsive" src={{book[5]}} style="width:200px;padding-top:30px;padding-bottom:20px;">  
                         {%- if user[9]=='Y' -%}         
-                        <a class="btn btn-primary" href="create-update-comic-book.py?ISBN={{book[0]}}" role="button">Edit Comic Book</a>
+                        <a class="btn btn-primary" href="update-comic-book.py?ISBN={{book[0]}}&action=edit" role="button">Edit Comic Book</a>
 			<a class="btn btn-danger"  href="#" role="button">Delete</a>
                         {% endif %}
                         {%- if user[9]=='N' -%}
