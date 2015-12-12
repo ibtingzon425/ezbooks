@@ -13,9 +13,15 @@ def main():
 	form = cgi.FieldStorage()
 	email = form.getvalue('email') #email of current user
 	book = form.getvalue('ISBN')
+	action = form.getvalue('action')
 	total = 0.0
 
 	try:
+		sess = session.Session(expires=365*24*60*60, cookie_path='/')
+		lastvisit = sess.data.get('lastvisit')
+		email= sess.data.get('user')
+		print sess.cookie
+
 		# Checks if book already exists in cart
 		command = "SELECT * FROM UserCart WHERE Email=%s AND ISBN=%s"
 		cur = con.cursor()
@@ -25,12 +31,21 @@ def main():
 		if email is None:
 			print "Location: login.py?redirect=1\r\n"
 
-		#Insert book into user's cart
+		#Delete book into user's cart
 		if book_ != None:
-			command = "DELETE FROM UserCart WHERE Email=%s AND ISBN=%s"
+			if action == 'subtract' :
+				quantity = 1
+				command = "UPDATE UserCart SET Quantity = Quantity - 1 WHERE Email=%s AND ISBN=%s"
+			else :
+				# Check quantity first
+				command = "SELECT QUANTITY FROM UserCart WHERE Email=%s AND ISBN=%s"
+				cur.execute(command, (email, book))
+				row = cur.fetchone()
+				quantity = row[0]
+
+				command = "DELETE FROM UserCart WHERE Email=%s AND ISBN=%s"
 			cur = con.cursor()
 			cur.execute(command, (email, book))
-			con.commit()
 
 			command = "SELECT TotalCost from Users WHERE Email='" + email + "'"
 			cur.execute(command)
@@ -43,7 +58,7 @@ def main():
 			price = row[0]
 
 			if (total >= price):
-				total = total - price
+				total = total - (price*quantity)
 			else:
 				total = 0
 
@@ -55,7 +70,7 @@ def main():
 		cur.execute(command)
 		user= cur.fetchone() 
 
-		command = "SELECT ISBN, Title, Price, Format from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
+		command = "SELECT ISBN, Title, Price, Format, Quantity from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
 		
 		cur.execute(command)
 		rows = cur.fetchall()
@@ -67,11 +82,11 @@ def main():
 		total = 0
 		for title in titles_temp:
 
-			command = "SELECT WriterName from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE ISBN='" + title[0] + "'"
-			cur.execute(command)
-			row = cur.fetchone()
+			#command = "SELECT WriterName from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE ISBN='" + title[0] + "'"
+			#cur.execute(command)
+			#row = cur.fetchone()
 
-			new_title = title + (row)
+			new_title = title #+ (row)
 			titles.append(new_title)
 
 
@@ -83,7 +98,7 @@ def main():
 		
 		sidebar = utilities.getSideBar(email,user[9], cur)
 		print display("shopping-cart.html").render(sidebar=sidebar,user=user,titles=titles,total=total)
-
+		sess.close()
 	except mdb.Error, e:
 		if con:
 			con.rollback()

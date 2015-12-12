@@ -19,15 +19,12 @@ a.morelink {
                         {%- if user[9]=='Y' -%}         
                         <a class="btn btn-primary" href="update-comic-book.py?ISBN={{book[0]}}&action=edit" role="button">Edit Comic Book</a>
 			<a class="btn btn-danger"  href="#" role="button">Delete</a>
-                        {% endif %}
-                        {%- if user[9]=='N' -%}
+                        {%- else  -%}
                         <div class="btn-group dropup">
                         <div class="dropdown">
                                 <input type="hidden" id="book" name="book" class="form-control" value="{{book[1]}}">
                                 <input type="hidden" id="price" name="book" class="form-control" value="{{book[2]}}">
-				                {%- if book_owned == True -%}
-				                <a class="btn btn-primary" href="model/images/sample_comic.pdf" target="_blank" role="button">Download</a>
-                                {%- elif book_exists == False -%} 
+				                
                                 <form id="form" action="add-to-cart.py" method="POST">
                                 <input type="hidden" id="email" name="email" class="form-control" value="{{user[2]}}">
                                 <input type="hidden" id="ISBN" name="ISBN" class="form-control" value="{{book[0]}}">
@@ -46,26 +43,6 @@ a.morelink {
                                 }
                                 </script>
                                 </form>
-                                {% else %} 
-                                <form id="form" action="remove-from-cart.py" method="POST">
-                                <input type="hidden" id="email" name="email" class="form-control" value="{{user[2]}}">
-                                <input type="hidden" id="ISBN" name="ISBN" class="form-control" value="{{book[0]}}">
-                                <button type="submit" id="btn" class="btn btn-danger" onclick="onRemove()">Remove from Cart &raquo;</button>
-                                <script>
-                                function onRemove() {
-                                    var link;
-                                    book = document.getElementById("book").value
-                                    price = document.getElementById("price").value
-                                    if (confirm("Remove " + book + " (PHP" + price + ") from cart?") == true) {
-                                        link = "remove-from-cart.py";
-                                    } else {
-                                        link = "comic-book-item.py";
-                                    }
-                                    document.getElementById("form").action = link;
-                                }
-                                </script>
-                                </form>
-                                {% endif %} 
                           </div>
                         </div>
                         {% endif %}

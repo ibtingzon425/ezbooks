@@ -29,38 +29,42 @@ def main():
 		cur.execute(command, (email, book))
 		book_ = cur.fetchone()
 
-		#Insert book into user's cart
+		# Insert book into user's cart
 		if book_ == None:
 			command = "INSERT INTO UserCart(Email, ISBN) VALUES(%s, %s)"
 			cur = con.cursor()
 			cur.execute(command, (email, book))
-			con.commit()
-			#update total price
-			command = "SELECT TotalCost from Users WHERE Email='" + email + "'"
-			cur.execute(command)
-			row = cur.fetchone()
-			total = row[0]
+		# Increment quantity
+		else :
+			command = "UPDATE UserCart SET Quantity = Quantity + 1 WHERE Email = '" + email + "' AND ISBN = " + book
+			cur.execute(command)		
+	
+		#update total price
+		command = "SELECT TotalCost from Users WHERE Email='" + email + "'"
+		cur.execute(command)
+		row = cur.fetchone()
+		total = row[0]
 
-			if total == None:
-				total = 0
+		if total == None:
+			total = 0
 
-			command = "SELECT Price from ComicBooks WHERE ISBN='" + book + "'"
-			cur.execute(command)
-			row = cur.fetchone()
-			price = row[0]
+		command = "SELECT Price from ComicBooks WHERE ISBN='" + book + "'"
+		cur.execute(command)
+		row = cur.fetchone()
+		price = row[0]
 
-			total = total + price
+		total = total + price
 
-			command = "UPDATE Users SET TotalCost='" + str(total) + "' WHERE Email='" + email + "'"
-			cur.execute(command)
-			con.commit()
+		command = "UPDATE Users SET TotalCost='" + str(total) + "' WHERE Email='" + email + "'"
+		cur.execute(command)
+		con.commit()
 		
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
 		cur.execute(command)
 		user = cur.fetchone() 
 
 		#Get titles of ComicBooks in cart
-		command = "SELECT ISBN, Title, Price, Format from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
+		command = "SELECT ISBN, Title, Price, Format, Quantity from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
 		
 		cur.execute(command)
 		rows = cur.fetchall()
@@ -71,11 +75,11 @@ def main():
 		titles = []
 		total = 0
 		for title in titles_temp:
-			command = "SELECT WriterName from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE ISBN='" + title[0] + "'"
-			cur.execute(command)
-			row = cur.fetchone()
+			#command = "SELECT WriterName from ComicBooks NATURAL JOIN BookWriter NATURAL JOIN Writers WHERE ISBN='" + title[0] + "'"
+			#cur.execute(command)
+			#row = cur.fetchone()
 
-			new_title = title + (row)
+			new_title = title # + (row)
 			titles.append(new_title)
 
 		command = "SELECT TotalCost from Users WHERE Email='" + email + "'"

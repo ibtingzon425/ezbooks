@@ -20,21 +20,47 @@ th {
                     <div style="padding:40px">
                         <table border="1" style="width:100%">
                           <tr>
-                            <th>ISBN</th>
+                            <th width="20%">ISBN</th>
                             <th>Title</th>
-                            <th>Writer</th>
-                            <th>Format</th>
-                            <th><div align="right">Price</div></th>
+                            <th  width="10%">Quantity</th>
+                            <th width="15%">Price Per Unit</th>
+                            <th><div align="right">Total Price</div></th>
                           </tr>
 
+			  <script>
+				function confirmRemove(isbn, title) {
+					if (confirm('Are you sure you want to remove ' + title + ' (' + isbn + ') from cart?')) {
+						document.getElementById('remove-from-cart-' + isbn).click()
+					}
+				}
+			  </script>
                           {% for title in titles %}
                           <tr>
-                            <td><a href="comic-book-item.py?ISBN={{title[0]}}">{{title[0]}}</a></td>
+                            <td>
+				<a href="comic-book-item.py?ISBN={{title[0]}}">{{title[0]}}</a>&nbsp;
+				<a id="remove-from-cart-{{title[0]}}" href="remove-from-cart.py?ISBN={{title[0]}}" style="display:none" />
+				<a onclick="confirmRemove('{{title[0]}}', '{{title[1]}}')">
+					<img src="model/images/delete-icon.png" title="Remove From Cart" width="10%" style="display:inline"/>
+				</a>
+			    </td>
                             <td><a href="comic-book-item.py?ISBN={{title[0]}}">{{title[1]}}</a></td>
-                            <td><a href="writer-profile.py?writer={{title[4]}}">{{title[4]}}</a></td>
-                            <td>{{title[3]}}
+                            <td align="center">
+				{% if title[4] <= 1 %}
+					<img disabled="disabled" src="model/images/filler-icon.png" title="Subtract Quantity" width="25%" style="display:inline"/>
+				{% else %} 
+					<a href="remove-from-cart.py?ISBN={{title[0]}}&action=subtract"><img src="model/images/subtract-icon.png" title="Subtract Quantity" width="25%" style="display:inline"/></a>
+				{% endif %}
+				{{title[4]}}
+				{% if title[4] < 10 %}
+ 					<a href="add-to-cart.py?ISBN={{title[0]}}"><img src="model/images/add-icon.png" title="Add Quantity" width="25%" style="display:inline"/></a>
+				{% else %}
+					<img disabled="disabled" src="model/images/filler-icon.png" title="Subtract Quantity" width="25%" style="display:inline"/>
+				{% endif %}
+			    </td>
+                            <td align="right">
+				PHP {{title[2]}}
                             </td>
-                            <td width="130px"><div style= "color:#bb3e4f" align="right">PHP {{title[2]}}</div></td>
+                            <td width="130px"><div style= "color:#bb3e4f" align="right">PHP {{title[2] * title[4]}}</div></td>
                           </tr>
                           {% endfor %}
 

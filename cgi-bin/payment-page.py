@@ -23,7 +23,7 @@ def main():
 		email= sess.data.get('user')
 		print sess.cookie
 
-		#f = open("temp", "w")		
+		f = open("temp", "w")		
 
 		if email is None:
 			print "Location: login.py?redirect=1\r\n"
@@ -41,22 +41,24 @@ def main():
 		orderID = cur.fetchone()[0]
   
 		# Retrieve books in User Cart
-		command = "SELECT ISBN from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
+		command = "SELECT ISBN, Quantity from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
 		cur.execute(command)
 		rows = cur.fetchall()
-		ISBN_set = []
-		for row in rows:
-			ISBN_set.append(row[0])
+		#bookorders = []
+		#for row in rows:
+			#bookorders.append(row)
+
 
 		# Add Book to Order
-		for isbn in ISBN_set:
-			command = "INSERT INTO BookOrder(ISBN,OrderID) values(" + isbn + "," + str(orderID) + ")"
+		for book in rows:	
+			command = "INSERT INTO BookOrder(ISBN,OrderID,Quantity) values(" + book[0] + "," + str(orderID) + "," + str(book[1]) + ")"
+			f.write(command + '\n')
 			cur.execute(command)
 
 		# Empty User Cart
 		command = "DELETE FROM UserCart WHERE Email='" + email + "'"
 		cur.execute(command)
-		
+		f.write(command + '\n')
 		con.commit()
 		
 
