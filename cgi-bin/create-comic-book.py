@@ -106,6 +106,26 @@ def main():
 					cur.execute(insert_command)	
 					con.commit() 
 
+					# upload image is user specified
+					
+					if form.has_key('image_file'):
+						update_command = "UPDATE ComicBooks SET "
+						fileitem = form['image_file']
+						if fileitem.file:
+							extension = os.path.splitext(fileitem.filename)[1] 
+							if extension != '' :
+								fout = file ("model/images/cover-" +  isbn + extension , 'wb')
+								while 1:
+									chunk = fileitem.file.read(100000)
+									if not chunk: 
+										break
+									fout.write(chunk)
+								fout.close()
+								update_command = update_command + "Image = '" + "model/images/cover-" + isbn + extension  + "' "
+								update_command =  update_command + " WHERE ISBN = '" + isbn +  "'"
+								cur.execute(update_command)
+								con.commit() 
+
 					if awards != None:
 						awards = awards.split(',')
 						for award in awards:

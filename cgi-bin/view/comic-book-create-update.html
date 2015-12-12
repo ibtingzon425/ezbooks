@@ -56,9 +56,9 @@
           </td></p>
 
         {% if state == "create" -%}
-        <form   method="POST"  action="create-comic-book.py?action=save">
+        <form   method="POST" enctype="multipart/form-data"  action="create-comic-book.py?action=save">
         {% else %}
-        <form   method="POST"  action="update-comic-book.py?action=save">
+        <form   method="POST" enctype="multipart/form-data"  action="update-comic-book.py?action=save">
         {% endif %}
         <table>
         
@@ -95,7 +95,7 @@
         <tr>
         <td class="head"><strong>Illustrators</strong></td>
         <td class="body"><p>
-        <select class="head" id="illustrators" name="illustrators" multiple="multiple" required >
+        <select class="head" id="illustrators" name="illustrators" multiple="multiple">
          {{illustrators}}
         </select>
         <!-- Initialize the plugin: -->
@@ -125,7 +125,13 @@
         </p></td>  
         </tr>
         <tr>
-            <td class="head"></td><td class="body"><p>Genre not in the list? <a href="create-update-genre.py">Create a new genre.</a> </p></td>
+            <td class="head"></td>
+            <td class="body"><p>Genre not in the list? <a href="create-update-genre.py">Create a new genre.</a> </p></td>
+        </tr>
+
+        <tr>
+            <td class="head"><p><strong>Image:</strong></p></td>
+            <td class="body"><p><input id="image_file" name="image_file" type="file" accept="image/*" class="file-loading"></p></td>
         </tr>
 
         <tr>
