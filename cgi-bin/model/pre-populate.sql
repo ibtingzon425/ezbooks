@@ -1,9 +1,9 @@
 -- Real Password is 12345
-INSERT INTO `Users` VALUES ('Admin','User','admin@ezcomics.com','$6$rounds=656000$wVf.fA291z66gi1k$6DuEkfdkorc1LRKQOJLMHcKJhhxK0W3k5FVhIO1mfxQwvky.ucTbQNPgHrGJd2d71suI8qCYWPXMbk2L/.q4k/','2015-11-25',NULL,NULL,NULL,NULL,'Y');
+INSERT INTO `Users` VALUES ('Admin','User','admin@ezcomics.com','$6$rounds=656000$wVf.fA291z66gi1k$6DuEkfdkorc1LRKQOJLMHcKJhhxK0W3k5FVhIO1mfxQwvky.ucTbQNPgHrGJd2d71suI8qCYWPXMbk2L/.q4k/','2015-11-25',NULL,NULL,'model/users/default.png',NULL,'Y');
 
 -- Real Password is 0987
 INSERT INTO `Users` VALUES 
-('Roy Amante','Salvador','roy.salvador@gmail.com','$6$rounds=656000$4SjJk0DANLFXwHG.$bUYDV4GAmkpXudefgrZ7Puw8UnWJgrTgHY4XBnLt0QfKtzIcC6O/spq3x7Q8NNEsdIMeZjfkMoKnZFMPtWR7r1','2015-11-22',NULL,NULL,NULL,0,'N');
+('Roy Amante','Salvador','roy.salvador@gmail.com','$6$rounds=656000$4SjJk0DANLFXwHG.$bUYDV4GAmkpXudefgrZ7Puw8UnWJgrTgHY4XBnLt0QfKtzIcC6O/spq3x7Q8NNEsdIMeZjfkMoKnZFMPtWR7r1','2015-11-22',NULL,NULL,'model/users/default.png',0,'N');
 
 INSERT INTO Genres (Genre, GenreDesc) VALUES ("Fantasy", "Fantasy is a genre that uses magic and other supernatural forms as a primary element of plot, theme, and/or setting.  ");
 INSERT INTO Genres (Genre, GenreDesc) VALUES ("Humor", "A comic novel is usually a work of fiction in which the writer seeks to amuse the reader, sometimes with subtlety and as part of a carefully woven narrative, sometimes above all other considerations. ");
