@@ -15,6 +15,11 @@ a.morelink {
                 {{success}}
         </div>
     {% endif %}
+    {%- if error != None -%}
+        <div class="alert alert-danger" role="alert">
+                {{error}}
+        </div>
+    {% endif %}
 	<link type="text/css" href="view/css/book-item.css" rel="stylesheet">
             <div class="col-md-9">
                 <div class="thumbnail">
@@ -23,7 +28,7 @@ a.morelink {
                         <img class="img-responsive" src={{book[5]}} style="width:200px;padding-top:30px;padding-bottom:20px;">  
                         {%- if user[9]=='Y' -%}         
                         <a class="btn btn-primary" href="update-comic-book.py?ISBN={{book[0]}}&action=edit" role="button">Edit Comic Book</a>
-			<a class="btn btn-danger"  href="#" role="button">Delete</a>
+			<a class="btn btn-danger"  href="delete-comic-book.py?ISBN={{book[0]}}" role="button">Delete</a>
                         {%- else  -%}
                         <div class="btn-group dropup">
                         <div class="dropdown">

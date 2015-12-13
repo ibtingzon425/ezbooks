@@ -47,6 +47,9 @@ def main():
 		cur.execute(command)
 		user= cur.fetchone()
 
+		if desc != None:
+			desc = desc.replace('\r\n', '<br>')
+
 		if action == "edit":
 			bookform = []
 			if isbn != None :
@@ -181,7 +184,7 @@ def main():
 					cur.execute(insert_command)
 					con.commit() 
 			
-			print "Location: comic-book-item.py?ISBN=" + isbn + "&success=" + str(form['image_file'].file) + "\r\n"
+			print "Location: comic-book-item.py?ISBN=" + isbn + "&success=1\r\n"
 			
 	except mdb.Error, e:
 	    if con:

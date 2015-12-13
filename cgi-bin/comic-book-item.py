@@ -13,15 +13,19 @@ def main():
 	
 	ISBN = form.getvalue('ISBN')
 	code = form.getvalue('success')
+	err = form.getvalue('error')
 
 	try:
 		cur = con.cursor()
 
 		success = None
+		error = None
 		if code == '1':
 			success = '<strong>Success: </strong> Comic Book successfully updated.'
 		elif code == '2':
 			success = '<strong>Success: </strong> Comic Book successfully created.'
+		if err == '0':
+			error = '<strong>Database Error:</strong> Foreign key constraint violated. Make sure to remove child records first.'
 
 		sess = session.Session(expires=365*24*60*60, cookie_path='/')
 		lastvisit = sess.data.get('lastvisit')
@@ -80,7 +84,7 @@ def main():
         
 		
 		sidebar = utilities.getSideBar(email,user[9], cur)
-		print display("comic-book-item.html").render(success=success,book=books,user=user,sidebar=sidebar,writers=writers,illustrators=illustrators,genres=genres,book_exists=book_exists,book_owned=book_owned)
+		print display("comic-book-item.html").render(error=error,success=success,book=books,user=user,sidebar=sidebar,writers=writers,illustrators=illustrators,genres=genres,book_exists=book_exists,book_owned=book_owned)
 		#print books
 		sess.close()
 		

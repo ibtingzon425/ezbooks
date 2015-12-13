@@ -33,6 +33,9 @@ def main():
 		if email is None:
 			print "Location: login.py?redirect=1\r\n"
 
+		if description != None:
+			description = description.replace('\r\n', '<br>')
+
 		update_command = "UPDATE Writers SET "
 
 		# set gender
@@ -42,7 +45,7 @@ def main():
 		if description is None:
 			 update_command = update_command + ", WriterDescription = null "
 		else :
-			 update_command = update_command + ", WriterDescription = '" + description + "' "
+			 update_command = update_command + """, WriterDescription = " """ + description + """ " """
 				
 
 		# set country

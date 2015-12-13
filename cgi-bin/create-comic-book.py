@@ -15,9 +15,6 @@ def invaidPageError():
 
 def main():
 	form = cgi.FieldStorage()
-	
-	#email = form.getvalue('email')
-	val = []
 	action = form.getvalue('action')
 	isbn = form.getvalue('ISBN')
 	title = form.getvalue('title')
@@ -40,6 +37,9 @@ def main():
 		lastvisit = sess.data.get('lastvisit')
 		email= sess.data.get('user')
 		print sess.cookie
+
+		if desc != None:
+			desc = desc.replace("\r\n", '<br>')
 		
 		if email is None:
 			print "Location: login.py?redirect=1\r\n"
@@ -47,6 +47,7 @@ def main():
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
                 cur.execute(command)
                 user= cur.fetchone()
+
 
 		if action == "create":
 			bookform = []
@@ -93,7 +94,6 @@ def main():
 					genres = utilities.getGenres(genres_, cur)
 					sidebar = utilities.getSideBar(email, user[9], cur)
 					error = "Comic book " + isbn + " already exists! Provide another comic book."
-					sidebar = utilities.getSideBar(email, user[9], cur)
 
 					print display("comic-book-create-update.html").render(state="create",user=user,sidebar=sidebar,bookform=bookform,genres=genres,writers=writers,illustrators=illustrators,error=error)
 				else :
@@ -106,8 +106,7 @@ def main():
 					cur.execute(insert_command)	
 					con.commit() 
 
-					# upload image is user specified
-					
+					# upload image is user specified					
 					if form.has_key('image_file'):
 						update_command = "UPDATE ComicBooks SET "
 						fileitem = form['image_file']
@@ -161,6 +160,7 @@ def main():
 	except mdb.Error, e:
 	    if con:
 	        con.rollback()
+	    invaidPageError()
 
 
 	    
