@@ -41,8 +41,7 @@ def main():
 		rows = cur.fetchall()
 		titles = []
 		for row in rows:
-			titles.append(row)
-		
+			titles.append(row)		
 
 		sidebar = utilities.getSideBar(email, user[9], cur)
 		successMsg = "<strong>Success:</strong> Illustrator '" + illustrator + "' has been deleted."

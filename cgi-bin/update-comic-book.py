@@ -181,7 +181,7 @@ def main():
 					cur.execute(insert_command)
 					con.commit() 
 			
-			print "Location: comic-book-item.py?ISBN=" + isbn + "&success=" + str(form['image_file'].file) + "\r\n"
+			print "Location: comic-book-item.py?ISBN=" + isbn + "&success=1\r\n"
 			
 	except mdb.Error, e:
 	    if con:
