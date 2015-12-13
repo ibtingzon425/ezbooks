@@ -33,6 +33,9 @@ def main():
 		if email is None:
 			print "Location: login.py?redirect=1\r\n"
 
+		if description != None:
+			description = description.replace('\r\n', '<br>')
+
 		update_command = "UPDATE Illustrators SET "
 
 		# set gender

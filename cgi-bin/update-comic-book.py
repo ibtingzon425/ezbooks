@@ -47,6 +47,9 @@ def main():
 		cur.execute(command)
 		user= cur.fetchone()
 
+		if desc != None:
+			desc = desc.replace('\r\n', '<br>')
+
 		if action == "edit":
 			bookform = []
 			if isbn != None :

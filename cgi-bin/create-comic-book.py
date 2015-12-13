@@ -37,6 +37,9 @@ def main():
 		lastvisit = sess.data.get('lastvisit')
 		email= sess.data.get('user')
 		print sess.cookie
+
+		if desc != None:
+			desc = desc.replace("\r\n", '<br>')
 		
 		if email is None:
 			print "Location: login.py?redirect=1\r\n"
@@ -44,6 +47,7 @@ def main():
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
                 cur.execute(command)
                 user= cur.fetchone()
+
 
 		if action == "create":
 			bookform = []

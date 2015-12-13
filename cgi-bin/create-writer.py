@@ -78,7 +78,7 @@ def main():
 			# Description
 			if description is not None:
 				insert_command_1 = insert_command_1 + ", WriterDescription "
-                                insert_command_2 = insert_command_2 + " ,'" + description + "' "
+                                insert_command_2 = insert_command_2 + """ , " """ + description + """ " """
 		
 			 # upload image is user specified
                 	if form.has_key('image_file'):
