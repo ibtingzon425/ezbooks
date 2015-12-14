@@ -1,2 +1,0 @@
-INSERT INTO BookOrder(ISBN,OrderID,Quantity) values(9780062278241,6,4)
-DELETE FROM UserCart WHERE Email='ibtingzon2@gmail.com'

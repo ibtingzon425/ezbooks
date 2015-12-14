@@ -1,0 +1,132 @@
+{% extends "sidebar.html" %}
+{% block form %}
+
+	<link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
+	<link type="text/css" href="view/css/jquery-ui.css" rel="stylesheet">
+	 
+	
+   	<div class="col-sm-9" style="overflow:visible;">
+		{%- if (user[9]=='Y') -%}
+   		<div class="list-group-item" style="background-color:#222; color:#aaa; "> <h4>Orders Fulfillment</h4></div>
+   		<div class="thumbnail col-sm-9" style="padding-left:80px;padding:50px; padding-top:20px; padding-bottom:20px; overflow: visible;">
+			{%- if error -%}
+                	<div class="alert alert-danger">
+                        	{{error}}
+                	</div>
+			{%- elif success -%}
+			<div class="alert alert-success">
+                        	{{success}}
+                	</div>
+                	{% endif %}
+
+
+			<script>
+                                                function confirmMarkShip(orderid) {
+                                                        if (confirm('Are you sure you want mark order with Order ID ' + orderid + ' as Shipped?')) {
+                                                                document.getElementById('mark-shipped-' + orderid ).click()
+                                                        }
+                                                }
+
+                                                function confirmCancel(orderid) {
+                                                        if (confirm('Are you sure you want to cancel order with Order ID ' + orderid )) {
+                                                                document.getElementById('cancel-order-' + orderid ).click()
+                                                        }
+                                                }
+
+                                                function confirmMarkDeliver(orderid) {
+                                                        if (confirm('Are you sure you want mark order with Order ID ' + orderid + ' as Delivered?')) {
+                                                                document.getElementById('mark-delivered-' + orderid ).click()
+                                                        }
+                                                }
+                        </script>
+
+
+
+			<h4>Pending Shipment</h4>
+			<hr/>
+			{% if paidOrders|length != 0%}
+				<table class="table table-bordered">
+                                        <tr style="background-color:#222; color:#aaa; ">
+                                                <th style="text-align:right">Order ID</th>
+                                                <th>Order Date</th>
+						<th>Ordered By</th>
+                                                <th>Comic Book Items</th>
+                                                <th>Delivery Address</th>
+                                                <th style="text-align:center">Action</th>
+                                        </tr>
+				
+                                        {% for order in paidOrders %}
+                                                <tr class="warning">
+                                                        <td style="text-align:right" width="5%">{{order[0]}}</td>
+                                                        <td width="15%">{{order[1]}}</td>
+							<td width="15%">{{order[4]}}</td>
+                                                        <td>{{order[2]}}</td>
+                                                        <td>{{order[3]}}</td>
+                                                        <td style="text-align:center" width="10%">
+								<a href="orders-fulfillment.py?action=ship&order={{order[0]}}" id="mark-shipped-{{order[0]}}" style="display:none"></a> 
+								<a onclick="confirmMarkShip('{{order[0]}}')">
+                                                                <img src="model/images/check-icon.png" title="Mark as Delivered" width="35%" style="display:inline"/>
+                                                                </a>
+								&nbsp;
+								<a href="orders-fulfillment.py?action=cancel&order={{order[0]}}" id="cancel-order-{{order[0]}}" style="display:none"></a>
+								<a onclick="confirmCancel('{{order[0]}}')">
+								<img src="model/images/cancel-icon.png" title="Cancel Order" width="35%" style="display:inline"/>
+								</a>
+							</td>
+                                                </tr>
+                                        {% endfor %}
+                                </table>
+			{% else %}
+				No Orders Pending Shipment
+			{% endif %}
+			<br/>
+			<br/>
+
+			<h4>For Delivery Tracking</h4>
+                        <hr/>
+			{% if shippedOrders|length != 0%}
+				<table class="table table-bordered">
+                        		<tr style="background-color:#222; color:#aaa; ">
+                                		<th style="text-align:right">Order ID</th>
+                                                <th>Order Date</th>
+                                                <th>Ordered By</th>
+                                                <th>Comic Book Items</th>
+                                                <th>Delivery Address</th>
+                                                <th style="text-align:center">Action</th>
+                        		</tr>
+                        		{% for order in shippedOrders %}
+                        			<tr class="info">
+                                                        <td style="text-align:right" width="5%">{{order[0]}}</td>
+                                                        <td width="15%">{{order[1]}}</td>
+                                                        <td width="15%">{{order[4]}}</td>
+                                                        <td>{{order[2]}}</td>
+                                                        <td>{{order[3]}}</td>
+                                                        <td style="text-align:center" width="10%">
+                                                                <a href="orders-fulfillment.py?action=deliver&order={{order[0]}}" id="mark-delivered-{{order[0]}}" style="display:none"></a>
+                                                                <a onclick="confirmMarkDeliver('{{order[0]}}')">
+                                                                <img src="model/images/check-icon.png" title="Mark as Shipped" width="35%" style="display:inline"/>
+                                                                </a>
+                                                                &nbsp;
+                                                                <a href="orders-fulfillment.py?action=cancel&order={{order[0]}}" id="cancel-order-{{order[0]}}" style="display:none"></a>
+                                                                <a onclick="confirmCancel('{{order[0]}}')">
+                                                                <img src="model/images/cancel-icon.png" title="Cancel Order" width="35%" style="display:inline"/>
+                                                                </a>
+                                                        </td>
+                                                </tr>
+
+                        		{% endfor %}
+                		</table>
+                        {% else %}
+                                No Orders For Delivery Tracking 
+                        {% endif %}        	
+		</div>
+		<br/>
+		<br/>
+	
+		 {%- else -%}
+                	<div class="alert alert-danger"><strong>Permission Error:</strong> You don't have permission to access this page!</div>
+        	{%- endif -%}
+        </div>
+	
+{% endblock %}
+

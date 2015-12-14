@@ -63,7 +63,7 @@ def main():
 					   ' (' +str(rows[i][3]) +  ')</a>'
 				while j < len(rows) and (rows[i][0]==rows[j][0]):
 					bookHTML = bookHTML + '<br/>' + str(rows[j][2]) + ' X <a href="comic-book-item.py?ISBN=' + str(rows[j][3]) + '">' + \
-						   str(rows[j][4]) + ' (' +str(rows[i][3]) +  ')</a>'
+						   str(rows[j][4]) + ' (' +str(rows[j][3]) +  ')</a>'
 					j = j + 1
 				pendingOrders.append( [rows[i][0], rows[i][1], bookHTML, rows[i][5], rows[i][6]] )
 				i = j
@@ -85,7 +85,7 @@ def main():
                                            ' (' +str(rows[i][3]) +  ')</a>'
                                 while j < len(rows) and (rows[i][0]==rows[j][0]):
                                         bookHTML = bookHTML + '<br/>' + str(rows[j][2]) + ' X <a href="comic-book-item.py?ISBN=' + str(rows[j][3]) + '">' + \
-                                                   str(rows[j][4]) + ' (' +str(rows[i][3]) +  ')</a>'
+                                                   str(rows[j][4]) + ' (' +str(rows[j][3]) +  ')</a>'
                                         j = j + 1
                                 completedOrders.append( [rows[i][0], rows[i][1], bookHTML, rows[i][5], rows[i][6]] )
                                 i = j

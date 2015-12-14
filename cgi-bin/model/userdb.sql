@@ -31,7 +31,7 @@ CREATE TABLE ComicBooks(
 	Price DECIMAL(10,2) NOT NULL,
 	Publisher VARCHAR(256) DEFAULT "", 
 	Description VARCHAR(5000) DEFAULT "No description available.",
-	Image VARCHAR(500) DEFAULT "model/writers/default.png",
+	Image VARCHAR(500) DEFAULT "model/images/default-comic.jpg",
 	DatePublished DATE,
 	Length INTEGER DEFAULT 0,
 	Format VARCHAR(500) DEFAULT "Paperback"
