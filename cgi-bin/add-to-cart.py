@@ -64,7 +64,7 @@ def main():
 		user = cur.fetchone() 
 
 		#Get titles of ComicBooks in cart
-		command = "SELECT ISBN, Title, Price, Format, Quantity from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
+		command = "SELECT ISBN, Title, Price, Format, Quantity, Stock from ComicBooks NATURAL JOIN UserCart WHERE Email='" + email + "'"
 		
 		cur.execute(command)
 		rows = cur.fetchall()

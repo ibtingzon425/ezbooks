@@ -34,7 +34,8 @@ CREATE TABLE ComicBooks(
 	Image VARCHAR(500) DEFAULT "model/images/default-comic.jpg",
 	DatePublished DATE,
 	Length INTEGER DEFAULT 0,
-	Format VARCHAR(500) DEFAULT "Paperback"
+	Format VARCHAR(500) DEFAULT "Paperback",
+	Stock INT(11) DEFAULT 10
 );
 
 CREATE TABLE Writers(
@@ -104,7 +105,7 @@ CREATE TABLE Orders(
 CREATE TABLE BookOrder(
 	ISBN VARCHAR(500) NOT NULL,
 	OrderID INT UNSIGNED NOT NULL,
-	Quantity TINYINT UNSIGNED DEFAULT 1,
+	Quantity INT(11) DEFAULT 1,
 	PRIMARY KEY(ISBN, OrderID)
 );
 

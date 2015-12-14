@@ -25,8 +25,14 @@ a.morelink {
                 <div class="thumbnail">
                 	<div class="col-md-4 left-side">
                         <center>
-                        <img class="img-responsive" src={{book[5]}} style="width:200px;padding-top:30px;padding-bottom:20px;">  
-                        {%- if user[9]=='Y' -%}         
+                        <img class="img-responsive" src={{book[5]}} style="width:200px;padding-top:30px;padding-bottom:20px;">
+			{% if book[9] > 0 %}
+				{{book[9]}} item(s) left
+			{% else %}
+				Out of stock
+			{% endif %} 
+			<br/><br />   
+                        {%- if user[9]=='Y'-%}         
                         <a class="btn btn-primary" href="update-comic-book.py?ISBN={{book[0]}}&action=edit" role="button">Edit Comic Book</a>
 			<a class="btn btn-danger"  onclick="confirmDeleteBook('{{book[0]}}')" role="button">Delete</a>
             <a id="continue-deletion" style="display:none" href="delete-comic-book.py?ISBN={{book[0]}}"></a>
@@ -37,7 +43,7 @@ a.morelink {
                                 }
                             }
                         </script>
-                        {%- else  -%}
+                        {%- elif book[9] > 0  -%}
                         <div class="btn-group dropup">
                         <div class="dropdown">
                                 <input type="hidden" id="book" name="book" class="form-control" value="{{book[1]}}">
@@ -114,11 +120,11 @@ a.morelink {
                         <tr><td > Publisher:  </td> <td> {{book[3]}}  </td></tr> 
                         <tr><td > Date Published:  </td> <td> {{book[6]}}  </td></tr>
                         <tr><td > ISBN:  </td> <td> {{book[0]}}  </td></tr>
-                        {%- if book[9]|length > 0 -%}
+                        {%- if book[10]|length > 0 -%}
                         <tr><td > Literary Awards:  </td> 
-                            <td> {% for award in book[9] %}
+                            <td> {% for award in book[10] %}
                             {{award}} 
-                            {%- if loop.index < book[9]|length -%}
+                            {%- if loop.index < book[10]|length -%}
                             ,
                             {% endif %}
                             {% endfor %}

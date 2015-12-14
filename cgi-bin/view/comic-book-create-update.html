@@ -137,7 +137,7 @@
         <tr>
         <td class="head"><strong>Price</strong></td></td></p>
         <td class="body"><p>
-            <input class="form-control" name="price" type="text" placeholder="Price" value="{{bookform[2]}}" style="width:150px;"  required /> 
+            <input class="form-control" name="price" type="number" placeholder="Price" value="{{bookform[2]}}" style="width:100px;"  required /> 
         </p></td>  
         </tr>
 
@@ -151,7 +151,7 @@
         <tr>
         <td class="head"><strong>Date Published</strong></td>
          <td class="body"><p>
-            <input class="form-control" name="datepub" type="text" placeholder="Date Published" value="{{bookform[6]}}" style="width:250px;"  required /> 
+            <input class="form-control" name="datepub" type="date" placeholder="Date Published" value="{{bookform[6]}}" style="width:160px;"  required /> 
         </p></td> 
         </tr>
 
@@ -165,15 +165,15 @@
         <tr>
         <td class="head"><strong>Length</strong></td>
          <td class="body"><p>
-            <input class="form-control" name="length" type="text" placeholder="Length" value="{{bookform[7]}}" style="width:250px;"  required /> 
+            <input class="form-control" name="length" type="number" placeholder="Length" value="{{bookform[7]}}" style="width:100px;"  required /> 
         </p></td> 
         </tr>
 
         <tr>
         <td class="head"><strong>Literary Awards</strong></td>
          <td class="body"><p>
-        <textarea class="form-control"  name="awards" type="text" rows="3" value="{{bookform[9]}}"placeholder="Literary Awards" >{% for award in bookform[9] %}{{award}}{%- if loop.index < bookform[9]|length -%},{% endif %}{% endfor %}</textarea>
-        <p>*Separate each litarary award using a comma.</td></p>
+        <textarea class="form-control"  name="awards" type="text" rows="3" value="{{bookform[10]}}"placeholder="Literary Awards" >{% for award in bookform[10] %}{{award}}{%- if loop.index < bookform[10]|length -%},{% endif %}{% endfor %}</textarea>
+        <p>*Separate each literary award using a comma.</td></p>
           </td></p>
         </tr>
 
@@ -185,6 +185,14 @@
         </p>
         </td> 
         </tr>
+
+	<tr>
+        <td class="head"><strong>Stocks Left</strong></td>
+         <td class="body"><p>
+            <input class="form-control" name="stock" type="number" placeholder="Stock" value="{{bookform[9]}}" style="width:100px;"  required />
+        </p></td>
+        </tr>
+
         </table>
         <br>
 

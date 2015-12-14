@@ -28,6 +28,7 @@ def main():
 	genres = form.getlist('genres')
 	illustrators= form.getlist('illustrators')
 	writers= form.getlist('writers')
+	stock = form.getvalue('stock')
 
 	try:
 		state = "create"
@@ -98,10 +99,10 @@ def main():
 					print display("comic-book-create-update.html").render(state="create",user=user,sidebar=sidebar,bookform=bookform,genres=genres,writers=writers,illustrators=illustrators,error=error)
 				else :
 
-					insert_command = "INSERT INTO ComicBooks(ISBN, Description, Title, Price, Publisher, DatePublished, Length, Format) VALUES"
+					insert_command = "INSERT INTO ComicBooks(ISBN, Description, Title, Price, Publisher, DatePublished, Length, Format, Stock) VALUES"
 					insert_command = insert_command + "(" 
 					insert_command = insert_command + "'" + isbn + "'," 
-					insert_command = insert_command + """ " """ + desc + """ " """ + ", '" + title + "','" + price + "','" + publisher + "','" + datepub + "','" + length + "','" + format + "')"
+					insert_command = insert_command + """ " """ + desc + """ " """ + ", '" + title + "','" + price + "','" + publisher + "','" + datepub + "','" + length + "','" + format + "','" + stock + "')"
 
 					cur.execute(insert_command)	
 

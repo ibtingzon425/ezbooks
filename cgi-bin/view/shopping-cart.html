@@ -51,7 +51,7 @@ th {
 					<a href="remove-from-cart.py?ISBN={{title[0]}}&action=subtract"><img src="model/images/subtract-icon.png" title="Subtract Quantity" width="25%" style="display:inline"/></a>
 				{% endif %}
 				{{title[4]}}
-				{% if title[4] < 10 %}
+				{% if title[4] < title[5] %}
  					<a href="add-to-cart.py?ISBN={{title[0]}}"><img src="model/images/add-icon.png" title="Add Quantity" width="25%" style="display:inline"/></a>
 				{% else %}
 					<img disabled="disabled" src="model/images/filler-icon.png" title="Subtract Quantity" width="25%" style="display:inline"/>
