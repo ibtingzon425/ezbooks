@@ -23,7 +23,6 @@ def main():
 		email= sess.data.get('user')
 		print sess.cookie
 
-		f = open("temp", "w")		
 
 		if email is None:
 			print "Location: login.py?redirect=1\r\n"
@@ -38,7 +37,6 @@ def main():
 
 		# Create order record and retrieve its OrderID
 		command = "INSERT INTO Orders(OrderDate, CustomerEmail, DeliveryAddress, Status) VALUES( NOW(), '" + email + "','" + deliveryaddress + "','Paid')"
-		#f.write(command)
 		cur.execute(command)
 		command = "SELECT max(OrderID) FROM Orders where CustomerEmail ='" + email + "'"
 		cur.execute(command)
@@ -53,43 +51,22 @@ def main():
 			#bookorders.append(row)
 
 
-		# Add Book to Order
-		for book in rows:	
+		for book in rows:
+			# Add Book to Order	
 			command = "INSERT INTO BookOrder(ISBN,OrderID,Quantity) values(" + book[0] + "," + str(orderID) + "," + str(book[1]) + ")"
-			f.write(command + '\n')
 			cur.execute(command)
+			
+			# Update Stock count of the comic book
+			command = "UPDATE ComicBooks SET Stock = Stock - " + str(book[1]) + " WHERE ISBN = '" + book[0] + "'"	
+			cur.execute(command) 
 
 		# Empty User Cart
 		command = "DELETE FROM UserCart WHERE Email='" + email + "'"
 		cur.execute(command)
-		f.write(command + '\n')
+
+				
 		con.commit()
 
-
-		#for isbn in ISBN_set:
-		#	command = "SELECT * FROM UserCart WHERE Email=%s AND ISBN=%s"
-		#	cur = con.cursor()
-		#	cur.execute(command, (email, isbn))
-		#	book_ = cur.fetchone()
-
-			# Delete book from user's cart
-		#	if book_ != None:
-		#		command = "DELETE FROM UserCart WHERE Email=%s AND ISBN=%s"
-		#		cur = con.cursor()
-		#		cur.execute(command, (email, isbn))
- 
-
-			# Checks if book already exists in owned
-			#command = "SELECT * FROM UserOwned WHERE Email=%s AND ISBN=%s"
-			#cur = con.cursor()
-			#cur.execute(command, (email, isbn))
-			#book_ = cur.fetchone()
-
-			#Insert book into user's cart
-			#if book_ == None:
-				#command = "INSERT INTO UserOwned(Email, ISBN) VALUES(%s, %s)"
-				#cur = con.cursor()
-				#cur.execute(command, (email, isbn))
 		
 		sidebar = utilities.getSideBar(email,user_[9], cur)
 		print display("success.html").render(sidebar=sidebar,user=user_)

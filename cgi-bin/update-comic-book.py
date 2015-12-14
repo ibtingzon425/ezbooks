@@ -30,6 +30,7 @@ def main():
 	genres = form.getlist('genres')
 	illustrators= form.getlist('illustrators')
 	writers= form.getlist('writers')
+	stock = form.getvalue('stock')
 
 	try:
 		state = "update"
@@ -114,6 +115,7 @@ def main():
 			update_command = update_command + ", Publisher = '" + publisher + "' "
 			update_command = update_command + ", DatePublished = '" + datepub + "' "
 			update_command = update_command + ", Price = '" + price + "' "
+			update_command = update_command + ", Stock = '" + stock + "' "
 
 			if desc is None:
 				 update_command = update_command + ", Description = null "
