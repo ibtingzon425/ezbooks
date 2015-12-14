@@ -1,5 +1,8 @@
 import sha, shelve, time, Cookie, os
 
+#Copyright 2006 Clodoaldo Pinto Neto cpn@codepoint.net
+#See session_license.txt for more info
+
 class Session(object):
 
    def __init__(self, expires=None, cookie_path=None):
