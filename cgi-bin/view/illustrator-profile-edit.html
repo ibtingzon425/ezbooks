@@ -2,17 +2,17 @@
 
 {% block form %}
 	<link type="text/css" href="view/css/user-profile.css" rel="stylesheet">
-            <div class="col-md-9">
+        <div class="col-md-9">
 		{%- if error -%}
-                	<div class="alert alert-danger">
-                        	{{error}}
-                	</div>
+            <div class="alert alert-danger">
+               	{{error}}
+            </div>
 		{%- elif success -%}
 			<div class="alert alert-success">
                         	{{success}}
                 	</div>
                 {% endif %}
-                <div class="thumbnail" style="overflow: visible;height:460px">
+                <div class="thumbnail" style="overflow: visible;height:510px">
                 	<div class="col-md-4 left-side">
                         <center>
                             <img class="img-responsive" src="{{illustrator[5]}}" style="width:200px;padding-top:30px;padding-bottom:20px;">
@@ -71,7 +71,7 @@
                                 	<input class="btn btn-success" type="submit" value="Save" style="width:100px;"></input>
                                 	<a class="btn btn-danger" href="illustrator-profile.py?illustrator={{illustrator[0]}}" role="button" style="width:100px;">Cancel</a>
                         	</p>
-			</form >
+			             </form >
                         <br />
                      </div>
                 </div>
