@@ -28,10 +28,9 @@ def main():
 		if email is None:
 			print "Location: login.py?redirect=1\r\n"
 
-		
+
 		update_command = "UPDATE Users SET TotalCost='0.00' WHERE Email = '" + email + "'"
 		cur.execute(update_command)
-		con.commit()
 		
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
 		cur.execute(command)

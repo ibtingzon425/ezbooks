@@ -137,11 +137,9 @@ def main():
 
 			update_command =  update_command + " WHERE ISBN = '" + isbn +  "'"
 			cur.execute(update_command)
-			con.commit() 
 
 			command = "DELETE FROM LiteraryAwards Where ISBN = '" + isbn +  "'";
-			cur.execute(command)		
-			con.commit()	
+			cur.execute(command)
 			
 			if awards != None:
 				awards = awards.split(',')
@@ -160,29 +158,25 @@ def main():
 					insert_command = "INSERT INTO BookGenre(ISBN, Genre) VALUES "
 					insert_command =  insert_command + "( '" + isbn + "' , '" + genre + "')"
 					cur.execute(insert_command)
-					con.commit() 
 
 			command = "DELETE FROM BookIllustrator Where ISBN = '" + isbn +  "'";		
 			cur.execute(command)
-			con.commit()
 			
 			if illustrators is not None:
 				for illustrator in illustrators:
 					insert_command = "INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES "
 					insert_command =  insert_command + "( '" + isbn + "' , '" + illustrator + "')"
 					cur.execute(insert_command)
-					con.commit() 
 
 			command = "DELETE FROM BookWriter Where ISBN = '" + isbn +  "'";		
 			cur.execute(command)
-			con.commit()
 			
 			if writers is not None:
 				for writer in writers:
 					insert_command = "INSERT INTO BookWriter(ISBN, WriterName) VALUES "
 					insert_command =  insert_command + "( '" + isbn + "' , '" + writer + "')"
 					cur.execute(insert_command)
-					con.commit() 
+			con.commit() 
 			
 			print "Location: comic-book-item.py?ISBN=" + isbn + "&success=1\r\n"
 			

@@ -104,7 +104,6 @@ def main():
 					insert_command = insert_command + """ " """ + desc + """ " """ + ", '" + title + "','" + price + "','" + publisher + "','" + datepub + "','" + length + "','" + format + "')"
 
 					cur.execute(insert_command)	
-					con.commit() 
 
 					# upload image is user specified					
 					if form.has_key('image_file'):
@@ -123,7 +122,6 @@ def main():
 								update_command = update_command + "Image = '" + "model/images/cover-" + isbn + extension  + "' "
 								update_command =  update_command + " WHERE ISBN = '" + isbn +  "'"
 								cur.execute(update_command)
-								con.commit() 
 
 					if awards != None:
 						awards = awards.split(',')
@@ -131,28 +129,26 @@ def main():
 							insert_command = "INSERT INTO LiteraryAwards(ISBN, Award) VALUES "
 							insert_command =  insert_command + "( '" + isbn + """' , " """ + award + """ ")"""
 							cur.execute(insert_command)
-							con.commit() 
 					
 					if genres is not None:
 						for genre in genres:
 							insert_command = "INSERT INTO BookGenre(ISBN, Genre) VALUES "
 							insert_command =  insert_command + "( '" + isbn + "' , '" + genre + "')"
 							cur.execute(insert_command)
-							con.commit() 
 					
 					if illustrators is not None:
 						for illustrator in illustrators:
 							insert_command = "INSERT INTO BookIllustrator(ISBN, IllustratorName) VALUES "
 							insert_command =  insert_command + "( '" + isbn + "' , '" + illustrator + "')"
 							cur.execute(insert_command)
-							con.commit() 
 
 					if writers is not None:
 						for writer in writers:
 							insert_command = "INSERT INTO BookWriter(ISBN, WriterName) VALUES "
 							insert_command =  insert_command + "( '" + isbn + "' , '" + writer + "')"
 							cur.execute(insert_command)
-							con.commit() 
+					
+					con.commit() 
 
 					print "Location: comic-book-item.py?ISBN=" + isbn + "&success=2\r\n"
 					
