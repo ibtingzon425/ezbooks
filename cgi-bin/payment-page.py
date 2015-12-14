@@ -27,6 +27,11 @@ def main():
 
 		if email is None:
 			print "Location: login.py?redirect=1\r\n"
+
+		
+		update_command = "UPDATE Users SET TotalCost='0.00' WHERE Email = '" + email + "'"
+		cur.execute(update_command)
+		con.commit()
 		
 		command = "SELECT * FROM Users WHERE Email = '" + email + "'";
 		cur.execute(command)
@@ -60,7 +65,7 @@ def main():
 		cur.execute(command)
 		f.write(command + '\n')
 		con.commit()
-		
+
 
 		#for isbn in ISBN_set:
 		#	command = "SELECT * FROM UserCart WHERE Email=%s AND ISBN=%s"
