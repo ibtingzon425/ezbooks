@@ -85,7 +85,6 @@ def main():
 		
 		sidebar = utilities.getSideBar(email,user[9], cur)
 		print display("comic-book-item.html").render(error=error,success=success,book=books,user=user,sidebar=sidebar,writers=writers,illustrators=illustrators,genres=genres,book_exists=book_exists,book_owned=book_owned)
-		#print books
 		sess.close()
 		
 	except mdb.Error, e:

@@ -21,7 +21,7 @@ CREATE TABLE Users(
 	Country VARCHAR(50) DEFAULT "",
 	Birthdate DATE,
 	Image VARCHAR(500) DEFAULT "model/users/default.png",
-	TotalCost DECIMAL(10,2),
+	TotalCost DECIMAL(10,2) DEFAULT 0.00,
     IsAdmin CHAR(1) DEFAULT 'N'
 );
 
